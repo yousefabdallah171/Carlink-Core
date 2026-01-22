@@ -73,6 +73,18 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-cat-col' => 'background-color: {{VALUE}};' ],
         ]);
 
+        $this->add_responsive_control('dropdown_width', [
+            'label' => __( 'Dropdown Width', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', '%' ],
+            'range' => [
+                'px' => [ 'min' => 50, 'max' => 300 ],
+                '%' => [ 'min' => 10, 'max' => 100 ],
+            ],
+            'default' => [ 'size' => 90, 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-cat-col' => 'width: {{SIZE}}{{UNIT}};' ],
+        ]);
+
         $this->add_control('drop_color', [
             'label' => __( 'Text Color', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,

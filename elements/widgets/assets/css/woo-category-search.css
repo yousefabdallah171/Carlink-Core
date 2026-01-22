@@ -19,7 +19,7 @@
     padding: 0; /* نلغي البادينج من هنا ونخليه في السليكت */
     position: relative;
     border-right: 1px solid #ddd;
-    min-width: 90px; /* نوسع العرض شوية */
+    width: 90px; /* Changed from min-width to width for control */
 }
 
 .rmt-cat-col select {
