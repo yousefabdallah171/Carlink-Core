@@ -1,0 +1,106 @@
+/* Container Wrapper */
+.rmt-amazon-search {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    height: 48px; /* Fixed height for that 'thick' bar look */
+    background-color: #fff;
+    border-radius: 50px; /* Force capsule shape */
+    border: 1px solid #e1e1e1;
+    overflow: hidden; /* Clips the internal blocks to the radius */
+    box-sizing: border-box;
+}
+
+/* 1. Left Part: Category Dropdown */
+.rmt-cat-col {
+    background-color: #E9ECEF; /* Light gray from your requirement */
+    display: flex;
+    align-items: center;
+    padding: 0; /* نلغي البادينج من هنا ونخليه في السليكت */
+    position: relative;
+    border-right: 1px solid #ddd;
+    min-width: 90px; /* نوسع العرض شوية */
+}
+
+.rmt-cat-col select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none !important;
+    background-color: transparent !important; /* نخلي الخلفية شفافة عشان ياخد لون الأب */
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    
+    /* الإصلاحات الضرورية للنص */
+    padding: 0 30px 0 15px; /* يمين مساحة للسهم، ويسار مساحة للكلام */
+    width: 100%;
+    height: 100%;
+    line-height: normal !important; /* <--- إصلاح مشكلة اختفاء النص */
+    display: block;
+    
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Custom Chevron for Dropdown */
+.rmt-cat-col::after {
+    content: "\f107"; /* FontAwesome Chevron Down */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    pointer-events: none; /* عشان الضغطة تعدي للـ select */
+    font-size: 12px;
+    z-index: 5; /* نتأكد انه فوق */
+}
+
+/* 2. Middle Part: Search Input */
+.rmt-input-col {
+    flex: 1;
+    border: none !important;
+    padding: 0 15px;
+    font-size: 15px;
+    background-color: #ffffff;
+    outline: none !important;
+    box-shadow: none !important;
+    height: 100%;
+}
+
+.rmt-input-col::placeholder {
+    color: #a0a0a0;
+}
+
+/* 3. Right Part: Submit Button */
+.rmt-btn-col {
+    background-color: #1A202C; /* Dark Blue from your requirement */
+    color: #ffffff;
+    border: none !important;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    height: 100%;
+}
+
+.rmt-btn-col:hover {
+    background-color: #2d3748;
+}
+
+.rmt-btn-col i, 
+.rmt-btn-col svg {
+    font-size: 18px;
+    fill: #fff;
+    width: 18px;
+    height: 18px;
+}
+
+/* Elementor Override: Remove any default margins from the widget */
+.elementor-widget-woo-category-search .elementor-widget-container {
+    line-height: 0;
+}
