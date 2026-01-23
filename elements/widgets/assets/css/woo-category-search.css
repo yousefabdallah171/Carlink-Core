@@ -43,19 +43,14 @@
     box-shadow: none !important;
 }
 
-/* Custom Chevron for Dropdown */
-.rmt-cat-col::after {
-    content: "\f107"; /* FontAwesome Chevron Down */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
+/* Custom Dropdown Icon */
+.rmt-dropdown-icon {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #555;
-    pointer-events: none; /* عشان الضغطة تعدي للـ select */
-    font-size: 12px;
-    z-index: 5; /* نتأكد انه فوق */
+    pointer-events: none;
+    z-index: 5;
 }
 
 /* 2. Middle Part: Search Input */

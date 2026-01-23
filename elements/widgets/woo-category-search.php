@@ -85,6 +85,28 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-cat-col' => 'width: {{SIZE}}{{UNIT}};' ],
         ]);
 
+        $this->add_control('dropdown_icon', [
+            'label' => __( 'Dropdown Icon', 'rakmyat-core' ),
+            'type' => Controls_Manager::ICONS,
+            'default' => [ 'value' => 'fas fa-chevron-down', 'library' => 'fa-solid' ],
+        ]);
+
+        $this->add_control('dropdown_icon_color', [
+            'label' => __( 'Icon Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#333',
+            'selectors' => [ '{{WRAPPER}} .rmt-dropdown-icon i, {{WRAPPER}} .rmt-dropdown-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};' ],
+        ]);
+
+        $this->add_responsive_control('dropdown_icon_size', [
+            'label' => __( 'Icon Size', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px' ],
+            'range' => [ 'px' => [ 'min' => 10, 'max' => 30 ] ],
+            'default' => [ 'size' => 14, 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-dropdown-icon i' => 'font-size: {{SIZE}}{{UNIT}};', '{{WRAPPER}} .rmt-dropdown-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: auto;' ],
+        ]);
+
         $this->add_control('drop_color', [
             'label' => __( 'Text Color', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,
@@ -139,6 +161,9 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
                         <option value="<?php echo esc_attr($cat->slug); ?>"><?php echo esc_html($cat->name); ?></option>
                     <?php endforeach; ?>
                 </select>
+                <span class="rmt-dropdown-icon">
+                    <?php Icons_Manager::render_icon( $settings['dropdown_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                </span>
             </div>
 
             <input type="text" name="s" class="rmt-input-col" 
