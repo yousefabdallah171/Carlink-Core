@@ -37,6 +37,12 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             'default' => [ 'value' => 'fas fa-search', 'library' => 'fa-solid' ],
         ]);
 
+        $this->add_control('all_text', [
+            'label' => __( 'All Categories Text', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => __( 'ALL', 'rakmyat-core' ),
+        ]);
+
         $this->end_controls_section();
 
         // STYLE SECTION: CONTAINER
@@ -107,6 +113,14 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-dropdown-icon i' => 'font-size: {{SIZE}}{{UNIT}};', '{{WRAPPER}} .rmt-dropdown-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: auto;' ],
         ]);
 
+        $this->add_responsive_control('dropdown_padding', [
+            'label' => __( 'Dropdown Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%' ],
+            'default' => [ 'top' => '0', 'right' => '15', 'bottom' => '0', 'left' => '20', 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-cat-col' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+        ]);
+
         $this->add_control('drop_color', [
             'label' => __( 'Text Color', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,
@@ -156,7 +170,7 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             
             <div class="rmt-cat-col">
                 <select name="product_cat">
-                    <option value="" selected="selected"><?php _e('ALL', 'rakmyat-core'); ?></option>
+                    <option value="" selected="selected"><?php echo esc_html($settings['all_text']); ?></option>
                     <?php foreach ($categories as $cat) : ?>
                         <option value="<?php echo esc_attr($cat->slug); ?>"><?php echo esc_html($cat->name); ?></option>
                     <?php endforeach; ?>
