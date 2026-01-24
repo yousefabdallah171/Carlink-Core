@@ -1,0 +1,133 @@
+/* Outer wrapper - allows arrows to be positioned outside */
+.rmt-slider-wrapper {
+    position: relative;
+    padding: 0 50px;
+    overflow: visible;
+}
+
+/* Slider container - clips cards */
+.rmt-testimonial-slider {
+    padding: 30px 0;
+    padding-bottom: 80px;
+    overflow: hidden;
+}
+
+/* Ensure Elementor allows arrows outside */
+.elementor-widget-modern-testimonial-slider,
+.elementor-widget-modern-testimonial-slider .elementor-widget-container {
+    overflow: visible !important;
+}
+
+.rmt-testimonial-card {
+    position: relative;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    overflow: visible;
+}
+
+.rmt-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.rmt-client-img img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.rmt-client-name {
+    margin: 0 0 5px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A202C;
+}
+
+/* Star Rating */
+.rmt-star-rating i {
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+.rmt-star-rating i.rmt-star-active {
+    color: #f6ad55;
+}
+
+.rmt-review-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4A5568;
+    margin: 0;
+}
+
+/* Quote Icon */
+.rmt-quote-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 80px;
+    color: rgba(58, 95, 121, 0.15);
+    z-index: 2;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.rmt-quote-icon i,
+.rmt-quote-icon svg {
+    display: block !important;
+    font-size: inherit;
+    width: 1em;
+    height: 1em;
+}
+
+.rmt-card-header,
+.rmt-card-body {
+    position: relative;
+    z-index: 3;
+}
+
+/* Navigation Arrows - positioned relative to wrapper */
+.rmt-nav-prev,
+.rmt-nav-next {
+    color: #1A202C;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.rmt-nav-prev {
+    left: 0;
+}
+
+.rmt-nav-next {
+    right: 0;
+}
+
+.rmt-nav-prev::after,
+.rmt-nav-next::after {
+    display: none;
+}
+
+.rmt-nav-prev i,
+.rmt-nav-next i,
+.rmt-nav-prev svg,
+.rmt-nav-next svg {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}

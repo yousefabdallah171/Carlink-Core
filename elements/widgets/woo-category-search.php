@@ -64,6 +64,14 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             'selector' => '{{WRAPPER}} .rmt-amazon-search',
         ]);
 
+        $this->add_responsive_control('container_margin', [
+            'label' => __( 'Container Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%' ],
+            'default' => [ 'top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0', 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-amazon-search' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+        ]);
+
         $this->end_controls_section();
 
         // STYLE SECTION: DROPDOWN
@@ -119,6 +127,14 @@ class RMT_Woo_Category_Search_Widget extends Widget_Base {
             'size_units' => [ 'px', '%' ],
             'default' => [ 'top' => '0', 'right' => '15', 'bottom' => '0', 'left' => '20', 'unit' => 'px' ],
             'selectors' => [ '{{WRAPPER}} .rmt-cat-col' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+        ]);
+
+        $this->add_responsive_control('select_padding', [
+            'label' => __( 'Select Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%' ],
+            'default' => [ 'top' => '0', 'right' => '30', 'bottom' => '0', 'left' => '15', 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-cat-col select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
         ]);
 
         $this->add_control('drop_color', [
