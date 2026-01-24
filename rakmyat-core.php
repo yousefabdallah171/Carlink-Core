@@ -3,7 +3,7 @@
  * Plugin Name: Carlink Core
  * Description: Custom Elementor Addons for WooCommerce.
  * Version: 1.0.0
- * Author: Yousef Abdallah
+ * Author: osbash
  * Text Domain: rakmyat-core
  */
 
