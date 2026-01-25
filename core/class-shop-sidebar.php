@@ -68,7 +68,7 @@ class Shop_Sidebar {
      * Setup sidebar override
      */
     public function setup_sidebar() {
-        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_search() ) {
             return;
         }
 
@@ -136,7 +136,7 @@ class Shop_Sidebar {
             return;
         }
 
-        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_search() ) {
             return;
         }
 
@@ -156,7 +156,7 @@ class Shop_Sidebar {
             return;
         }
 
-        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_search() ) {
             return;
         }
 
@@ -178,7 +178,7 @@ class Shop_Sidebar {
      * Fallback: Inject sidebar via JavaScript if not rendered yet
      */
     public function fallback_sidebar_injection() {
-        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_search() ) {
             return;
         }
 
@@ -282,7 +282,7 @@ class Shop_Sidebar {
      * Render mobile elements (toggle button and overlay)
      */
     public function render_mobile_elements() {
-        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() && ! is_search() ) {
             return;
         }
         ?>

@@ -88,6 +88,13 @@ class Shop_Page {
 
         $current_orderby = isset( $_GET['orderby'] ) ? sanitize_text_field( $_GET['orderby'] ) : 'menu_order';
         $search_query = isset( $_GET['s'] ) ? sanitize_text_field( $_GET['s'] ) : '';
+
+        // Render breadcrumbs
+        if ( function_exists( 'woocommerce_breadcrumb' ) ) {
+            echo '<div class="rmt-breadcrumbs-wrapper">';
+            woocommerce_breadcrumb();
+            echo '</div>';
+        }
         ?>
         <div class="rmt-shop-toolbar">
             <div class="rmt-toolbar-left">

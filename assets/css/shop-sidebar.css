@@ -226,11 +226,15 @@
 .rmt-price-slider-container {
     padding: 10px 0;
     margin-bottom: 12px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .rmt-price-slider {
     position: relative;
     height: 6px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .rmt-price-track {

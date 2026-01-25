@@ -4,6 +4,40 @@
  */
 
 /* ========================================
+   BREADCRUMBS (SHOP PAGE ONLY)
+======================================== */
+.post-type-archive-product .rmt-shop-loop-main-grid .rmt-breadcrumbs-wrapper,
+.product-category .rmt-shop-loop-main-grid .rmt-breadcrumbs-wrapper,
+.product-tag .rmt-shop-loop-main-grid .rmt-breadcrumbs-wrapper {
+    margin-bottom: 24px;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb,
+.product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #6B7280;
+    margin: 0;
+    padding: 0;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb a,
+.product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb a,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb a {
+    color: #3A5F79;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb a:hover,
+.product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb a:hover,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb a:hover {
+    color: #2c4a5e;
+    text-decoration: underline;
+}
+
+/* ========================================
    HIDE DEFAULT TOOLBAR (SHOP LOOP ONLY)
 ======================================== */
 .post-type-archive-product .rmt-shop-loop-main-grid #mf-catalog-toolbar,
