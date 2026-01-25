@@ -314,6 +314,24 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-subtitle' => 'color: {{VALUE}};' ],
         ]);
 
+        $this->add_responsive_control('subtitle_margin', [
+            'label' => __( 'Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-subtitle' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('subtitle_padding', [
+            'label' => __( 'Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-subtitle' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
         $this->end_controls_section();
 
         // --- STYLE TAB: BUTTON ---
@@ -332,6 +350,24 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
             'type' => Controls_Manager::COLOR,
             'default' => '#ffffff',
             'selectors' => [ '{{WRAPPER}} .rmt-glass-btn' => 'color: {{VALUE}};' ],
+        ]);
+
+        $this->add_responsive_control('btn_padding', [
+            'label' => __( 'Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-glass-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('btn_margin', [
+            'label' => __( 'Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-glass-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
         ]);
 
         $this->end_controls_section();
