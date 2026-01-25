@@ -103,6 +103,23 @@
     color: #e74c3c !important;
 }
 
+/* Hide wishlist button text - show icon only */
+.glass-prod-card .prod-wishlist .wcboost-wishlist-button__text {
+    display: none !important;
+}
+
+.glass-prod-card .prod-wishlist .wcboost-wishlist-button__icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass-prod-card .prod-wishlist .wcboost-wishlist-button__icon svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
 /* ========================================
    PRODUCT INFO
 ======================================== */
@@ -122,7 +139,7 @@
 }
 
 .glass-prod-card .prod-title a {
-    color: rgba(58, 95, 121, 1);
+    color:#3A5F79;
     text-decoration: none;
     transition: color 0.3s ease;
     display: -webkit-box;
@@ -135,14 +152,30 @@
     color: #2c4a5e;
 }
 
-/* Meta (Vendor) */
-.glass-prod-card .prod-meta {
-    margin-bottom: 8px;
+/* Safety Center */
+.glass-prod-card .prod-safety-center {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.glass-prod-card .vendor-name {
-    font-size: 13px;
-    color: rgba(0, 0, 0, 0.5);
+.glass-prod-card .prod-safety-center .safety-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0A0A0A;
+}
+
+.glass-prod-card .prod-safety-center .safety-rating {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0A0A0A;
+}
+
+.glass-prod-card .prod-safety-center .safety-rating .star {
+    font-size: 12px;
 }
 
 /* Stock Status */
@@ -156,6 +189,9 @@
 }
 
 .glass-prod-card .stock-status.in-stock {
+    font-family: inter;
+    font-weight: 600;
+font-size: 16px;
     color: #27ae60;
 }
 
@@ -163,24 +199,34 @@
     color: #e74c3c;
 }
 
+
 /* Price */
 .glass-prod-card .prod-price {
     margin-bottom: 12px;
+        display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 5px
 }
 
 .glass-prod-card .prod-price .price-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.5);
+     display: block;
+    font-size: 16PX;
+    font-weight: 600;
+    color: #0A0A0A;
+    font-family: 'Inter';
     margin-bottom: 2px;
 }
 
 .glass-prod-card .prod-price .woocommerce-Price-amount,
 .glass-prod-card .prod-price > span:not(.price-label) {
-    font-size: 18px;
-    font-weight: 700;
-    color: rgba(58, 95, 121, 1);
+     color:#FF3A44;
+    font-family: 'inter';
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .glass-prod-card .prod-price del {
@@ -201,7 +247,10 @@
 }
 
 .glass-prod-card .prod-price ins .woocommerce-Price-amount {
-    color: rgba(58, 95, 121, 1);
+    color:#FF3A44;
+    font-family: 'inter';
+    font-weight: 600;
+    font-size: 16px;
 }
 
 /* ========================================
@@ -356,8 +405,26 @@ ul.products {
         font-size: 13px;
     }
 
-    .glass-prod-card .prod-price .woocommerce-Price-amount {
-        font-size: 16px;
+    /* Safety Center mobile */
+    .glass-prod-card .prod-safety-center .safety-text,
+    .glass-prod-card .prod-safety-center .safety-rating {
+        font-size: 12px;
+    }
+
+    /* Price row mobile - keep horizontal */
+    .glass-prod-card .prod-price {
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .glass-prod-card .prod-price .price-label {
+        font-size: 14px;
+    }
+
+    .glass-prod-card .prod-price .woocommerce-Price-amount,
+    .glass-prod-card .prod-price ins .woocommerce-Price-amount {
+        font-size: 14px;
     }
 
     .glass-prod-card .rmt-btn {

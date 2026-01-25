@@ -70,11 +70,10 @@ if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
                 </a>
             </h3>
 
-            <?php if ( $vendor_name ) : ?>
-            <div class="prod-meta">
-                <span class="vendor-name"><?php echo esc_html( $vendor_name ); ?> (4.9 ★)</span>
+            <div class="prod-safety-center">
+                <span class="safety-text">Safety Center</span>
+                <span class="safety-rating">(4.9 <span class="star">⭐</span>)</span>
             </div>
-            <?php endif; ?>
 
             <div class="prod-stock">
                 <?php if ( $in_stock ) : ?>
@@ -85,7 +84,7 @@ if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
             </div>
 
             <div class="prod-price">
-                <span class="price-label">Price</span>
+                <span class="price-label">Price :</span>
                 <?php echo $product_price; ?>
             </div>
 
