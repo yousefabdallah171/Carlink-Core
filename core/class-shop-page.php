@@ -53,8 +53,24 @@ class Shop_Page {
         // Remove Martfury toolbar if exists
         remove_action( 'woocommerce_before_shop_loop', 'martfury_shop_toolbar', 20 );
 
-        // Add our custom toolbar
+        // Add wrapper and custom toolbar
+        add_action( 'woocommerce_before_shop_loop', [ $this, 'open_shop_wrapper' ], 15 );
         add_action( 'woocommerce_before_shop_loop', [ $this, 'render_custom_toolbar' ], 20 );
+        add_action( 'woocommerce_after_shop_loop', [ $this, 'close_shop_wrapper' ], 5 );
+    }
+
+    /**
+     * Open wrapper for shop page
+     */
+    public function open_shop_wrapper() {
+        echo '<div class="rmt-shop-loop-main-grid">';
+    }
+
+    /**
+     * Close wrapper for shop page
+     */
+    public function close_shop_wrapper() {
+        echo '</div>';
     }
 
     /**
