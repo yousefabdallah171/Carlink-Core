@@ -40,7 +40,7 @@
     font-size: 48px;
     line-height: 1.2;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .rmt-subtitle {
@@ -81,6 +81,7 @@
     height: 50px !important;
     background: none !important;
     transition: 0.3s;
+    z-index: 10 !important;
 }
 
 .rmt-nav-btn::after {
@@ -97,6 +98,11 @@
 
 .rmt-nav-btn:hover i {
     opacity: 1;
+}
+
+/* Pagination - ensure always visible above content */
+.rmt-glass-slider .swiper-pagination {
+    z-index: 10 !important;
 }
 
 /* Dots Logic */
