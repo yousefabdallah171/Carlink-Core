@@ -21,8 +21,12 @@ class Shop_Sidebar {
         // Replace sidebar content
         add_action( 'wp', [ $this, 'setup_sidebar' ] );
 
-        // Direct sidebar injection using woocommerce_sidebar hook
+        // Multiple hooks to ensure sidebar content is rendered
         add_action( 'woocommerce_sidebar', [ $this, 'inject_sidebar_content' ], 5 );
+        add_action( 'get_sidebar', [ $this, 'inject_on_get_sidebar' ], 10 );
+
+        // Use wp_footer as fallback to inject via JS if needed
+        add_action( 'wp_footer', [ $this, 'fallback_sidebar_injection' ], 5 );
 
         // Filter products by availability
         add_action( 'woocommerce_product_query', [ $this, 'filter_by_availability' ] );
@@ -120,9 +124,18 @@ class Shop_Sidebar {
     }
 
     /**
+     * Track if sidebar has been rendered
+     */
+    private static $sidebar_rendered = false;
+
+    /**
      * Inject sidebar content directly via woocommerce_sidebar hook
      */
     public function inject_sidebar_content() {
+        if ( self::$sidebar_rendered ) {
+            return;
+        }
+
         if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
             return;
         }
@@ -132,6 +145,86 @@ class Shop_Sidebar {
         }
 
         $this->output_sidebar_html();
+        self::$sidebar_rendered = true;
+    }
+
+    /**
+     * Inject on get_sidebar hook
+     */
+    public function inject_on_get_sidebar( $name ) {
+        if ( self::$sidebar_rendered ) {
+            return;
+        }
+
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+            return;
+        }
+
+        if ( ! get_theme_mod( 'rmt_enable_custom_sidebar', true ) ) {
+            return;
+        }
+
+        // Check if this is a shop-related sidebar
+        $shop_sidebars = [ 'shop', 'catalog', 'shop-sidebar', 'woocommerce' ];
+        if ( $name && ! in_array( $name, $shop_sidebars ) ) {
+            return;
+        }
+
+        $this->output_sidebar_html();
+        self::$sidebar_rendered = true;
+    }
+
+    /**
+     * Fallback: Inject sidebar via JavaScript if not rendered yet
+     */
+    public function fallback_sidebar_injection() {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+            return;
+        }
+
+        if ( ! get_theme_mod( 'rmt_enable_custom_sidebar', true ) ) {
+            return;
+        }
+
+        // Capture sidebar HTML
+        ob_start();
+        $this->output_sidebar_html();
+        $sidebar_html = ob_get_clean();
+
+        // Escape for JS
+        $sidebar_html = str_replace( [ "\r\n", "\r", "\n" ], '', $sidebar_html );
+        $sidebar_html = str_replace( "'", "\\'", $sidebar_html );
+        ?>
+        <script>
+        (function() {
+            // Check if sidebar already exists
+            if (document.querySelector('.rmt-shop-sidebar')) {
+                return;
+            }
+
+            // Target sidebar containers
+            var selectors = [
+                '#primary-sidebar',
+                '.primary-sidebar',
+                '.catalog-sidebar',
+                '#secondary',
+                '.sidebar-shop',
+                '.shop-sidebar',
+                'aside.widgets-area'
+            ];
+
+            var sidebar = null;
+            for (var i = 0; i < selectors.length; i++) {
+                sidebar = document.querySelector(selectors[i]);
+                if (sidebar) break;
+            }
+
+            if (sidebar) {
+                sidebar.innerHTML = '<?php echo $sidebar_html; ?>';
+            }
+        })();
+        </script>
+        <?php
     }
 
     /**
