@@ -150,6 +150,18 @@ class RMT_Modern_Testimonial_Slider_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-testimonial-card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
         ]);
 
+        $this->add_responsive_control('card_min_height', [
+            'label' => __( 'Min Height', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'vh' ],
+            'range' => [
+                'px' => [ 'min' => 100, 'max' => 600 ],
+                'vh' => [ 'min' => 10, 'max' => 100 ],
+            ],
+            'selectors' => [ '{{WRAPPER}} .rmt-testimonial-card' => 'min-height: {{SIZE}}{{UNIT}};' ],
+            'description' => __( 'Set min-height to make all cards the same height', 'rakmyat-core' ),
+        ]);
+
         $this->end_controls_section();
 
         // --- STYLE TAB: QUOTE ICON ---
