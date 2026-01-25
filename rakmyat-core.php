@@ -16,11 +16,13 @@ define( 'RMT_URL', plugin_dir_url( __FILE__ ) );
 // Load Core Classes
 require_once RMT_PATH . 'core/class-widget-manager.php';
 require_once RMT_PATH . 'core/class-wc-override.php';
+require_once RMT_PATH . 'core/class-shop-page.php';
 
 // Initialize All Managers
 add_action( 'plugins_loaded', function() {
     \RakmyatCore\Core\Widget_Manager::instance();
     \RakmyatCore\Core\WC_Override::instance();
+    \RakmyatCore\Core\Shop_Page::instance();
 });
 
 // Disable WooCommerce Coming Soon mode (to allow shop to display)
