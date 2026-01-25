@@ -116,14 +116,19 @@ class Shop_Page {
             </div>
             <div class="rmt-toolbar-right">
                 <form class="rmt-ordering" method="get">
-                    <select name="orderby" class="rmt-orderby" onchange="this.form.submit()">
-                        <option value="" disabled><?php esc_html_e( 'Sort by', 'rakmyat-core' ); ?></option>
-                        <?php foreach ( $orderby_options as $value => $label ) : ?>
-                            <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_orderby, $value ); ?>>
-                                <?php echo esc_html( $label ); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="rmt-orderby-wrapper">
+                        <select name="orderby" class="rmt-orderby" onchange="this.form.submit()">
+                            <option value="" disabled><?php esc_html_e( 'Sort by', 'rakmyat-core' ); ?></option>
+                            <?php foreach ( $orderby_options as $value => $label ) : ?>
+                                <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_orderby, $value ); ?>>
+                                    <?php echo esc_html( $label ); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <svg class="rmt-orderby-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2.5 5H17.5M2.5 10H12.5M2.5 15H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                     <input type="hidden" name="paged" value="1" />
                     <?php wc_query_string_form_fields( null, [ 'orderby', 'submit', 'paged', 'product-page' ] ); ?>
                 </form>

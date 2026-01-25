@@ -17,6 +17,8 @@
     background: #F8F8F8;
     padding: 24px 20px;
     border-radius: 8px;
+    width: 100%;
+    max-width: 240px;
 }
 
 .rmt-sidebar-title {
@@ -35,6 +37,7 @@
     border-bottom: 1px dashed #D1D5DB;
     padding-bottom: 16px;
     margin-bottom: 16px;
+    overflow: hidden;
 }
 
 .rmt-filter-section:last-of-type {
@@ -188,8 +191,10 @@
 .rmt-price-inputs {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .rmt-price-input-group {
@@ -198,8 +203,10 @@
     background: #fff;
     border: 1px solid #D1D5DB;
     border-radius: 6px;
-    padding: 8px 12px;
+    padding: 8px 10px;
     flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .rmt-currency {
