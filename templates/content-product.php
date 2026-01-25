@@ -21,6 +21,11 @@ $product_image = $product->get_image( 'woocommerce_thumbnail' );
 $in_stock      = $product->is_in_stock();
 $add_to_cart_url = $product->add_to_cart_url();
 
+// Get product rating from WooCommerce
+$average_rating = $product->get_average_rating();
+$review_count   = $product->get_review_count();
+$rating_display = $average_rating ? number_format( (float) $average_rating, 1 ) : '0.0';
+
 // Get vendor info if marketplace plugin exists
 $vendor_name = '';
 $vendor_rating = '';
@@ -72,7 +77,7 @@ if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
 
             <div class="prod-safety-center">
                 <span class="safety-text">Safety Center</span>
-                <span class="safety-rating">(4.9 <span class="star">⭐</span>)</span>
+                <span class="safety-rating">(<?php echo esc_html( $rating_display ); ?> <span class="star">⭐</span>)</span>
             </div>
 
             <div class="prod-stock">
