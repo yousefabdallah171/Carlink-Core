@@ -14,7 +14,6 @@
    SIDEBAR CONTAINER
 ======================================== */
 .rmt-shop-sidebar {
-    background: #F8F8F8;
     padding: 24px 20px;
     border-radius: 8px;
     width: 100%;
@@ -23,7 +22,7 @@
 
 .rmt-sidebar-title {
     font-family: 'Inter', sans-serif;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 700;
     color: #0A0A0A;
     margin: 0 0 24px 0;
@@ -35,8 +34,8 @@
 ======================================== */
 .rmt-filter-section {
     border-bottom: 1px dashed #D1D5DB;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
     overflow: hidden;
 }
 
@@ -52,14 +51,14 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding: 8px 0;
+    padding: 8px 0 0 0;
     user-select: none;
 }
 
 .rmt-filter-title {
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     color: #0A0A0A;
 }
 
@@ -378,44 +377,26 @@
 
 @media (max-width: 992px) {
     .rmt-shop-sidebar {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 300px;
-        height: 100vh;
-        z-index: 9999;
-        border-radius: 0;
-        overflow-y: auto;
-        transition: left 0.3s ease;
-        padding-top: 60px;
-    }
-
-    .rmt-shop-sidebar.rmt-sidebar-open {
-        left: 0;
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        z-index: auto;
+        border-radius: 8px;
+        overflow: visible;
+        padding-top: 24px;
     }
 
     .rmt-filter-toggle-btn {
-        display: flex;
-    }
-
-    .rmt-filter-close-btn {
-        display: block;
-    }
-
-    /* Overlay */
-    .rmt-sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 9998;
         display: none;
     }
 
-    .rmt-sidebar-overlay.active {
-        display: block;
+    .rmt-filter-close-btn {
+        display: none;
+    }
+
+    .rmt-sidebar-overlay {
+        display: none !important;
     }
 }
 

@@ -15,17 +15,29 @@
 .post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb,
 .product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb,
 .product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #6B7280;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #EEEEEE;
     margin: 0;
     padding: 0;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .rmt-breadcrumb-item,
+.product-category .rmt-shop-loop-main-grid .rmt-breadcrumb-item,
+.product-tag .rmt-shop-loop-main-grid .rmt-breadcrumb-item {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000A8;
 }
 
 .post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb a,
 .product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb a,
 .product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb a {
-    color: #3A5F79;
+    color: inherit;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -33,8 +45,27 @@
 .post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb a:hover,
 .product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb a:hover,
 .product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb a:hover {
-    color: #2c4a5e;
+    color: #3A5F79;
     text-decoration: underline;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb .breadcrumb_last,
+.product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb .breadcrumb_last,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb .breadcrumb_last,
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb .current,
+.product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb .current,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb .current,
+.post-type-archive-product .rmt-shop-loop-main-grid .rmt-breadcrumb-item:last-child,
+.product-category .rmt-shop-loop-main-grid .rmt-breadcrumb-item:last-child,
+.product-tag .rmt-shop-loop-main-grid .rmt-breadcrumb-item:last-child,
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb span:last-child,
+.product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb span:last-child,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb span:last-child {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    color: #0A0A0A;
 }
 
 /* ========================================
@@ -100,14 +131,14 @@
     display: flex;
     align-items: center;
     position: relative;
-    max-width: 300px;
+    max-width: 305px;
 }
 
 .post-type-archive-product .rmt-shop-loop-main-grid .rmt-search-field,
 .product-category .rmt-shop-loop-main-grid .rmt-search-field,
 .product-tag .rmt-shop-loop-main-grid .rmt-search-field {
     width: 100%;
-    padding: 12px 50px 12px 16px;
+    padding: 12px 90px 12px 16px;
     background: #EEEEEE;
     border: 1px solid #8C8C8C;
     border-radius: 8px;
@@ -250,14 +281,80 @@
     }
 }
 
-/* Mobile - 2 columns */
+/* Mobile - 1 column */
 @media (max-width: 576px) {
     .post-type-archive-product .rmt-shop-loop-main-grid ul.products,
     .product-category .rmt-shop-loop-main-grid ul.products,
     .product-tag .rmt-shop-loop-main-grid ul.products {
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: 1fr !important;
         gap: 12px !important;
     }
+}
+
+/* ========================================
+   PAGINATION (SHOP LOOP ONLY)
+======================================== */
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination {
+    margin-top: 32px;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers a,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers a,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers a,
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers span,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers span,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #3A5F79;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3A5F79;
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .current,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .current,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .current {
+    background: #3A5F79;
+    color: #fff;
+    border-color: #3A5F79;
+    font-weight: 600;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers a:hover,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers a:hover,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers a:hover {
+    background: #3A5F79;
+    color: #fff;
+}
+
+.post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next,
+.product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next,
+.product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next {
+    gap: 8px;
 }
 
 /* ========================================

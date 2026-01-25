@@ -78,7 +78,7 @@ class Shop_Page {
      */
     public function render_custom_toolbar() {
         $orderby_options = [
-            'menu_order' => __( 'Default sorting', 'woocommerce' ),
+            'menu_order' => __( 'Sort by', 'woocommerce' ),
             'popularity' => __( 'Sort by popularity', 'woocommerce' ),
             'rating'     => __( 'Sort by average rating', 'woocommerce' ),
             'date'       => __( 'Sort by latest', 'woocommerce' ),
@@ -92,7 +92,13 @@ class Shop_Page {
         // Render breadcrumbs
         if ( function_exists( 'woocommerce_breadcrumb' ) ) {
             echo '<div class="rmt-breadcrumbs-wrapper">';
-            woocommerce_breadcrumb();
+            woocommerce_breadcrumb( [
+                'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
+                'wrap_after'  => '</nav>',
+                'before'      => '<span class="rmt-breadcrumb-item">',
+                'after'       => '</span>',
+                'delimiter'   => '&nbsp;/&nbsp;',
+            ] );
             echo '</div>';
         }
         ?>
@@ -118,16 +124,14 @@ class Shop_Page {
                 <form class="rmt-ordering" method="get">
                     <div class="rmt-orderby-wrapper">
                         <select name="orderby" class="rmt-orderby" onchange="this.form.submit()">
-                            <option value="" disabled><?php esc_html_e( 'Sort by', 'rakmyat-core' ); ?></option>
+                            <option value="" disabled><?php esc_html_e( 'Selecte Sorting', 'rakmyat-core' ); ?></option>
                             <?php foreach ( $orderby_options as $value => $label ) : ?>
                                 <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_orderby, $value ); ?>>
                                     <?php echo esc_html( $label ); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <svg class="rmt-orderby-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M2.5 5H17.5M2.5 10H12.5M2.5 15H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img class="rmt-orderby-icon" src="<?php echo esc_url( RMT_URL . 'assets/img/filter_list.svg' ); ?>" alt="Sort" />
                     </div>
                     <input type="hidden" name="paged" value="1" />
                     <?php wc_query_string_form_fields( null, [ 'orderby', 'submit', 'paged', 'product-page' ] ); ?>
