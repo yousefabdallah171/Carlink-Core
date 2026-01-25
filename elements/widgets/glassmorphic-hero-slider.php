@@ -93,24 +93,141 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
-        // --- STYLE TAB: POSITIONING ---
-        $this->start_controls_section('section_positioning', [
-            'label' => __( 'Content Positioning', 'rakmyat-core' ),
+        // --- STYLE TAB: CONTAINER ---
+        $this->start_controls_section('section_container', [
+            'label' => __( 'Container', 'rakmyat-core' ),
             'tab' => Controls_Manager::TAB_STYLE,
         ]);
 
-        $this->add_responsive_control('content_left_offset', [
-            'label' => __( 'Left Offset (px)', 'rakmyat-core' ),
+        $this->add_responsive_control('container_max_width', [
+            'label' => __( 'Container Max Width', 'rakmyat-core' ),
             'type' => Controls_Manager::SLIDER,
-            'range' => [ 'px' => [ 'min' => 0, 'max' => 500 ] ],
-            'selectors' => [ '{{WRAPPER}} .rmt-slide-content' => 'padding-left: {{SIZE}}{{UNIT}};' ],
+            'size_units' => [ 'px', '%', 'vw' ],
+            'range' => [
+                'px' => [ 'min' => 600, 'max' => 1920 ],
+                '%' => [ 'min' => 50, 'max' => 100 ],
+                'vw' => [ 'min' => 50, 'max' => 100 ],
+            ],
+            'default' => [ 'size' => 1440, 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-slide-container' => 'max-width: {{SIZE}}{{UNIT}};' ],
         ]);
 
-        $this->add_responsive_control('content_vertical_adj', [
-            'label' => __( 'Vertical Position (px)', 'rakmyat-core' ),
+        $this->add_responsive_control('container_padding', [
+            'label' => __( 'Container Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em' ],
+            'default' => [
+                'top' => '0',
+                'right' => '15',
+                'bottom' => '0',
+                'left' => '15',
+                'unit' => 'px',
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-slide-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->end_controls_section();
+
+        // --- STYLE TAB: CONTENT BOX ---
+        $this->start_controls_section('section_content_box', [
+            'label' => __( 'Content Box', 'rakmyat-core' ),
+            'tab' => Controls_Manager::TAB_STYLE,
+        ]);
+
+        $this->add_responsive_control('content_padding', [
+            'label' => __( 'Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-slide-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('content_margin', [
+            'label' => __( 'Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-slide-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('content_max_width', [
+            'label' => __( 'Max Width', 'rakmyat-core' ),
             'type' => Controls_Manager::SLIDER,
-            'range' => [ 'px' => [ 'min' => -300, 'max' => 300 ] ],
-            'selectors' => [ '{{WRAPPER}} .rmt-slide-content' => 'margin-top: {{SIZE}}{{UNIT}};' ],
+            'size_units' => [ 'px', '%', 'vw' ],
+            'range' => [
+                'px' => [ 'min' => 200, 'max' => 1200 ],
+                '%' => [ 'min' => 10, 'max' => 100 ],
+                'vw' => [ 'min' => 10, 'max' => 100 ],
+            ],
+            'default' => [ 'size' => 700, 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-slide-content' => 'max-width: {{SIZE}}{{UNIT}};' ],
+        ]);
+
+        $this->add_responsive_control('content_text_align', [
+            'label' => __( 'Text Alignment', 'rakmyat-core' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+                'left' => [
+                    'title' => __( 'Left', 'rakmyat-core' ),
+                    'icon' => 'eicon-text-align-left',
+                ],
+                'center' => [
+                    'title' => __( 'Center', 'rakmyat-core' ),
+                    'icon' => 'eicon-text-align-center',
+                ],
+                'right' => [
+                    'title' => __( 'Right', 'rakmyat-core' ),
+                    'icon' => 'eicon-text-align-right',
+                ],
+            ],
+            'default' => 'left',
+            'selectors' => [ '{{WRAPPER}} .rmt-slide-content' => 'text-align: {{VALUE}};' ],
+        ]);
+
+        $this->add_responsive_control('content_horizontal_position', [
+            'label' => __( 'Horizontal Position', 'rakmyat-core' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+                'flex-start' => [
+                    'title' => __( 'Start', 'rakmyat-core' ),
+                    'icon' => 'eicon-h-align-left',
+                ],
+                'center' => [
+                    'title' => __( 'Center', 'rakmyat-core' ),
+                    'icon' => 'eicon-h-align-center',
+                ],
+                'flex-end' => [
+                    'title' => __( 'End', 'rakmyat-core' ),
+                    'icon' => 'eicon-h-align-right',
+                ],
+            ],
+            'default' => 'flex-start',
+            'selectors' => [ '{{WRAPPER}} .rmt-slide-container' => 'justify-content: {{VALUE}};' ],
+        ]);
+
+        $this->add_responsive_control('content_vertical_position', [
+            'label' => __( 'Vertical Position', 'rakmyat-core' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+                'flex-start' => [
+                    'title' => __( 'Top', 'rakmyat-core' ),
+                    'icon' => 'eicon-v-align-top',
+                ],
+                'center' => [
+                    'title' => __( 'Middle', 'rakmyat-core' ),
+                    'icon' => 'eicon-v-align-middle',
+                ],
+                'flex-end' => [
+                    'title' => __( 'Bottom', 'rakmyat-core' ),
+                    'icon' => 'eicon-v-align-bottom',
+                ],
+            ],
+            'default' => 'center',
+            'selectors' => [ '{{WRAPPER}} .rmt-slide-container' => 'align-items: {{VALUE}};' ],
         ]);
 
         $this->end_controls_section();
@@ -229,13 +346,15 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
                     <?php foreach ( $settings['slides'] as $slide ) : ?>
                         <div class="swiper-slide rmt-glass-slide" style="background-image: url('<?php echo esc_url($slide['image']['url']); ?>');">
                             <div class="rmt-slide-overlay"></div>
-                            <div class="rmt-slide-content">
+                            <div class="rmt-slide-container">
+                                <div class="rmt-slide-content">
                                 <h2 class="rmt-title"><?php echo wp_kses_post(preg_replace('/\{\{(.*?)\}\}/', '<span class="rmt-highlight">$1</span>', $slide['title'])); ?></h2>
                                 <h4 class="rmt-subtitle"><?php echo esc_html($slide['subtitle']); ?></h4>
                                 <a href="<?php echo esc_url($slide['button_link']['url']); ?>" class="rmt-glass-btn">
                                     <?php echo esc_html($slide['button_text']); ?>
                                     <i class="fas fa-chevron-right" style="margin-left:10px; font-size: 0.8em;"></i>
                                 </a>
+                            </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
