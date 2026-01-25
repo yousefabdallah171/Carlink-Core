@@ -93,6 +93,26 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        // --- STYLE TAB: SLIDER ---
+        $this->start_controls_section('section_slider', [
+            'label' => __( 'Slider', 'rakmyat-core' ),
+            'tab' => Controls_Manager::TAB_STYLE,
+        ]);
+
+        $this->add_responsive_control('slide_height', [
+            'label' => __( 'Slide Height', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'vh' ],
+            'range' => [
+                'px' => [ 'min' => 300, 'max' => 1000 ],
+                'vh' => [ 'min' => 30, 'max' => 100 ],
+            ],
+            'default' => [ 'size' => 600, 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-glass-slide' => 'height: {{SIZE}}{{UNIT}};' ],
+        ]);
+
+        $this->end_controls_section();
+
         // --- STYLE TAB: CONTAINER ---
         $this->start_controls_section('section_container', [
             'label' => __( 'Container', 'rakmyat-core' ),
@@ -126,6 +146,20 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
             'selectors' => [
                 '{{WRAPPER}} .rmt-slide-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+        ]);
+
+        $this->add_responsive_control('container_min_height', [
+            'label' => __( 'Container Min Height', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'vh', '%' ],
+            'range' => [
+                'px' => [ 'min' => 200, 'max' => 1000 ],
+                'vh' => [ 'min' => 20, 'max' => 100 ],
+                '%' => [ 'min' => 50, 'max' => 100 ],
+            ],
+            'default' => [ 'size' => 100, 'unit' => '%' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-slide-container' => 'min-height: {{SIZE}}{{UNIT}};' ],
+            'description' => __( 'Set min-height to ensure all slides have equal height', 'rakmyat-core' ),
         ]);
 
         $this->end_controls_section();
