@@ -21,6 +21,9 @@ class Shop_Sidebar {
         // Replace sidebar content
         add_action( 'wp', [ $this, 'setup_sidebar' ] );
 
+        // Direct sidebar injection using woocommerce_sidebar hook
+        add_action( 'woocommerce_sidebar', [ $this, 'inject_sidebar_content' ], 5 );
+
         // Filter products by availability
         add_action( 'woocommerce_product_query', [ $this, 'filter_by_availability' ] );
 
@@ -69,54 +72,162 @@ class Shop_Sidebar {
             return;
         }
 
-        // Remove default sidebar widgets
-        add_action( 'dynamic_sidebar_before', [ $this, 'start_sidebar_capture' ] );
-        add_action( 'dynamic_sidebar_after', [ $this, 'end_sidebar_capture' ] );
+        // Hook into sidebar to add our content
+        add_action( 'wp_footer', [ $this, 'render_mobile_elements' ] );
 
-        // Add our custom sidebar
+        // Replace sidebar content using widget area
         add_filter( 'sidebars_widgets', [ $this, 'replace_sidebar_widgets' ] );
+
+        // Register our own widget to display sidebar
+        add_action( 'widgets_init', [ $this, 'register_sidebar_widget' ] );
+
+        // Add content directly to sidebar
         add_action( 'dynamic_sidebar_before', [ $this, 'render_custom_sidebar' ], 5 );
     }
 
     /**
-     * Start capturing sidebar output
-     */
-    public function start_sidebar_capture( $sidebar_id ) {
-        if ( $sidebar_id === 'shop-sidebar' || $sidebar_id === 'sidebar-shop' || $sidebar_id === 'catalog-sidebar' ) {
-            ob_start();
-        }
-    }
-
-    /**
-     * End sidebar capture and discard
-     */
-    public function end_sidebar_capture( $sidebar_id ) {
-        if ( $sidebar_id === 'shop-sidebar' || $sidebar_id === 'sidebar-shop' || $sidebar_id === 'catalog-sidebar' ) {
-            ob_end_clean();
-        }
-    }
-
-    /**
-     * Replace sidebar widgets
+     * Replace sidebar widgets - clear all widgets from shop sidebars
      */
     public function replace_sidebar_widgets( $sidebars_widgets ) {
-        $shop_sidebars = [ 'shop-sidebar', 'sidebar-shop', 'catalog-sidebar' ];
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+            return $sidebars_widgets;
+        }
+
+        // Common shop sidebar IDs
+        $shop_sidebars = [
+            'shop-sidebar',
+            'sidebar-shop',
+            'catalog-sidebar',
+            'primary-sidebar',
+            'shop-sidebar-1',
+            'woocommerce-sidebar'
+        ];
+
         foreach ( $shop_sidebars as $sidebar ) {
             if ( isset( $sidebars_widgets[ $sidebar ] ) ) {
                 $sidebars_widgets[ $sidebar ] = [];
             }
         }
+
         return $sidebars_widgets;
+    }
+
+    /**
+     * Register sidebar widget
+     */
+    public function register_sidebar_widget() {
+        // This is just a placeholder
+    }
+
+    /**
+     * Inject sidebar content directly via woocommerce_sidebar hook
+     */
+    public function inject_sidebar_content() {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+            return;
+        }
+
+        if ( ! get_theme_mod( 'rmt_enable_custom_sidebar', true ) ) {
+            return;
+        }
+
+        $this->output_sidebar_html();
+    }
+
+    /**
+     * Output the sidebar HTML
+     */
+    private function output_sidebar_html() {
+        $filters_title = get_theme_mod( 'rmt_filters_title', __( 'Filters', 'rakmyat-core' ) );
+        ?>
+        <div class="rmt-shop-sidebar">
+            <h2 class="rmt-sidebar-title"><?php echo esc_html( $filters_title ); ?></h2>
+
+            <?php
+            // Category Filter
+            if ( get_theme_mod( 'rmt_enable_category_filter', true ) ) {
+                $this->render_category_filter();
+            }
+
+            // Brand Filter
+            if ( get_theme_mod( 'rmt_enable_brand_filter', true ) ) {
+                $this->render_brand_filter();
+            }
+
+            // Price Range Filter
+            if ( get_theme_mod( 'rmt_enable_price_filter', true ) ) {
+                $this->render_price_filter();
+            }
+
+            // Availability Filter
+            if ( get_theme_mod( 'rmt_enable_availability_filter', true ) ) {
+                $this->render_availability_filter();
+            }
+
+            // Collections Filter
+            if ( get_theme_mod( 'rmt_enable_collections_filter', true ) ) {
+                $this->render_collections_filter();
+            }
+
+            // Ratings Filter
+            if ( get_theme_mod( 'rmt_enable_ratings_filter', true ) ) {
+                $this->render_ratings_filter();
+            }
+            ?>
+
+            <!-- Mobile Close Button -->
+            <button class="rmt-filter-close-btn" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <?php
+    }
+
+    /**
+     * Render mobile elements (toggle button and overlay)
+     */
+    public function render_mobile_elements() {
+        if ( ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
+            return;
+        }
+        ?>
+        <!-- Mobile Filter Toggle Button -->
+        <button class="rmt-filter-toggle-btn" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6M9 8h6M17 16h6"/>
+            </svg>
+            <span><?php esc_html_e( 'Filters', 'rakmyat-core' ); ?></span>
+        </button>
+        <div class="rmt-sidebar-overlay"></div>
+        <?php
     }
 
     /**
      * Render custom sidebar
      */
     public function render_custom_sidebar( $sidebar_id ) {
-        $shop_sidebars = [ 'shop-sidebar', 'sidebar-shop', 'catalog-sidebar' ];
+        // Common shop sidebar IDs
+        $shop_sidebars = [
+            'shop-sidebar',
+            'sidebar-shop',
+            'catalog-sidebar',
+            'primary-sidebar',
+            'shop-sidebar-1',
+            'woocommerce-sidebar'
+        ];
+
         if ( ! in_array( $sidebar_id, $shop_sidebars ) ) {
             return;
         }
+
+        // Prevent duplicate rendering
+        static $rendered = false;
+        if ( $rendered ) {
+            return;
+        }
+        $rendered = true;
 
         $filters_title = get_theme_mod( 'rmt_filters_title', __( 'Filters', 'rakmyat-core' ) );
         ?>
@@ -155,21 +266,13 @@ class Shop_Sidebar {
             }
             ?>
 
-            <!-- Mobile Filter Button (shown in mobile CSS) -->
+            <!-- Mobile Close Button -->
             <button class="rmt-filter-close-btn" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12"/>
                 </svg>
             </button>
         </div>
-
-        <!-- Mobile Filter Toggle Button -->
-        <button class="rmt-filter-toggle-btn" type="button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6M9 8h6M17 16h6"/>
-            </svg>
-            <span><?php esc_html_e( 'Filters', 'rakmyat-core' ); ?></span>
-        </button>
         <?php
     }
 
