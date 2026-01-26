@@ -90,3 +90,7 @@
     margin: 0 4px;
     font-weight: 400;
 }
+.page-header-catalog .page-breadcrumbs {
+    background-color: #f1f1f100 !important;
+        margin-bottom: 0 !important;
+}
