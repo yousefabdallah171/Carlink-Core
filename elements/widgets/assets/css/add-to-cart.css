@@ -1,0 +1,246 @@
+/**
+ * Add to Cart Widget Styles
+ */
+
+.rmt-add-to-cart-widget {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Top Row: Quantity + Add to Cart + Wishlist */
+.rmt-atc-top-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+/* ========================================
+   QUANTITY SELECTOR
+======================================== */
+.rmt-qty-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    background: #ffffff;
+    overflow: hidden;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.rmt-qty-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    background: #F3F4F6;
+    border: none;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.rmt-qty-btn:hover {
+    background: #E5E7EB;
+}
+
+.rmt-qty-btn:active {
+    transform: scale(0.95);
+}
+
+.rmt-qty-btn svg {
+    width: 12px;
+    height: 12px;
+}
+
+.rmt-qty-input {
+    width: 50px;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A0A0A;
+    background: transparent;
+    -moz-appearance: textfield;
+}
+
+.rmt-qty-input::-webkit-outer-spin-button,
+.rmt-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.rmt-qty-input:focus {
+    outline: none;
+}
+
+/* ========================================
+   ADD TO CART BUTTON
+======================================== */
+.rmt-add-to-cart-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(270deg, rgba(138, 143, 145, 0.3) 0%, #8A8F91 100%);
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.rmt-add-to-cart-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.rmt-add-to-cart-btn:active {
+    transform: translateY(0);
+}
+
+.rmt-add-to-cart-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.rmt-add-to-cart-btn.loading .rmt-btn-text {
+    display: none;
+}
+
+.rmt-add-to-cart-btn.loading .rmt-btn-loading {
+    display: inline-flex !important;
+}
+
+/* Spinner animation */
+.rmt-spinner {
+    animation: rmt-spin 1s linear infinite;
+}
+
+@keyframes rmt-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   WISHLIST BUTTON
+======================================== */
+.rmt-wishlist-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.rmt-wishlist-btn:hover {
+    background: #F3F4F6;
+    border-color: #D1D5DB;
+}
+
+.rmt-wishlist-btn.active {
+    color: #EF4444;
+}
+
+.rmt-wishlist-btn i {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.rmt-wishlist-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.rmt-wishlist-icon-default,
+.rmt-wishlist-icon-active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================================
+   BUY NOW BUTTON
+======================================== */
+.rmt-buy-now-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #3A5F79 0%, rgba(58, 95, 121, 0.4) 100%);
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rmt-buy-now-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.rmt-buy-now-btn:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   OUT OF STOCK
+======================================== */
+.rmt-out-of-stock-notice {
+    margin: 0;
+    padding: 12px 20px;
+    background: #FEE2E2;
+    border-radius: 4px;
+    color: #DC2626;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 576px) {
+    .rmt-atc-top-row {
+        flex-wrap: wrap;
+    }
+
+    .rmt-qty-selector {
+        width: 100%;
+        order: 1;
+    }
+
+    .rmt-add-to-cart-btn {
+        flex: 1;
+        order: 2;
+    }
+
+    .rmt-wishlist-btn {
+        order: 3;
+    }
+}
