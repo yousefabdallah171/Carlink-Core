@@ -396,8 +396,17 @@ body.woocommerce-checkout .woocommerce-shipping-methods label {
 }
 
 /* ========================================
-   HIDE DEFAULT COUPON FORM
+   HIDE DEFAULT COUPON FORM AND COUPON COLUMN
 ======================================== */
+/* Hide coupon column at the top of checkout */
+body.woocommerce-checkout .col-form-coupon {
+    display: none !important;
+}
+
+body.woocommerce-checkout .woocommerce-form-coupon-toggle {
+    display: none !important;
+}
+
 body.woocommerce-checkout #payment .woocommerce-form-coupon {
     display: none !important;
 }
@@ -518,7 +527,8 @@ body.woocommerce-checkout .checkout_coupon input[type="text"]:focus {
     box-shadow: 0 0 0 2px rgba(58, 95, 121, 0.1) !important;
 }
 
-body.woocommerce-checkout .checkout_coupon button {
+body.woocommerce-checkout .checkout_coupon button,
+body.woocommerce-checkout .checkout_coupon input[type="submit"] {
     background: #3A5F79 !important;
     color: #FFFFFF !important;
     border: none !important;
@@ -535,12 +545,14 @@ body.woocommerce-checkout .checkout_coupon button {
     appearance: none !important;
 }
 
-body.woocommerce-checkout .checkout_coupon button:hover {
+body.woocommerce-checkout .checkout_coupon button:hover,
+body.woocommerce-checkout .checkout_coupon input[type="submit"]:hover {
     background: #2A3F50 !important;
     transform: translateY(-1px) !important;
 }
 
-body.woocommerce-checkout .checkout_coupon button:active {
+body.woocommerce-checkout .checkout_coupon button:active,
+body.woocommerce-checkout .checkout_coupon input[type="submit"]:active {
     transform: translateY(0) !important;
 }
 

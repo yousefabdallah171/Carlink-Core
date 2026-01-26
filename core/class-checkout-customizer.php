@@ -35,8 +35,8 @@ class Checkout_Customizer {
         \add_action( 'woocommerce_review_order_before_payment', [ $this, 'open_order_review_card' ] );
         \add_action( 'woocommerce_review_order_after_payment', [ $this, 'close_order_review_card' ] );
 
-        // Display coupon form before payment methods (inside order review)
-        \add_action( 'woocommerce_review_order_before_payment', [ $this, 'render_coupon_form' ] );
+        // Display coupon form right before submit button (at bottom of order review)
+        \add_action( 'woocommerce_review_order_before_submit', [ $this, 'render_coupon_form' ] );
     }
 
     /**
