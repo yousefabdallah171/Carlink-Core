@@ -71,7 +71,7 @@ class Widget_Manager {
         $widget_files = glob($widgets_dir . '*.php');
         foreach ($widget_files as $widget_file) {
             $widget_name = basename($widget_file, '.php');
-            
+
             // CSS Registration
             if (file_exists($css_dir . $widget_name . '.css')) {
                 wp_register_style(
@@ -90,11 +90,12 @@ class Widget_Manager {
                     filemtime($js_dir . $widget_name . '.js'),
                     true
                 );
-                // Localize for AJAX
+                // Enqueue wishlist script on all pages
                 if ($widget_name === 'wishlist-icon') {
-                    wp_localize_script('rmt-' . $widget_name, 'wishlist_ajax', [
-                        'ajaxurl' => admin_url('admin-ajax.php')
-                    ]);
+                    wp_enqueue_script('rmt-' . $widget_name);
+                    if (file_exists($css_dir . $widget_name . '.css')) {
+                        wp_enqueue_style('rmt-' . $widget_name . '-css');
+                    }
                 }
             }
         }

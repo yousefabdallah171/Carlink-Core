@@ -1,78 +1,47 @@
-(function ($) {
+(function($) {
     "use strict";
 
-    var WidgetWishlistIconHandler = function ($scope, $) {
-        var $myBadge = $scope.find('.rmt-wishlist-count');
-
-        // Check if badge element exists
-        if ($myBadge.length === 0) {
-            console.warn('Wishlist badge element not found');
-            return;
+    // Get current count from badge
+    function getCurrentCount() {
+        var $badge = $('.rmt-wishlist-count');
+        if ($badge.length) {
+            return parseInt($badge.text()) || 0;
         }
+        return 0;
+    }
 
-        // Fetch wishlist count from backend AJAX
-        var fetchCountFromBackend = function() {
-            // Check if wishlist_ajax is available
-            if (typeof wishlist_ajax === 'undefined' || !wishlist_ajax.ajaxurl) {
-                console.warn('Wishlist AJAX not initialized');
-                return;
-            }
-
-            $.ajax({
-                url: wishlist_ajax.ajaxurl,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    action: 'get_wishlist_count'
-                },
-                success: function(response) {
-                    if (response && response.count !== undefined) {
-                        var count = parseInt(response.count);
-                        updateUI(count);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log('Wishlist count fetch error:', error);
-                }
-            });
-        };
-
-        var updateUI = function(count) {
-            if (!isNaN(count) && count > 0) {
-                $myBadge.text(count).css('display', 'flex');
+    // Update badge with new count
+    function updateBadge(count) {
+        var $badge = $('.rmt-wishlist-count');
+        if ($badge.length) {
+            $badge.text(count);
+            if (count > 0) {
+                $badge.addClass('show');
             } else {
-                $myBadge.css('display', 'none');
+                $badge.removeClass('show');
             }
-        };
+        }
+    }
 
-        // 1. Fetch count on page load with a small delay to ensure DOM is ready
-        setTimeout(function() {
-            fetchCountFromBackend();
-        }, 500);
+    // When item is ADDED to wishlist
+    $(document).on('added_to_wishlist', function() {
+        var newCount = getCurrentCount() + 1;
+        updateBadge(newCount);
+    });
 
-        // 2. Re-fetch after any AJAX request (wishlist/cart changes)
-        $(document).on('ajaxComplete', function(event, xhr, settings) {
-            if (settings && settings.data) {
-                var requestData = settings.data.toString();
-                if (requestData.indexOf('wishlist') !== -1 || requestData.indexOf('add_to_cart') !== -1) {
-                    setTimeout(fetchCountFromBackend, 150);
-                }
-            }
-        });
+    // When item is REMOVED from wishlist
+    $(document).on('removed_from_wishlist', function() {
+        var newCount = getCurrentCount() - 1;
+        if (newCount < 0) newCount = 0;
+        updateBadge(newCount);
+    });
 
-        // 3. Listen for Martfury wishlist events
-        $(document).on('added_to_wishlist removed_from_wishlist', function() {
-            setTimeout(fetchCountFromBackend, 150);
-        });
-
-        // 4. Listen for WCBoost wishlist events
-        $(document).on('wcboost:wishlist:updated', function() {
-            setTimeout(fetchCountFromBackend, 150);
-        });
-    };
-
-    $(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/wishlist-icon.default', WidgetWishlistIconHandler);
+    // WCBoost specific event
+    $(document).on('wcboost:wishlist:updated', function(e, data) {
+        // If WCBoost provides count in event data, use it
+        if (data && typeof data.count !== 'undefined') {
+            updateBadge(parseInt(data.count));
+        }
     });
 
 })(jQuery);
