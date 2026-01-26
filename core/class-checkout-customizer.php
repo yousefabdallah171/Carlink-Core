@@ -16,27 +16,27 @@ class Checkout_Customizer {
 
     private function __construct() {
         // Only run on checkout page
-        if ( ! is_checkout() ) {
+        if ( ! \is_checkout() ) {
             return;
         }
 
         // Customize form field output
-        add_filter( 'woocommerce_form_field', [ $this, 'customize_form_field' ], 10, 4 );
+        \add_filter( 'woocommerce_form_field', [ $this, 'customize_form_field' ], 10, 4 );
 
         // Remove coupon toggle and always show coupon form
-        add_filter( 'woocommerce_checkout_show_terms', '__return_false' );
-        add_filter( 'woocommerce_coupons_enabled', '__return_true' );
+        \add_filter( 'woocommerce_checkout_show_terms', '__return_false' );
+        \add_filter( 'woocommerce_coupons_enabled', '__return_true' );
 
         // Reorder checkout elements
-        add_action( 'woocommerce_checkout_before_customer_details', [ $this, 'open_customer_details_wrapper' ] );
-        add_action( 'woocommerce_checkout_after_customer_details', [ $this, 'close_customer_details_wrapper' ] );
+        \add_action( 'woocommerce_checkout_before_customer_details', [ $this, 'open_customer_details_wrapper' ] );
+        \add_action( 'woocommerce_checkout_after_customer_details', [ $this, 'close_customer_details_wrapper' ] );
 
         // Move coupon form inside order review
-        add_action( 'woocommerce_review_order_before_payment', [ $this, 'open_order_review_card' ] );
-        add_action( 'woocommerce_review_order_after_payment', [ $this, 'close_order_review_card' ] );
+        \add_action( 'woocommerce_review_order_before_payment', [ $this, 'open_order_review_card' ] );
+        \add_action( 'woocommerce_review_order_after_payment', [ $this, 'close_order_review_card' ] );
 
         // Display coupon form in the right place
-        add_action( 'woocommerce_review_order_after_order_total', [ $this, 'render_coupon_form' ] );
+        \add_action( 'woocommerce_review_order_after_order_total', [ $this, 'render_coupon_form' ] );
     }
 
     /**
@@ -114,7 +114,7 @@ class Checkout_Customizer {
      * This displays the coupon input and button right after the order total
      */
     public function render_coupon_form() {
-        if ( ! WC()->cart->is_empty() && wc_coupons_enabled() ) {
+        if ( ! \WC()->cart->is_empty() && \wc_coupons_enabled() ) {
             ?>
             <tr class="coupon-divider">
                 <td colspan="2"></td>
@@ -134,9 +134,9 @@ class Checkout_Customizer {
                             type="submit"
                             class="button"
                             name="apply_coupon"
-                            value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"
+                            value="<?php \esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"
                         >
-                            <?php esc_html_e( 'Apply Coupon', 'woocommerce' ); ?>
+                            <?php \esc_html_e( 'Apply Coupon', 'woocommerce' ); ?>
                         </button>
                     </form>
                 </td>
