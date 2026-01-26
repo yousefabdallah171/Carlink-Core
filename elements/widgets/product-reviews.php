@@ -430,7 +430,84 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'type' => Controls_Manager::SLIDER,
             'default' => [ 'size' => 14 ],
             'range' => [ 'px' => [ 'min' => 8, 'max' => 32 ] ],
-            'selectors' => [ '{{WRAPPER}} .rmt-review-btn svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;' ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-review-btn svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
+                '{{WRAPPER}} .rmt-review-btn i' => 'font-size: {{SIZE}}px;',
+            ],
+        ]);
+
+        // Like Icon Controls
+        $this->add_control('like_icon_heading', [
+            'label' => __( 'Like Icon', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('like_icon_color', [
+            'label' => __( 'Icon Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#6B7280',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-like-btn .rmt-btn-icon' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-like-btn .rmt-btn-icon svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('like_icon_hover_color', [
+            'label' => __( 'Icon Hover Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#3A5F79',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-like-btn:hover .rmt-btn-icon' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-like-btn:hover .rmt-btn-icon svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('like_icon_active_color', [
+            'label' => __( 'Icon Active Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#3A5F79',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-like-btn.active .rmt-btn-icon' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-like-btn.active .rmt-btn-icon svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        // Dislike Icon Controls
+        $this->add_control('dislike_icon_heading', [
+            'label' => __( 'Dislike Icon', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('dislike_icon_color', [
+            'label' => __( 'Icon Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#6B7280',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-dislike-btn .rmt-btn-icon' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-dislike-btn .rmt-btn-icon svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('dislike_icon_hover_color', [
+            'label' => __( 'Icon Hover Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#EF4444',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-dislike-btn:hover .rmt-btn-icon' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-dislike-btn:hover .rmt-btn-icon svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('dislike_icon_active_color', [
+            'label' => __( 'Icon Active Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#EF4444',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-dislike-btn.active .rmt-btn-icon' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-dislike-btn.active .rmt-btn-icon svg' => 'fill: {{VALUE}};',
+            ],
         ]);
 
         $this->add_group_control(Group_Control_Typography::get_type(), [
