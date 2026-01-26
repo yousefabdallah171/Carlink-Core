@@ -288,6 +288,7 @@
 ======================================== */
 @media (max-width: 768px) {
     .rmt-reviews-container {
+        grid-template-columns: 1fr;
         gap: 30px;
     }
 
@@ -388,6 +389,7 @@
     }
 
     .rmt-reviews-container {
+        grid-template-columns: 1fr;
         gap: 24px;
     }
 
