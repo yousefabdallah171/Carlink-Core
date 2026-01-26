@@ -15,10 +15,7 @@ class Checkout_Customizer {
     }
 
     private function __construct() {
-        // Only run on checkout page
-        if ( ! \is_checkout() ) {
-            return;
-        }
+        // Register hooks unconditionally - WooCommerce hooks only fire on checkout page anyway
 
         // Customize form field output
         \add_filter( 'woocommerce_form_field', [ $this, 'customize_form_field' ], 10, 4 );
@@ -35,8 +32,8 @@ class Checkout_Customizer {
         \add_action( 'woocommerce_review_order_before_payment', [ $this, 'open_order_review_card' ] );
         \add_action( 'woocommerce_review_order_after_payment', [ $this, 'close_order_review_card' ] );
 
-        // Display coupon form right before submit button (at bottom of order review)
-        \add_action( 'woocommerce_review_order_before_submit', [ $this, 'render_coupon_form' ] );
+        // Display coupon form before payment section (between table and payment methods)
+        \add_action( 'woocommerce_review_order_before_payment', [ $this, 'render_coupon_form' ], 5 );
     }
 
     /**
@@ -114,7 +111,7 @@ class Checkout_Customizer {
      * This displays the coupon input and button inside the order review, before payment methods
      */
     public function render_coupon_form() {
-        if ( ! \WC()->cart->is_empty() && \wc_coupons_enabled() ) {
+        if ( \wc_coupons_enabled() ) {
             ?>
             <div class="checkout-coupon-wrapper">
                 <form class="checkout_coupon" method="post">

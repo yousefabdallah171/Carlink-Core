@@ -484,10 +484,13 @@ body.woocommerce-checkout #payment .woocommerce-form-coupon-toggle.hidden ~ .che
 
 /* Coupon wrapper - positioned inside order review */
 body.woocommerce-checkout .checkout-coupon-wrapper {
+    display: block !important;
+    visibility: visible !important;
     margin: 24px 0 0 0 !important;
     padding: 24px 0 0 0 !important;
     border-top: 1px solid #F0F0F0 !important;
     width: 100% !important;
+    clear: both !important;
 }
 
 /* Coupon form styling */
@@ -504,6 +507,9 @@ body.woocommerce-checkout .checkout_coupon {
 }
 
 body.woocommerce-checkout .checkout_coupon input[type="text"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     background: #FFFFFF !important;
     border: 1px solid #D1D5DB !important;
     border-radius: 6px !important;
@@ -529,6 +535,9 @@ body.woocommerce-checkout .checkout_coupon input[type="text"]:focus {
 
 body.woocommerce-checkout .checkout_coupon button,
 body.woocommerce-checkout .checkout_coupon input[type="submit"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     background: #3A5F79 !important;
     color: #FFFFFF !important;
     border: none !important;

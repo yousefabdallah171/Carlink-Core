@@ -91,6 +91,7 @@ Modern 2-column layout matching Figma design with glassmorphic checkout button.
   - Delete button: Red background (#DC2626) with SVG trash icon
 
 - **Order Summary Card:**
+  - "Order Summary" title (Poppins, 31px, 600 weight, #0A0A0A) at the top
   - Right sidebar with white background, light border (#E5E5E5), 12px border-radius
   - Sticky positioning (top: 20px) on desktop
   - Subtotal, Shipping (FREE in yellow), Tax, and Total rows
@@ -343,6 +344,23 @@ The checkout page is customized using WooCommerce hooks and filters instead of t
 - ✅ Automatic updates compatibility
 - ✅ Follows WooCommerce best practices
 
+### Cart Page Hooks
+
+The cart page uses WooCommerce hooks to add dynamic content:
+
+```php
+// Add Order Summary title
+add_action( 'woocommerce_before_cart_totals', [ $this, 'add_order_summary_title' ] );
+
+// Add trust badges
+add_action( 'woocommerce_after_cart_totals', [ $this, 'add_trust_badges' ] );
+```
+
+**Advantages:**
+- ✅ Dynamic content injection without template overrides
+- ✅ Works with any WooCommerce theme
+- ✅ Maintains theme compatibility
+
 ### Asset Loading
 
 Assets are intelligently loaded:
@@ -473,6 +491,10 @@ The plugin removes these WooCommerce actions to prevent duplication:
 - `woocommerce_before_shop_loop` (toolbar)
 - `woocommerce_catalog_ordering` (sort dropdown)
 
+### Cart Page Hooks Used
+- `woocommerce_before_cart_totals` - Add Order Summary title
+- `woocommerce_after_cart_totals` - Add trust badges
+
 ### Checkout Hooks Used
 - `woocommerce_form_field` - Customize form field output
 - `woocommerce_review_order_before_payment` - Render coupon form
@@ -487,10 +509,11 @@ The plugin removes these WooCommerce actions to prevent duplication:
 ### Version 3.0.0 (Latest)
 - ⭐ **NEW: WooCommerce Cart Page Styling**
   - Modern 2-column layout (cart table + order summary)
+  - "Order Summary" title via `woocommerce_before_cart_totals` hook (Poppins, 31px, 600 weight)
   - Dark teal header with glassmorphic checkout button
   - Quantity selector with custom +/- buttons
   - Red trash delete button with SVG icon
-  - Trust badges below checkout
+  - Trust badges below checkout (via `woocommerce_after_cart_totals` hook)
   - Fully responsive (tablet & mobile)
 
 - ⭐ **NEW: WooCommerce Checkout Page Styling**
