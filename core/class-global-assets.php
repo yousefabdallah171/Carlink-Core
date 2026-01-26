@@ -18,6 +18,9 @@ class Global_Assets {
         // Enqueue global plugin assets
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_global_assets' ] );
 
+        // Add Order Summary title to cart page
+        add_action( 'woocommerce_review_order_before_cart_contents', [ $this, 'add_order_summary_title' ] );
+
         // Add trust badges to cart page
         add_action( 'woocommerce_after_cart_totals', [ $this, 'add_trust_badges' ] );
     }
@@ -53,6 +56,15 @@ class Global_Assets {
                 filemtime( RMT_PATH . 'elements/widgets/assets/css/woo-checkout.css' )
             );
         }
+    }
+
+    /**
+     * Add Order Summary title to cart page order review section
+     */
+    public function add_order_summary_title() {
+        ?>
+        <h2>Order Summary</h2>
+        <?php
     }
 
     /**

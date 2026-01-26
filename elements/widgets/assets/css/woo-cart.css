@@ -49,7 +49,7 @@ body.woocommerce-cart .cart-collaterals {
 ======================================== */
 body.woocommerce-cart table.shop_table.cart {
     background: #FFFFFF !important;
-    border-radius: 8px !important;
+    border-radius: 0px !important;
     overflow: hidden !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
     border: none !important;
@@ -83,13 +83,13 @@ body.woocommerce-cart .woocommerce-cart-form table thead th {
 }
 
 body.woocommerce-cart table.shop_table.cart thead th:first-child {
-    border-radius: 8px 0 0 0 !important;
+    border-radius: 0 0 0 0 !important;
     text-align: left !important;
     padding-left: 20px !important;
 }
 
 body.woocommerce-cart table.shop_table.cart thead th:last-child {
-    border-radius: 0 8px 0 0 !important;
+    border-radius: 0 0 0 0 !important;
 }
 
 /* ========================================
@@ -132,7 +132,7 @@ body.woocommerce-cart td.product-thumbnail {
 body.woocommerce-cart td.product-thumbnail img {
     max-width: 80px !important;
     height: auto !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
 }
 
 /* Product Name */
@@ -195,7 +195,7 @@ body.woocommerce-cart .quantity {
     align-items: center !important;
     justify-content: center !important;
     border: 1px solid #D1D5DB !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
     overflow: hidden !important;
     background: #FFFFFF !important;
     height: 40px !important;
@@ -319,7 +319,7 @@ body.woocommerce-cart a.mf-remove {
     height: 40px !important;
     background: #FEE2E2 !important;
     border: 1px solid #DC2626 !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
     color: #DC2626 !important;
     text-decoration: none !important;
     transition: all 0.3s ease !important;
@@ -395,7 +395,7 @@ body.woocommerce-cart .cart_totals {
     background: #3A5F79 !important;
     background-color: #3A5F79 !important;
     padding: 30px !important;
-    border-radius: 8px !important;
+    border-radius: 0px !important;
     position: sticky !important;
     top: 20px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
@@ -404,9 +404,9 @@ body.woocommerce-cart .cart_totals {
 /* Order Summary Title */
 body.woocommerce-cart .cart_totals h2,
 body.woocommerce-cart .cart_totals > h2 {
-    color: #FFFFFF !important;
-    font-size: 24px !important;
-    font-weight: 700 !important;
+    color: #0A0A0A !important;
+    font-size: 31px !important;
+    font-weight: 600 !important;
     margin: 0 0 24px 0 !important;
     padding: 0 !important;
     text-align: left !important;
