@@ -145,6 +145,3 @@ class Checkout_Customizer {
         }
     }
 }
-
-// Initialize
-Checkout_Customizer::instance();
