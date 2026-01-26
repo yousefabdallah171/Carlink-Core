@@ -368,7 +368,7 @@ body.tax-product_tag .mf-catalog-page .site-content {
     background: #3A5F79;
     color: #fff;
 }
-    
+
 .post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next,
 .product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next,
 .product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next {
@@ -425,4 +425,9 @@ body.tax-product_tag .mf-catalog-page .site-content {
         padding: 10px 40px 10px 14px;
         font-size: 13px;
     }
+}
+
+
+.mf-catalog-page .site-content {
+    padding-top: 0 !important;
 }
