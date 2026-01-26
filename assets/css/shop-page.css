@@ -12,6 +12,24 @@
     margin-bottom: 24px;
 }
 
+/* ========================================
+   HIDE THEME DEFAULT BREADCRUMBS (SHOP PAGE ONLY)
+======================================== */
+.post-type-archive-product .page-header.page-header-catalog,
+.product-category .page-header.page-header-catalog,
+.product-tag .page-header.page-header-catalog {
+    display: none;
+}
+
+/* ========================================
+   ADJUST SITE CONTENT PADDING (SHOP PAGE ONLY)
+======================================== */
+body.post-type-archive-product .mf-catalog-page .site-content,
+body.tax-product_cat .mf-catalog-page .site-content,
+body.tax-product_tag .mf-catalog-page .site-content {
+    padding-top: 0 !important;
+}
+
 .post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-breadcrumb,
 .product-category .rmt-shop-loop-main-grid .woocommerce-breadcrumb,
 .product-tag .rmt-shop-loop-main-grid .woocommerce-breadcrumb {
@@ -350,7 +368,7 @@
     background: #3A5F79;
     color: #fff;
 }
-
+    
 .post-type-archive-product .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next,
 .product-category .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next,
 .product-tag .rmt-shop-loop-main-grid .woocommerce-pagination .page-numbers .next {

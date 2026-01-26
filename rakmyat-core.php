@@ -14,6 +14,7 @@ define( 'RMT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RMT_URL', plugin_dir_url( __FILE__ ) );
 
 // Load Core Classes
+require_once RMT_PATH . 'core/class-global-assets.php';
 require_once RMT_PATH . 'core/class-widget-manager.php';
 require_once RMT_PATH . 'core/class-wc-override.php';
 require_once RMT_PATH . 'core/class-shop-page.php';
@@ -22,6 +23,7 @@ require_once RMT_PATH . 'core/class-shop-sidebar.php';
 
 // Initialize All Managers
 add_action( 'plugins_loaded', function() {
+    \RakmyatCore\Core\Global_Assets::instance();
     \RakmyatCore\Core\Widget_Manager::instance();
     \RakmyatCore\Core\WC_Override::instance();
     \RakmyatCore\Core\Shop_Page::instance();
