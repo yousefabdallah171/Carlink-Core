@@ -35,8 +35,8 @@ class Checkout_Customizer {
         \add_action( 'woocommerce_review_order_before_payment', [ $this, 'open_order_review_card' ] );
         \add_action( 'woocommerce_review_order_after_payment', [ $this, 'close_order_review_card' ] );
 
-        // Display coupon form in the right place
-        \add_action( 'woocommerce_review_order_after_order_total', [ $this, 'render_coupon_form' ] );
+        // Display coupon form before payment methods (inside order review)
+        \add_action( 'woocommerce_review_order_before_payment', [ $this, 'render_coupon_form' ] );
     }
 
     /**
@@ -111,36 +111,31 @@ class Checkout_Customizer {
 
     /**
      * Render coupon form in the order review section
-     * This displays the coupon input and button right after the order total
+     * This displays the coupon input and button inside the order review, before payment methods
      */
     public function render_coupon_form() {
         if ( ! \WC()->cart->is_empty() && \wc_coupons_enabled() ) {
             ?>
-            <tr class="coupon-divider">
-                <td colspan="2"></td>
-            </tr>
-            <tr class="checkout-coupon-row">
-                <td colspan="2">
-                    <form class="checkout_coupon" method="post">
-                        <input
-                            type="text"
-                            name="post_data[coupon_code]"
-                            class="input-text"
-                            id="coupon_code"
-                            value=""
-                            placeholder="Coupon Code"
-                        />
-                        <button
-                            type="submit"
-                            class="button"
-                            name="apply_coupon"
-                            value="<?php \esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"
-                        >
-                            <?php \esc_html_e( 'Apply Coupon', 'woocommerce' ); ?>
-                        </button>
-                    </form>
-                </td>
-            </tr>
+            <div class="checkout-coupon-wrapper">
+                <form class="checkout_coupon" method="post">
+                    <input
+                        type="text"
+                        name="post_data[coupon_code]"
+                        class="input-text"
+                        id="coupon_code"
+                        value=""
+                        placeholder="Coupon Code"
+                    />
+                    <button
+                        type="submit"
+                        class="button"
+                        name="apply_coupon"
+                        value="<?php \esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"
+                    >
+                        <?php \esc_html_e( 'Apply Coupon', 'woocommerce' ); ?>
+                    </button>
+                </form>
+            </div>
             <?php
         }
     }
