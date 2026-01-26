@@ -200,6 +200,19 @@
     background: rgba(58, 95, 121, 0.05);
 }
 
+.rmt-btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rmt-btn-icon svg,
+.rmt-btn-icon i {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
 .rmt-review-btn svg {
     width: 14px;
     height: 14px;

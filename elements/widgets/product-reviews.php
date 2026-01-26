@@ -2,6 +2,7 @@
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -48,6 +49,26 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'default' => 'yes',
         ]);
 
+        $this->add_control('like_icon', [
+            'label' => __( 'Like Icon', 'rakmyat-core' ),
+            'type' => Controls_Manager::ICONS,
+            'default' => [
+                'value' => 'fas fa-thumbs-up',
+                'library' => 'fa-solid',
+            ],
+            'condition' => [ 'show_like_dislike' => 'yes' ],
+        ]);
+
+        $this->add_control('dislike_icon', [
+            'label' => __( 'Dislike Icon', 'rakmyat-core' ),
+            'type' => Controls_Manager::ICONS,
+            'default' => [
+                'value' => 'fas fa-thumbs-down',
+                'library' => 'fa-solid',
+            ],
+            'condition' => [ 'show_like_dislike' => 'yes' ],
+        ]);
+
         $this->add_control('show_view_more', [
             'label' => __( 'Show View More Link', 'rakmyat-core' ),
             'type' => Controls_Manager::SWITCHER,
@@ -73,6 +94,22 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'name' => 'summary_title_typo',
             'label' => __( 'Title Typography', 'rakmyat-core' ),
             'selector' => '{{WRAPPER}} .rmt-reviews-summary-title',
+        ]);
+
+        $this->add_control('star_size', [
+            'label' => __( 'Star Size', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 20 ],
+            'range' => [ 'px' => [ 'min' => 10, 'max' => 40 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-rating-stars-large .rmt-stars' => 'font-size: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('progress_bar_height', [
+            'label' => __( 'Progress Bar Height', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 20 ],
+            'range' => [ 'px' => [ 'min' => 8, 'max' => 40 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-rating-bar' => 'height: {{SIZE}}px;' ],
         ]);
 
         $this->add_control('summary_title_color', [
@@ -156,6 +193,24 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-review-avatar' => 'color: {{VALUE}};' ],
         ]);
 
+        $this->add_control('avatar_size', [
+            'label' => __( 'Avatar Size', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 40 ],
+            'range' => [ 'px' => [ 'min' => 20, 'max' => 80 ] ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-review-avatar' => 'width: {{SIZE}}px; height: {{SIZE}}px;'
+            ],
+        ]);
+
+        $this->add_control('avatar_font_size', [
+            'label' => __( 'Avatar Text Size', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 16 ],
+            'range' => [ 'px' => [ 'min' => 10, 'max' => 32 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-avatar' => 'font-size: {{SIZE}}px;' ],
+        ]);
+
         $this->add_group_control(Group_Control_Typography::get_type(), [
             'name' => 'reviewer_name_typo',
             'label' => __( 'Reviewer Name Typography', 'rakmyat-core' ),
@@ -180,6 +235,38 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'type' => Controls_Manager::COLOR,
             'default' => '#374151',
             'selectors' => [ '{{WRAPPER}} .rmt-review-content' => 'color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('review_header_spacing', [
+            'label' => __( 'Review Header Gap', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 12 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-header' => 'gap: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('review_meta_spacing', [
+            'label' => __( 'Review Meta Gap', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 4 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 20 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-meta' => 'gap: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('review_header_margin_bottom', [
+            'label' => __( 'Review Header Bottom Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 12 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-header' => 'margin-bottom: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('review_content_margin_bottom', [
+            'label' => __( 'Review Content Bottom Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 12 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-content' => 'margin-bottom: {{SIZE}}px;' ],
         ]);
 
         $this->end_controls_section();
@@ -211,6 +298,22 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-rating-bar-fill' => 'background-color: {{VALUE}};' ],
         ]);
 
+        $this->add_control('rating_row_gap', [
+            'label' => __( 'Rating Row Gap', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 8 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-rating-breakdown' => 'gap: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('rating_breakdown_gap', [
+            'label' => __( 'Label to Bar Gap', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 12 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-rating-row' => 'gap: {{SIZE}}px;' ],
+        ]);
+
         $this->end_controls_section();
 
         // --- STYLE TAB: REVIEW ITEMS ---
@@ -237,6 +340,24 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'type' => Controls_Manager::COLOR,
             'default' => '#6B7280',
             'selectors' => [ '{{WRAPPER}} .rmt-reviewer-title' => 'color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('item_spacing', [
+            'label' => __( 'Spacing Between Reviews', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 24 ],
+            'range' => [ 'px' => [ 'min' => 8, 'max' => 60 ] ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-review-item' => 'padding-bottom: {{SIZE}}px; margin-bottom: {{SIZE}}px;'
+            ],
+        ]);
+
+        $this->add_control('item_border_width', [
+            'label' => __( 'Border Width', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 1 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 5 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-item' => 'border-bottom-width: {{SIZE}}px;' ],
         ]);
 
         $this->end_controls_section();
@@ -297,6 +418,43 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-review-btn' => 'border-radius: {{SIZE}}px;' ],
         ]);
 
+        $this->add_control('btn_padding', [
+            'label' => __( 'Button Padding', 'rakmyat-core' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'default' => [ 'top' => 6, 'right' => 12, 'bottom' => 6, 'left' => 12, 'unit' => 'px' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+        ]);
+
+        $this->add_control('btn_icon_size', [
+            'label' => __( 'Icon Size', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 14 ],
+            'range' => [ 'px' => [ 'min' => 8, 'max' => 32 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-btn svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'btn_text_typo',
+            'label' => __( 'Button Text Typography', 'rakmyat-core' ),
+            'selector' => '{{WRAPPER}} .rmt-btn-text',
+        ]);
+
+        $this->add_control('btn_actions_gap', [
+            'label' => __( 'Button Group Gap', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 12 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-actions' => 'gap: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('btn_icon_margin', [
+            'label' => __( 'Icon to Text Gap', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 6 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 20 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-btn' => 'gap: {{SIZE}}px;' ],
+        ]);
+
         $this->end_controls_section();
 
         // --- STYLE TAB: LAYOUT ---
@@ -319,6 +477,25 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'default' => [ 'size' => 280 ],
             'range' => [ 'px' => [ 'min' => 200, 'max' => 400 ] ],
             'selectors' => [ '{{WRAPPER}} .rmt-reviews-container' => 'grid-template-columns: {{SIZE}}px 1fr;' ],
+        ]);
+
+        $this->add_control('summary_margin_bottom', [
+            'label' => __( 'Rating Overview Bottom Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 20 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 50 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-rating-overview' => 'margin-bottom: {{SIZE}}px;' ],
+        ]);
+
+        $this->add_control('title_margin_bottom', [
+            'label' => __( 'Title Bottom Margin', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 16 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-reviews-summary-title' => 'margin-bottom: {{SIZE}}px;',
+                '{{WRAPPER}} .rmt-reviews-list-title' => 'margin-bottom: {{SIZE}}px;'
+            ],
         ]);
 
         $this->end_controls_section();
@@ -466,16 +643,16 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
                                 <?php if ( $settings['show_like_dislike'] === 'yes' ) : ?>
                                     <div class="rmt-review-actions">
                                         <button class="rmt-review-btn rmt-like-btn" data-action="like">
+                                            <span class="rmt-btn-icon">
+                                                <?php Icons_Manager::render_icon( $settings['like_icon'] ); ?>
+                                            </span>
                                             <span class="rmt-btn-text">Like</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
-                                            </svg>
                                         </button>
                                         <button class="rmt-review-btn rmt-dislike-btn" data-action="dislike">
+                                            <span class="rmt-btn-icon">
+                                                <?php Icons_Manager::render_icon( $settings['dislike_icon'] ); ?>
+                                            </span>
                                             <span class="rmt-btn-text">Dislike</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/>
-                                            </svg>
                                         </button>
                                     </div>
                                 <?php endif; ?>
