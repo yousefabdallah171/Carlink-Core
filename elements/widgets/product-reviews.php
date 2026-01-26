@@ -110,6 +110,30 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-rating-bar' => 'background-color: {{VALUE}};' ],
         ]);
 
+        $this->add_control('progress_bar_border_radius', [
+            'label' => __( 'Progress Bar Border Radius', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 4 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 50 ] ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-rating-bar' => 'border-radius: {{SIZE}}px;',
+                '{{WRAPPER}} .rmt-rating-bar-fill' => 'border-radius: {{SIZE}}px;'
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'total_ratings_typo',
+            'label' => __( 'Total Ratings Text Typography', 'rakmyat-core' ),
+            'selector' => '{{WRAPPER}} .rmt-total-ratings',
+        ]);
+
+        $this->add_control('total_ratings_color', [
+            'label' => __( 'Total Ratings Text Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#6B7280',
+            'selectors' => [ '{{WRAPPER}} .rmt-total-ratings' => 'color: {{VALUE}};' ],
+        ]);
+
         $this->end_controls_section();
 
         // --- STYLE TAB: REVIEWS LIST ---
@@ -263,6 +287,14 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'type' => Controls_Manager::COLOR,
             'default' => 'rgba(58, 95, 121, 0.05)',
             'selectors' => [ '{{WRAPPER}} .rmt-review-btn.active' => 'background-color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('btn_border_radius', [
+            'label' => __( 'Button Border Radius', 'rakmyat-core' ),
+            'type' => Controls_Manager::SLIDER,
+            'default' => [ 'size' => 4 ],
+            'range' => [ 'px' => [ 'min' => 0, 'max' => 50 ] ],
+            'selectors' => [ '{{WRAPPER}} .rmt-review-btn' => 'border-radius: {{SIZE}}px;' ],
         ]);
 
         $this->end_controls_section();
