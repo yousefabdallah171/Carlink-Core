@@ -75,10 +75,10 @@ class RMT_Wishlist_Icon_Widget extends Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        
+
         // --- ULTRA SAFE COUNT FETCH ---
         $count = 0;
-        
+
         // Only run this if plugin is active and we are NOT in the editor
         if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
             if ( class_exists( 'WCBoost_Wishlist' ) ) {
@@ -94,13 +94,27 @@ class RMT_Wishlist_Icon_Widget extends Widget_Base {
         }
 
         $url = !empty($settings['wishlist_url']['url']) ? $settings['wishlist_url']['url'] : '#';
+
+        // Get icon settings
+        $icon_settings = !empty($settings['selected_icon']) ? $settings['selected_icon'] : [
+            'value' => 'fas fa-heart',
+            'library' => 'fa-solid',
+        ];
         ?>
 
         <div class="rmt-wishlist-container">
             <a href="<?php echo esc_url($url); ?>" class="rmt-wishlist-link">
                 <span class="rmt-wishlist-icon-wrap">
-                    <?php Icons_Manager::render_icon( $settings['selected_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-                    
+                    <?php
+                    // Render icon with fallback
+                    if ( !empty($icon_settings) ) {
+                        Icons_Manager::render_icon( $icon_settings, [ 'aria-hidden' => 'true' ] );
+                    } else {
+                        // Fallback: Use simple HTML icon
+                        echo '<i class="fas fa-heart"></i>';
+                    }
+                    ?>
+
                     <span class="rmt-wishlist-count" <?php echo ($count > 0) ? '' : 'style="display:none;"'; ?>>
                         <?php echo esc_html($count); ?>
                     </span>

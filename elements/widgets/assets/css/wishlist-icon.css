@@ -1,6 +1,7 @@
 .rmt-wishlist-container {
     display: inline-flex;
     vertical-align: middle;
+    align-items: center;
 }
 
 .rmt-wishlist-link {
@@ -8,23 +9,41 @@
     position: relative;
     color: inherit;
     text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rmt-wishlist-link:hover {
+    color: #e74c3c;
 }
 
 .rmt-wishlist-icon-wrap {
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
 /* Ensure the icon renders */
 .rmt-wishlist-icon-wrap i {
-    display: block !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
 }
 
 .rmt-wishlist-icon-wrap svg {
-    display: block;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+}
+
+.rmt-wishlist-icon-wrap .elementor-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* The Red Badge */

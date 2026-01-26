@@ -4,44 +4,70 @@
     var WidgetWishlistIconHandler = function ($scope, $) {
         var $myBadge = $scope.find('.rmt-wishlist-count');
 
-        // دالة التحديث: تبحث عن الرقم في الصفحة وتحدث أيقونتنا
-        var syncCount = function() {
-            // قراءة العداد من HTML الثيم (الأدق للثيم)
-            var $themeCounter = $('.mini-item-counter');
-            if ($themeCounter.length) {
-                // التعديل هنا: نأخذ أول واحد فقط ونحوله لرقم
-                // .first() -> عشان لو فيه نسختين ميكتبش 11
-                var rawText = $themeCounter.first().text().trim(); 
-                var count = parseInt(rawText);
-                updateUI(count);
+        // Check if badge element exists
+        if ($myBadge.length === 0) {
+            console.warn('Wishlist badge element not found');
+            return;
+        }
+
+        // Fetch wishlist count from backend AJAX
+        var fetchCountFromBackend = function() {
+            // Check if wishlist_ajax is available
+            if (typeof wishlist_ajax === 'undefined' || !wishlist_ajax.ajaxurl) {
+                console.warn('Wishlist AJAX not initialized');
+                return;
             }
+
+            $.ajax({
+                url: wishlist_ajax.ajaxurl,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    action: 'get_wishlist_count'
+                },
+                success: function(response) {
+                    if (response && response.count !== undefined) {
+                        var count = parseInt(response.count);
+                        updateUI(count);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Wishlist count fetch error:', error);
+                }
+            });
         };
 
         var updateUI = function(count) {
             if (!isNaN(count) && count > 0) {
                 $myBadge.text(count).css('display', 'flex');
             } else {
-                $myBadge.hide();
+                $myBadge.css('display', 'none');
             }
         };
 
-        // --- التنفيذ الذكي (بدون Loops) ---
-        
-        // 1. عند التحميل
-        syncCount();
+        // 1. Fetch count on page load with a small delay to ensure DOM is ready
+        setTimeout(function() {
+            fetchCountFromBackend();
+        }, 500);
 
-        // 2. الاستماع لأحداث Ajax فقط (بدون مراقبة DOM)
-        // هذا هو الحدث الذي يطلقه ووردبريس عند انتهاء أي ريكوست (مثل إضافة للمفضلة)
-        $(document).ajaxComplete(function(event, xhr, settings) {
-            // نتأكد إن الريكوست خاص بالمفضلة عشان منحدثش عالفاضي
-            if ( settings.data && (settings.data.indexOf('wishlist') !== -1 || settings.data.indexOf('add_to_cart') !== -1) ) {
-                setTimeout(syncCount, 100); // تحديث بعد لحظة
+        // 2. Re-fetch after any AJAX request (wishlist/cart changes)
+        $(document).on('ajaxComplete', function(event, xhr, settings) {
+            if (settings && settings.data) {
+                var requestData = settings.data.toString();
+                if (requestData.indexOf('wishlist') !== -1 || requestData.indexOf('add_to_cart') !== -1) {
+                    setTimeout(fetchCountFromBackend, 150);
+                }
             }
         });
 
-        // 3. دعم خاص لـ Martfury (هو بيستخدم حدث اسمه 'added_to_wishlist')
-        $('body').on('added_to_wishlist removed_from_wishlist', function() {
-            setTimeout(syncCount, 100);
+        // 3. Listen for Martfury wishlist events
+        $(document).on('added_to_wishlist removed_from_wishlist', function() {
+            setTimeout(fetchCountFromBackend, 150);
+        });
+
+        // 4. Listen for WCBoost wishlist events
+        $(document).on('wcboost:wishlist:updated', function() {
+            setTimeout(fetchCountFromBackend, 150);
         });
     };
 
