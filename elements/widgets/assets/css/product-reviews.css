@@ -265,7 +265,7 @@
 }
 
 /* ========================================
-   RESPONSIVE
+   RESPONSIVE - TABLET (768px - 992px)
 ======================================== */
 @media (max-width: 992px) {
     .rmt-reviews-container {
@@ -276,11 +276,36 @@
     .rmt-reviews-summary {
         position: static;
     }
-}
 
-@media (max-width: 576px) {
     .rmt-reviews-summary-title,
     .rmt-reviews-list-title {
+        font-size: 20px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE (481px - 768px)
+======================================== */
+@media (max-width: 768px) {
+    .rmt-reviews-container {
+        gap: 30px;
+    }
+
+    .rmt-reviews-summary-title,
+    .rmt-reviews-list-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .rmt-rating-overview {
+        margin-bottom: 16px;
+    }
+
+    .rmt-rating-stars-large {
+        gap: 6px;
+    }
+
+    .rmt-rating-stars-large .rmt-stars {
         font-size: 18px;
     }
 
@@ -289,26 +314,213 @@
     }
 
     .rmt-rating-label {
-        font-size: 13px;
-        min-width: 40px;
+        font-size: 12px;
+        min-width: 38px;
     }
 
     .rmt-rating-bar {
-        height: 16px;
+        height: 18px;
+    }
+
+    .rmt-review-item {
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+    }
+
+    .rmt-review-header {
+        gap: 10px;
+        margin-bottom: 10px;
     }
 
     .rmt-review-avatar {
         width: 36px;
         height: 36px;
         font-size: 14px;
+        min-width: 36px;
+    }
+
+    .rmt-review-meta {
+        gap: 2px;
+    }
+
+    .rmt-reviewer-name {
+        font-size: 13px;
+    }
+
+    .rmt-reviewer-title {
+        font-size: 11px;
+    }
+
+    .rmt-review-rating .rmt-stars {
+        font-size: 14px;
     }
 
     .rmt-review-content {
         font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .rmt-review-actions {
+        gap: 8px;
+        flex-wrap: wrap;
     }
 
     .rmt-review-btn {
-        padding: 5px 10px;
+        padding: 6px 10px;
         font-size: 12px;
+        min-width: auto;
+    }
+
+    .rmt-btn-icon svg,
+    .rmt-btn-icon i {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SMALL MOBILE (max-width: 480px)
+======================================== */
+@media (max-width: 480px) {
+    .rmt-product-reviews {
+        font-size: 14px;
+    }
+
+    .rmt-reviews-container {
+        gap: 24px;
+    }
+
+    .rmt-reviews-summary-title,
+    .rmt-reviews-list-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .rmt-rating-overview {
+        margin-bottom: 12px;
+    }
+
+    .rmt-rating-stars-large {
+        gap: 4px;
+    }
+
+    .rmt-rating-stars-large .rmt-stars {
+        font-size: 16px;
+    }
+
+    .rmt-rating-number {
+        font-size: 12px;
+    }
+
+    .rmt-total-ratings {
+        font-size: 12px;
+    }
+
+    .rmt-rating-row {
+        gap: 6px;
+    }
+
+    .rmt-rating-label {
+        font-size: 11px;
+        min-width: 32px;
+    }
+
+    .rmt-rating-bar {
+        height: 16px;
+    }
+
+    .rmt-review-item {
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+    }
+
+    .rmt-review-item:last-of-type {
+        margin-bottom: 8px;
+    }
+
+    .rmt-review-header {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .rmt-review-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+        min-width: 32px;
+    }
+
+    .rmt-review-meta {
+        gap: 2px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .rmt-reviewer-name {
+        font-size: 12px;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rmt-reviewer-title {
+        font-size: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rmt-review-rating .rmt-stars {
+        font-size: 12px;
+    }
+
+    .rmt-review-content {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 8px;
+    }
+
+    .rmt-review-actions {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .rmt-review-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+        border: 1px solid #D1D5DB;
+        min-width: auto;
+        flex: 0 1 auto;
+    }
+
+    .rmt-review-btn .rmt-btn-text {
+        display: none;
+    }
+
+    .rmt-review-btn:hover .rmt-btn-text {
+        display: inline;
+    }
+
+    .rmt-btn-icon {
+        margin: 0;
+    }
+
+    .rmt-btn-icon svg,
+    .rmt-btn-icon i {
+        width: 12px;
+        height: 12px;
+    }
+
+    .rmt-view-more-link {
+        font-size: 12px;
+        display: block;
+        text-align: center;
+    }
+
+    .rmt-no-reviews {
+        font-size: 12px;
+        line-height: 1.5;
     }
 }
