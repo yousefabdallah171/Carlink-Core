@@ -133,6 +133,12 @@ class RMT_Add_To_Cart_Widget extends Widget_Base {
             'tab' => Controls_Manager::TAB_STYLE,
         ]);
 
+        // Container Controls
+        $this->add_control('qty_container_heading', [
+            'label' => __( 'Container', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+        ]);
+
         $this->add_control('qty_bg_color', [
             'label' => __( 'Background Color', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,
@@ -163,25 +169,81 @@ class RMT_Add_To_Cart_Widget extends Widget_Base {
             'selectors' => [ '{{WRAPPER}} .rmt-qty-selector' => 'border-radius: {{SIZE}}px;' ],
         ]);
 
-        $this->add_control('qty_btn_bg_color', [
-            'label' => __( 'Button Background', 'rakmyat-core' ),
+        // Minus Button Controls
+        $this->add_control('qty_minus_heading', [
+            'label' => __( 'Minus Button (-)', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('qty_minus_bg_color', [
+            'label' => __( 'Background', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,
             'default' => '#F3F4F6',
-            'selectors' => [ '{{WRAPPER}} .rmt-qty-btn' => 'background-color: {{VALUE}};' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-minus' => 'background-color: {{VALUE}};' ],
         ]);
 
-        $this->add_control('qty_btn_color', [
-            'label' => __( 'Button Icon Color', 'rakmyat-core' ),
+        $this->add_control('qty_minus_color', [
+            'label' => __( 'Icon Color', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,
             'default' => '#374151',
-            'selectors' => [ '{{WRAPPER}} .rmt-qty-btn' => 'color: {{VALUE}};' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-minus' => 'color: {{VALUE}};' ],
         ]);
 
-        $this->add_control('qty_btn_hover_bg', [
-            'label' => __( 'Button Hover Background', 'rakmyat-core' ),
+        $this->add_control('qty_minus_hover_bg', [
+            'label' => __( 'Hover Background', 'rakmyat-core' ),
             'type' => Controls_Manager::COLOR,
             'default' => '#E5E7EB',
-            'selectors' => [ '{{WRAPPER}} .rmt-qty-btn:hover' => 'background-color: {{VALUE}};' ],
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-minus:hover' => 'background-color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('qty_minus_hover_color', [
+            'label' => __( 'Hover Icon Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#374151',
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-minus:hover' => 'color: {{VALUE}};' ],
+        ]);
+
+        // Plus Button Controls
+        $this->add_control('qty_plus_heading', [
+            'label' => __( 'Plus Button (+)', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('qty_plus_bg_color', [
+            'label' => __( 'Background', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#F3F4F6',
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-plus' => 'background-color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('qty_plus_color', [
+            'label' => __( 'Icon Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#374151',
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-plus' => 'color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('qty_plus_hover_bg', [
+            'label' => __( 'Hover Background', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#E5E7EB',
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-plus:hover' => 'background-color: {{VALUE}};' ],
+        ]);
+
+        $this->add_control('qty_plus_hover_color', [
+            'label' => __( 'Hover Icon Color', 'rakmyat-core' ),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#374151',
+            'selectors' => [ '{{WRAPPER}} .rmt-qty-plus:hover' => 'color: {{VALUE}};' ],
+        ]);
+
+        // Input Controls
+        $this->add_control('qty_input_heading', [
+            'label' => __( 'Input Field', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
         ]);
 
         $this->add_control('qty_input_width', [

@@ -29,22 +29,17 @@
     flex-shrink: 0;
 }
 
+/* Base button styles */
 .rmt-qty-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 100%;
-    background: #F3F4F6;
     border: none;
-    color: #374151;
     cursor: pointer;
     transition: all 0.2s ease;
     flex-shrink: 0;
-}
-
-.rmt-qty-btn:hover {
-    background: #E5E7EB;
 }
 
 .rmt-qty-btn:active {
@@ -54,6 +49,26 @@
 .rmt-qty-btn svg {
     width: 12px;
     height: 12px;
+}
+
+/* Minus Button (-) */
+.rmt-qty-minus {
+    background: #F3F4F6;
+    color: #374151;
+}
+
+.rmt-qty-minus:hover {
+    background: #E5E7EB;
+}
+
+/* Plus Button (+) */
+.rmt-qty-plus {
+    background: #F3F4F6;
+    color: #374151;
+}
+
+.rmt-qty-plus:hover {
+    background: #E5E7EB;
 }
 
 .rmt-qty-input {
