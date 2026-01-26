@@ -43,6 +43,16 @@ class Global_Assets {
                 filemtime( RMT_PATH . 'elements/widgets/assets/css/woo-cart.css' )
             );
         }
+
+        // Enqueue WooCommerce Checkout custom styling
+        if ( is_checkout() ) {
+            wp_enqueue_style(
+                'rmt-woo-checkout',
+                RMT_URL . 'elements/widgets/assets/css/woo-checkout.css',
+                [],
+                filemtime( RMT_PATH . 'elements/widgets/assets/css/woo-checkout.css' )
+            );
+        }
     }
 
     /**
