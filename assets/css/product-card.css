@@ -386,8 +386,8 @@ ul.products {
 
 @media (max-width: 576px) {
     ul.products {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 12px !important;
     }
 
     .glass-prod-card .prod-inner {
