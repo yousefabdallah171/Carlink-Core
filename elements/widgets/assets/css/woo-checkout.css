@@ -457,33 +457,52 @@ body.woocommerce-checkout ul.payment_methods img {
 /* ========================================
    COUPON SECTION (Inside Order Review)
 ======================================== */
-body.woocommerce-checkout .woocommerce-form-coupon,
-body.woocommerce-checkout .checkout_coupon {
-    margin: 24px 0 0 0 !important;
-    padding: 24px 0 0 0 !important;
-    background: transparent !important;
-    border: none !important;
-    border-top: 1px solid #F0F0F0 !important;
-    width: 100% !important;
-}
-
+/* Hide the default coupon toggle link */
 body.woocommerce-checkout #payment .woocommerce-form-coupon-toggle {
-    margin: 0 !important;
-    padding: 0 !important;
     display: none !important;
 }
 
-body.woocommerce-checkout .woocommerce-form-coupon-toggle.hidden ~ .checkout_coupon,
+body.woocommerce-checkout #payment .woocommerce-form-coupon-toggle.hidden ~ .checkout_coupon {
+    display: none !important;
+}
+
+/* Coupon row in the order review table */
+body.woocommerce-checkout tr.checkout-coupon-row {
+    background: transparent !important;
+    border: none !important;
+}
+
+body.woocommerce-checkout tr.checkout-coupon-row td {
+    padding: 24px 0 0 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+body.woocommerce-checkout tr.coupon-divider {
+    background: transparent !important;
+}
+
+body.woocommerce-checkout tr.coupon-divider td {
+    padding: 0 !important;
+    height: 1px !important;
+    background: #F0F0F0 !important;
+    margin: 24px 0 0 0 !important;
+}
+
+/* Coupon form styling */
 body.woocommerce-checkout .checkout_coupon {
     display: flex !important;
     gap: 12px !important;
     align-items: stretch !important;
     width: 100% !important;
     flex-wrap: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
 }
 
-body.woocommerce-checkout .checkout_coupon input[type="text"],
-body.woocommerce-checkout .woocommerce-form-coupon input[type="text"] {
+body.woocommerce-checkout .checkout_coupon input[type="text"] {
     background: #FFFFFF !important;
     border: 1px solid #D1D5DB !important;
     border-radius: 6px !important;
@@ -493,21 +512,21 @@ body.woocommerce-checkout .woocommerce-form-coupon input[type="text"] {
     color: #0A0A0A !important;
     flex: 1 1 auto !important;
     min-width: 0 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 body.woocommerce-checkout .checkout_coupon input[type="text"]::placeholder {
     color: #999999 !important;
 }
 
-body.woocommerce-checkout .checkout_coupon input[type="text"]:focus,
-body.woocommerce-checkout .woocommerce-form-coupon input[type="text"]:focus {
+body.woocommerce-checkout .checkout_coupon input[type="text"]:focus {
     outline: none !important;
     border-color: #3A5F79 !important;
     box-shadow: 0 0 0 2px rgba(58, 95, 121, 0.1) !important;
 }
 
-body.woocommerce-checkout .checkout_coupon button,
-body.woocommerce-checkout .woocommerce-form-coupon button {
+body.woocommerce-checkout .checkout_coupon button {
     background: #3A5F79 !important;
     color: #FFFFFF !important;
     border: none !important;
@@ -520,12 +539,17 @@ body.woocommerce-checkout .woocommerce-form-coupon button {
     transition: all 0.3s ease !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
-body.woocommerce-checkout .checkout_coupon button:hover,
-body.woocommerce-checkout .woocommerce-form-coupon button:hover {
+body.woocommerce-checkout .checkout_coupon button:hover {
     background: #2A3F50 !important;
     transform: translateY(-1px) !important;
+}
+
+body.woocommerce-checkout .checkout_coupon button:active {
+    transform: translateY(0) !important;
 }
 
 /* ========================================

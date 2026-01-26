@@ -20,6 +20,7 @@ require_once RMT_PATH . 'core/class-wc-override.php';
 require_once RMT_PATH . 'core/class-shop-page.php';
 require_once RMT_PATH . 'core/class-shop-customizer.php';
 require_once RMT_PATH . 'core/class-shop-sidebar.php';
+require_once RMT_PATH . 'core/class-checkout-customizer.php';
 
 // Initialize All Managers
 add_action( 'plugins_loaded', function() {
@@ -29,6 +30,7 @@ add_action( 'plugins_loaded', function() {
     \RakmyatCore\Core\Shop_Page::instance();
     \RakmyatCore\Core\Shop_Customizer::instance();
     \RakmyatCore\Core\Shop_Sidebar::instance();
+    \RakmyatCore\Core\Checkout_Customizer::instance();
 });
 
 // Disable WooCommerce Coming Soon mode (to allow shop to display)
