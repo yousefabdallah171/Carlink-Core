@@ -17,6 +17,9 @@ class Global_Assets {
     private function __construct() {
         // Enqueue global plugin assets
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_global_assets' ] );
+
+        // Add trust badges to cart page
+        add_action( 'woocommerce_after_cart_totals', [ $this, 'add_trust_badges' ] );
     }
 
     /**
@@ -30,5 +33,28 @@ class Global_Assets {
             [],
             filemtime( RMT_PATH . 'assets/css/breadcrumbs.css' )
         );
+
+        // Enqueue WooCommerce Cart custom styling
+        if ( is_cart() ) {
+            wp_enqueue_style(
+                'rmt-woo-cart',
+                RMT_URL . 'elements/widgets/assets/css/woo-cart.css',
+                [],
+                filemtime( RMT_PATH . 'elements/widgets/assets/css/woo-cart.css' )
+            );
+        }
+    }
+
+    /**
+     * Add trust badges to cart page
+     */
+    public function add_trust_badges() {
+        ?>
+        <div class="trust-badges">
+            <div class="trust-badge">Secure checkout</div>
+            <div class="trust-badge">Free returns within 30 days</div>
+            <div class="trust-badge">Quality guaranteed</div>
+        </div>
+        <?php
     }
 }
