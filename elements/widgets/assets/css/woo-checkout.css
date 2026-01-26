@@ -29,7 +29,7 @@ body.woocommerce-checkout .woocommerce {
 body.woocommerce-checkout .woocommerce > form,
 body.woocommerce-checkout .woocommerce-checkout-form {
     display: flex !important;
-    gap: 40px !important;
+    gap: 20px !important;
     flex-wrap: wrap !important;
 }
 
@@ -42,7 +42,7 @@ body.woocommerce-checkout .woocommerce-notices-wrapper {
 /* Checkout Form (Left Side - Billing Details) */
 body.woocommerce-checkout form.checkout {
     display: flex !important;
-    gap: 40px !important;
+    gap: 20px !important;
     width: 100% !important;
     flex-wrap: wrap !important;
 }
