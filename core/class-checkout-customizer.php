@@ -34,6 +34,9 @@ class Checkout_Customizer {
 
         // Display coupon form before payment section (between table and payment methods)
         \add_action( 'woocommerce_review_order_before_payment', [ $this, 'render_coupon_form' ], 5 );
+
+        // Add product images to order review items
+        \add_filter( 'woocommerce_cart_item_name', [ $this, 'add_product_image_to_order_item' ], 10, 3 );
     }
 
     /**
@@ -135,5 +138,37 @@ class Checkout_Customizer {
             </div>
             <?php
         }
+    }
+
+    /**
+     * Add product image to cart item name (works on checkout)
+     * Displays product image before product title
+     *
+     * @param string $product_name Product name HTML
+     * @param array $cart_item Cart item data
+     * @param string $cart_item_key Cart item key
+     */
+    public function add_product_image_to_order_item( $product_name, $cart_item, $cart_item_key ) {
+        // Only on checkout page
+        if ( ! \is_checkout() ) {
+            return $product_name;
+        }
+
+        // Get product
+        $product = $cart_item['data'];
+        if ( ! $product ) {
+            return $product_name;
+        }
+
+        // Get product image
+        $image_html = '';
+        $image_id = $product->get_image_id();
+        if ( $image_id ) {
+            $image_url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
+            $image_html = '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="checkout-product-image" />';
+        }
+
+        // Wrap in flex container for image + name side by side
+        return '<div class="checkout-product-item">' . $image_html . '<div class="checkout-product-name">' . $product_name . '</div></div>';
     }
 }
