@@ -272,6 +272,9 @@ body.woocommerce-checkout table.shop_table tbody tr {
     background: transparent !important;
     border: none !important;
     border-bottom: 1px solid #F0F0F0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
 }
 
 body.woocommerce-checkout table.shop_table tbody tr:last-child {
@@ -287,6 +290,8 @@ body.woocommerce-checkout table.shop_table td {
     color: #0A0A0A !important;
     vertical-align: middle !important;
     background: transparent !important;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
 }
 
 /* Product Image & Name */
@@ -616,12 +621,12 @@ body.woocommerce-checkout .checkout_coupon input[type="text"] {
     background: #FFFFFF !important;
     border: 1px solid #D9D9D9 !important;
     border-radius: 4px !important;
-    padding: 12px 15px !important;
+    padding: 15px !important;
     font-size: 14px !important;
     font-family: 'Poppins', sans-serif !important;
     color: #0A0A0A !important;
-    flex: 1 1 auto !important;
-    min-width: 100px !important;
+    flex: 0 1 63% !important;
+    width: 63% !important;
     height: 44px !important;
     box-sizing: border-box !important;
     -webkit-appearance: none !important;
@@ -644,7 +649,7 @@ body.woocommerce-checkout button[name="apply_coupon"] {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    width: 40%;
+    width: 35% !important;
     background-color: #3A5F79 !important;
     background: #3A5F79 !important;
     color: #FFFFFF !important;
@@ -661,6 +666,7 @@ body.woocommerce-checkout button[name="apply_coupon"] {
     appearance: none !important;
     min-height: 44px !important;
     box-shadow: none !important;
+    box-sizing: border-box !important;
 }
 
 body.woocommerce-checkout .checkout_coupon button:hover,
@@ -741,8 +747,32 @@ body.woocommerce-checkout #order_comments_heading {
 }
 
 /* ========================================
-   RESPONSIVE - TABLET (992px and below)
+   GLOBAL INPUT FIELDS
 ======================================== */
+input[type="text"],
+input[type="email"],
+textarea {
+    border: 1px solid #d9d9d9 !important;
+    background: #fff !important;
+    padding: 15px !important;
+    width: 63% !important;
+    box-sizing: border-box !important;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET (991px and below)
+======================================== */
+@media (max-width: 991px) {
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 55% !important;
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 0;
+    }
+}
+
 @media (max-width: 992px) {
     body.woocommerce-checkout form.checkout {
         flex-direction: column !important;
@@ -758,12 +788,39 @@ body.woocommerce-checkout #order_comments_heading {
     body.woocommerce-checkout #order_review {
         position: static !important;
     }
+
+    /* Coupon styling on tablet */
+    body.woocommerce-checkout .checkout_coupon input[type="text"] {
+        width: 50% !important;
+        flex: 0 1 50% !important;
+    }
+
+    body.woocommerce-checkout .checkout_coupon button,
+    body.woocommerce-checkout button[name="apply_coupon"] {
+        width: 40% !important;
+    }
 }
 
 /* ========================================
    RESPONSIVE - MOBILE (768px and below)
 ======================================== */
 @media (max-width: 768px) {
+    /* Override Bootstrap column classes to 80% width */
+    body.woocommerce-checkout .col-md-7,
+    body.woocommerce-checkout .col-md-5 {
+        width: 80% !important;
+        max-width: 80% !important;
+        margin: 0 auto !important;
+    }
+
+    body.woocommerce-checkout #customer_details {
+        flex: 1 1 100% !important;
+    }
+
+    body.woocommerce-checkout #order_review {
+        flex: 1 1 100% !important;
+    }
+
     body.woocommerce-checkout .woocommerce {
         padding: 20px 15px !important;
         gap: 24px !important;
@@ -792,15 +849,34 @@ body.woocommerce-checkout #order_comments_heading {
     body.woocommerce-checkout .woocommerce-billing-fields textarea {
         padding: 12px !important;
         font-size: 13px !important;
+        width: 100% !important;
     }
 
     body.woocommerce-checkout #order_review {
         padding: 20px !important;
     }
 
+    body.woocommerce-checkout table.shop_table {
+        width: 100% !important;
+        table-layout: auto !important;
+    }
+
+    body.woocommerce-checkout table.shop_table tbody tr {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
     body.woocommerce-checkout table.shop_table td {
         padding: 12px 0 !important;
         font-size: 14px !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    body.woocommerce-checkout table.shop_table td.product-name,
+    body.woocommerce-checkout table.shop_table td.product-total {
+        width: 100% !important;
     }
 
     body.woocommerce-checkout table.shop_table td.product-name img,
@@ -823,17 +899,29 @@ body.woocommerce-checkout #order_comments_heading {
 
     body.woocommerce-checkout .checkout_coupon {
         flex-wrap: nowrap !important;
+        gap: 10px !important;
+        align-items: center !important;
     }
 
     body.woocommerce-checkout .checkout_coupon input[type="text"] {
-        width: auto !important;
-        flex: 1 1 auto !important;
+        flex: 0 1 55% !important;
+        width: 55% !important;
         margin-bottom: 0 !important;
     }
 
-    body.woocommerce-checkout .checkout_coupon button {
-        width: auto !important;
-        flex-shrink: 0 !important;
+    body.woocommerce-checkout .checkout_coupon button,
+    body.woocommerce-checkout button[name="apply_coupon"] {
+        flex: 0 0 auto !important;
+        width: 40% !important;
+        padding: 0px !important;
+        white-space: nowrap !important;
+    }
+
+    body.woocommerce-checkout .checkout-coupon-wrapper {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 
     body.woocommerce-checkout #place_order {
@@ -847,6 +935,22 @@ body.woocommerce-checkout #order_comments_heading {
    RESPONSIVE - SMALL MOBILE (480px and below)
 ======================================== */
 @media (max-width: 480px) {
+    /* Override Bootstrap column classes to 80% width */
+    body.woocommerce-checkout .col-md-7,
+    body.woocommerce-checkout .col-md-5 {
+        width: 80% !important;
+        max-width: 80% !important;
+        margin: 0 auto !important;
+    }
+
+    body.woocommerce-checkout #customer_details {
+        flex: 1 1 100% !important;
+    }
+
+    body.woocommerce-checkout #order_review {
+        flex: 1 1 100% !important;
+    }
+
     body.woocommerce-checkout .woocommerce {
         padding: 16px 12px !important;
         gap: 20px !important;
@@ -875,19 +979,38 @@ body.woocommerce-checkout #order_comments_heading {
     body.woocommerce-checkout .woocommerce-billing-fields textarea {
         padding: 10px 12px !important;
         font-size: 12px !important;
+        width: 100% !important;
     }
 
     body.woocommerce-checkout #order_review {
         padding: 16px !important;
     }
 
+    body.woocommerce-checkout table.shop_table {
+        width: 100% !important;
+        table-layout: auto !important;
+    }
+
+    body.woocommerce-checkout table.shop_table tbody tr {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
     body.woocommerce-checkout table.shop_table td {
         padding: 10px 0 !important;
         font-size: 13px !important;
+        width: 100% !important;
+        display: block !important;
     }
 
     body.woocommerce-checkout table.shop_table td.product-name {
         gap: 8px !important;
+        width: 100% !important;
+    }
+
+    body.woocommerce-checkout table.shop_table td.product-total {
+        width: 100% !important;
     }
 
     body.woocommerce-checkout table.shop_table td.product-name img,
@@ -911,20 +1034,33 @@ body.woocommerce-checkout #order_comments_heading {
     body.woocommerce-checkout .checkout_coupon {
         flex-wrap: nowrap !important;
         gap: 8px !important;
+        align-items: center !important;
     }
 
     body.woocommerce-checkout .checkout_coupon input[type="text"] {
-        flex: 1 1 auto !important;
+        flex: 0 1 55% !important;
+        width: 55% !important;
         padding: 10px 12px !important;
         font-size: 12px !important;
         height: 40px !important;
     }
 
-    body.woocommerce-checkout .checkout_coupon button {
-        padding: 10px 12px !important;
+    body.woocommerce-checkout .checkout_coupon button,
+    body.woocommerce-checkout button[name="apply_coupon"] {
+        flex: 0 0 auto !important;
+        width: 40% !important;
+        padding: 0px !important;
         font-size: 12px !important;
-        flex-shrink: 0 !important;
         white-space: nowrap !important;
+        min-height: 40px !important;
+        box-sizing: border-box !important;
+    }
+
+    body.woocommerce-checkout .checkout-coupon-wrapper {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 
     body.woocommerce-checkout #place_order {
@@ -933,10 +1069,4 @@ body.woocommerce-checkout #order_comments_heading {
         font-size: 14px !important;
         margin-top: 16px !important;
     }
-}
-
-input[type=text], input[type=email], textarea {
-      border: 0.5px solid rgba(107, 114, 128, 1) !important;
-     padding: 15px !important;
-      width: 58%;
 }
