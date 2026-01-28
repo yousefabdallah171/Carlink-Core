@@ -639,15 +639,39 @@ body.woocommerce-cart .trust-badge::before {
         max-width: 60px !important;
     }
 
+    body.woocommerce-cart td.product-name {
+        max-width: 120px !important;
+        word-wrap: break-word !important;
+    }
+
+    body.woocommerce-cart td.product-name a {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    body.woocommerce-cart .quantity {
+        width: 90px !important;
+        height: 36px !important;
+    }
+
     body.woocommerce-cart .quantity .decrease,
     body.woocommerce-cart .quantity .increase {
-        width: 32px !important;
-        height: 32px !important;
+        width: 28px !important;
+        min-width: 28px !important;
+        height: 100% !important;
+        font-size: 16px !important;
     }
 
     body.woocommerce-cart .quantity input.qty {
-        width: 35px !important;
-        height: 32px !important;
+        width: 32px !important;
+        min-width: 32px !important;
+        height: 100% !important;
+        font-size: 13px !important;
+    }
+
+    /* Hide duplicate remove button inside quantity cell */
+    body.woocommerce-cart td.product-quantity .product-remove {
+        display: none !important;
     }
 
     body.woocommerce-cart .cart_totals {
@@ -670,35 +694,119 @@ body.woocommerce-cart .trust-badge::before {
    RESPONSIVE - SMALL MOBILE
 ======================================== */
 @media (max-width: 480px) {
+    /* Hide table header on mobile */
     body.woocommerce-cart table.shop_table.cart thead {
         display: none !important;
     }
 
+    /* Card-style layout for each cart item */
     body.woocommerce-cart table.shop_table.cart tbody tr.cart_item {
-        display: block !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
         padding: 16px !important;
         margin-bottom: 12px !important;
         border: 1px solid #E5E7EB !important;
         border-radius: 8px !important;
+        position: relative !important;
+        gap: 8px !important;
     }
 
+    /* All table cells - reset to block */
     body.woocommerce-cart table.shop_table.cart td {
         display: block !important;
         text-align: left !important;
-        padding: 8px 0 !important;
+        padding: 4px 0 !important;
         border: none !important;
+        width: 100% !important;
     }
 
+    /* Product thumbnail - inline with name */
     body.woocommerce-cart td.product-thumbnail {
-        text-align: left !important;
-        margin-bottom: 12px !important;
+        width: auto !important;
+        flex: 0 0 60px !important;
+        margin-bottom: 0 !important;
     }
 
+    body.woocommerce-cart td.product-thumbnail img {
+        max-width: 60px !important;
+        height: auto !important;
+    }
+
+    /* Product name - next to thumbnail */
+    body.woocommerce-cart td.product-name {
+        flex: 1 1 calc(100% - 80px) !important;
+        width: auto !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    body.woocommerce-cart td.product-name a {
+        display: block !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Price - full width with label */
+    body.woocommerce-cart td.product-price {
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    body.woocommerce-cart td.product-price::before {
+        content: 'Price: ' !important;
+        font-weight: 500 !important;
+        color: #374151 !important;
+    }
+
+    /* Quantity - full width */
+    body.woocommerce-cart td.product-quantity {
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    body.woocommerce-cart td.product-quantity .quantity {
+        margin: 0 !important;
+    }
+
+    /* Hide the remove button INSIDE product-quantity (duplicate) */
+    body.woocommerce-cart td.product-quantity .product-remove {
+        display: none !important;
+    }
+
+    /* Subtotal - full width with label */
     body.woocommerce-cart td.product-subtotal {
+        width: 100% !important;
         text-align: left !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        color: #374151 !important;
     }
 
+    body.woocommerce-cart td.product-subtotal::before {
+        content: 'Total: ' !important;
+        font-weight: 500 !important;
+        color: #374151 !important;
+    }
+
+    body.woocommerce-cart td.product-subtotal .amount {
+        color: #374151 !important;
+    }
+
+    /* Remove button - position at top right */
+    body.woocommerce-cart td.product-remove {
+        position: absolute !important;
+        top: 12px !important;
+        right: 12px !important;
+        width: auto !important;
+        padding: 0 !important;
+    }
+
+    /* Order Summary box */
     body.woocommerce-cart .cart_totals {
         padding: 20px !important;
     }
