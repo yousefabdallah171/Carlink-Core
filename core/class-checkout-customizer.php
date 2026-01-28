@@ -15,13 +15,10 @@ class Checkout_Customizer {
     }
 
     private function __construct() {
-        // Register hooks unconditionally - WooCommerce hooks only fire on checkout page anyway
-
         // Customize form field output
         \add_filter( 'woocommerce_form_field', [ $this, 'customize_form_field' ], 10, 4 );
 
-        // Remove coupon toggle and always show coupon form
-        \add_filter( 'woocommerce_checkout_show_terms', '__return_false' );
+        // Always enable coupons
         \add_filter( 'woocommerce_coupons_enabled', '__return_true' );
 
         // Reorder checkout elements
@@ -37,6 +34,9 @@ class Checkout_Customizer {
 
         // Add product images to order review items
         \add_filter( 'woocommerce_cart_item_name', [ $this, 'add_product_image_to_order_item' ], 10, 3 );
+
+        // Add coupon AJAX script on checkout page
+        \add_action( 'wp_footer', [ $this, 'render_coupon_script' ] );
     }
 
     /**
@@ -111,30 +111,29 @@ class Checkout_Customizer {
 
     /**
      * Render coupon form in the order review section
-     * This displays the coupon input and button inside the order review, before payment methods
+     * Uses a div (NOT a form) to avoid nested form inside the checkout form.
+     * Coupon is applied via WooCommerce AJAX.
      */
     public function render_coupon_form() {
         if ( \wc_coupons_enabled() ) {
             ?>
             <div class="checkout-coupon-wrapper">
-                <form class="checkout_coupon" method="post">
+                <div class="checkout_coupon">
                     <input
                         type="text"
-                        name="post_data[coupon_code]"
                         class="input-text"
-                        id="coupon_code"
+                        id="rmt_coupon_code"
                         value=""
-                        placeholder="Coupon Code"
+                        placeholder="<?php \esc_attr_e( 'Coupon Code', 'woocommerce' ); ?>"
                     />
                     <button
-                        type="submit"
+                        type="button"
                         class="button"
-                        name="apply_coupon"
-                        value="<?php \esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"
+                        id="rmt_apply_coupon"
                     >
                         <?php \esc_html_e( 'Apply Coupon', 'woocommerce' ); ?>
                     </button>
-                </form>
+                </div>
             </div>
             <?php
         }
@@ -149,26 +148,83 @@ class Checkout_Customizer {
      * @param string $cart_item_key Cart item key
      */
     public function add_product_image_to_order_item( $product_name, $cart_item, $cart_item_key ) {
-        // Only on checkout page
-        if ( ! \is_checkout() ) {
+        // Only on checkout page front-end rendering, NOT during AJAX order processing
+        if ( ! \is_checkout() || \wp_doing_ajax() ) {
             return $product_name;
         }
 
-        // Get product
-        $product = $cart_item['data'];
-        if ( ! $product ) {
+        // Get product safely
+        if ( ! isset( $cart_item['data'] ) || ! $cart_item['data'] instanceof \WC_Product ) {
             return $product_name;
         }
+
+        $product = $cart_item['data'];
 
         // Get product image
         $image_html = '';
         $image_id = $product->get_image_id();
         if ( $image_id ) {
-            $image_url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
-            $image_html = '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="checkout-product-image" />';
+            $image_url = \wp_get_attachment_image_url( $image_id, 'thumbnail' );
+            if ( $image_url ) {
+                $image_html = '<img src="' . \esc_url( $image_url ) . '" alt="' . \esc_attr( $product->get_name() ) . '" class="checkout-product-image" />';
+            }
         }
 
         // Wrap in flex container for image + name side by side
         return '<div class="checkout-product-item">' . $image_html . '<div class="checkout-product-name">' . $product_name . '</div></div>';
+    }
+
+    /**
+     * Render inline script to handle coupon application via WooCommerce AJAX
+     */
+    public function render_coupon_script() {
+        if ( ! \is_checkout() ) {
+            return;
+        }
+        ?>
+        <script>
+        (function($) {
+            $(document).on('click', '#rmt_apply_coupon', function(e) {
+                e.preventDefault();
+                var couponCode = $('#rmt_coupon_code').val().trim();
+                if ( ! couponCode ) {
+                    return;
+                }
+
+                var $btn = $(this);
+                $btn.prop('disabled', true).text('Applying...');
+
+                $.ajax({
+                    type: 'POST',
+                    url: wc_checkout_params.ajax_url,
+                    data: {
+                        action: 'woocommerce_apply_coupon' ,
+                        security: wc_checkout_params.apply_coupon_nonce,
+                        coupon_code: couponCode
+                    },
+                    success: function(response) {
+                        $('.woocommerce-error, .woocommerce-message, .woocommerce-info').remove();
+                        if ( response ) {
+                            $('form.checkout').before(response);
+                        }
+                        $(document.body).trigger('update_checkout');
+                        $('#rmt_coupon_code').val('');
+                    },
+                    complete: function() {
+                        $btn.prop('disabled', false).text('<?php echo \esc_js( __( 'Apply Coupon', 'woocommerce' ) ); ?>');
+                    }
+                });
+            });
+
+            // Allow Enter key to apply coupon
+            $(document).on('keypress', '#rmt_coupon_code', function(e) {
+                if ( e.keyCode === 13 ) {
+                    e.preventDefault();
+                    $('#rmt_apply_coupon').trigger('click');
+                }
+            });
+        })(jQuery);
+        </script>
+        <?php
     }
 }
