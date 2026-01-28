@@ -1078,4 +1078,32 @@ textarea {
 .woocommerce form .form-row .input-text {
     width: 100% !important;
 }
+@media (max-width: 768px) {
+    body.woocommerce-checkout .col-md-7, body.woocommerce-checkout .col-md-5 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
 
+    body.woocommerce-checkout .checkout_coupon button,
+    body.woocommerce-checkout .checkout_coupon input[type="submit"],
+    body.woocommerce-checkout .checkout_coupon .button,
+    body.woocommerce-checkout button[name="apply_coupon"] {
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.woocommerce-checkout .col-md-7, body.woocommerce-checkout .col-md-5 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    body.woocommerce-checkout .checkout_coupon button,
+    body.woocommerce-checkout .checkout_coupon input[type="submit"],
+    body.woocommerce-checkout .checkout_coupon .button,
+    body.woocommerce-checkout button[name="apply_coupon"] {
+        font-size: 10px !important;
+    }
+}
