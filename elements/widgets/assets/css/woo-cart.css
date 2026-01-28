@@ -619,6 +619,13 @@ body.woocommerce-cart .trust-badge::before {
 /* ========================================
    RESPONSIVE - MOBILE
 ======================================== */
+@media (max-width: 767px) {
+    /* Override theme position absolute on thumbnail link */
+    .woocommerce-cart .woocommerce table.cart td.product-thumbnail > a {
+        position: static !important;
+    }
+}
+
 @media (max-width: 768px) {
     body.woocommerce-cart .woocommerce {
         padding: 20px 15px !important;
