@@ -514,6 +514,7 @@ body.woocommerce-checkout .checkout_coupon button.button {
     background: #3A5F79 !important;
     color: #FFFFFF !important;
     border: none !important;
+    padding: 0  !important;
 }
 
 /* ========================================
@@ -1070,4 +1071,6 @@ textarea {
         font-size: 14px !important;
         margin-top: 16px !important;
     }
+}.woocommerce table.shop_table th {
+    border-bottom: 0px solid #e1e1e1;
 }
