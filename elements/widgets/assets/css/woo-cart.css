@@ -14,6 +14,22 @@ body.woocommerce-cart main {
     background-color: #FFFFFF !important;
 }
 
+/* Remove dark breadcrumb/page header background */
+body.woocommerce-cart .page-header,
+body.woocommerce-cart .page-header-page,
+body.woocommerce-cart .page-header-catalog,
+body.woocommerce-cart .woocommerce-page-header,
+body.woocommerce-cart .storefront-page-header {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+}
+
+/* Elementor dark background fix */
+.elementor-4468 .elementor-element.elementor-element-9701511 {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+}
+
 /* ========================================
    PAGE LAYOUT - 2 COLUMNS SIDE BY SIDE
 ======================================== */
