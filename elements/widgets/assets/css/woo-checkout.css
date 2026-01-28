@@ -60,7 +60,8 @@ body.woocommerce-checkout form.checkout {
     display: flex !important;
     gap: 20px !important;
     width: 100% !important;
-    flex-wrap: wrap !important;
+    flex-wrap: wrap !important;      
+    justify-content: center;
 }
 
 body.woocommerce-checkout #customer_details {
@@ -777,6 +778,7 @@ textarea {
     body.woocommerce-checkout form.checkout {
         flex-direction: column !important;
         gap: 30px !important;
+      
     }
 
     body.woocommerce-checkout #customer_details,
