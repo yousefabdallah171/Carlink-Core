@@ -119,6 +119,14 @@
 }
 
 /* ========================================
+   ELEMENTOR HEADER BACKGROUND FIX
+======================================== */
+.elementor-4468 .elementor-element.elementor-element-ec703d9 {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+}
+
+/* ========================================
    RESPONSIVE
 ======================================== */
 @media (max-width: 768px) {
