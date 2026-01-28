@@ -718,7 +718,6 @@ body.woocommerce-cart .trust-badge::before {
         text-align: left !important;
         padding: 4px 0 !important;
         border: none !important;
-        width: 100% !important;
     }
 
     /* Product thumbnail - inline with name */
