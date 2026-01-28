@@ -31,6 +31,14 @@ body.woocommerce-cart .storefront-page-header {
 }
 
 /* ========================================
+   HIDE SHIPPING CALCULATOR FORM
+======================================== */
+body.woocommerce-cart .shipping-calculator-form,
+body.woocommerce-cart .woocommerce-shipping-calculator {
+    display: none !important;
+}
+
+/* ========================================
    PAGE LAYOUT - 2 COLUMNS SIDE BY SIDE
 ======================================== */
 body.woocommerce-cart .woocommerce {
