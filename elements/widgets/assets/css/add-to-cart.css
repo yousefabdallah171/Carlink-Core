@@ -247,6 +247,7 @@
     }
 
     .rmt-qty-selector {
+        width: auto !important;
         order: 1;
     }
 
