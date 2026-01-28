@@ -431,3 +431,6 @@ body.tax-product_tag .mf-catalog-page .site-content {
 .mf-catalog-page .site-content {
     padding-top: 0px !important;
 }
+.woocommerce ul.products li.product a img {
+    width: 100% !important;
+}

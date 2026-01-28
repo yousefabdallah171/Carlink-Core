@@ -27,6 +27,7 @@
     overflow: hidden;
     height: 44px;
     flex-shrink: 0;
+    WIDTH: AUTO;
 }
 
 /* Base button styles */
