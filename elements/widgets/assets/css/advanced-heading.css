@@ -1,0 +1,67 @@
+/**
+ * Advanced Heading Widget Styles
+ * Most styling handled via Elementor controls - these are base/reset styles
+ */
+
+/* Base heading reset */
+.rmt-advanced-heading {
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+/* Link reset */
+.rmt-advanced-heading .rmt-heading-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline;
+}
+
+.rmt-advanced-heading .rmt-heading-link:hover {
+    color: inherit;
+}
+
+/* Span element */
+.rmt-advanced-heading .rmt-heading-span {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Text before/after */
+.rmt-advanced-heading .rmt-heading-before,
+.rmt-advanced-heading .rmt-heading-after {
+    display: inline;
+}
+
+/* Block mode - span on new line */
+.rmt-advanced-heading.rmt-span-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.rmt-advanced-heading.rmt-span-block .rmt-heading-before,
+.rmt-advanced-heading.rmt-span-block .rmt-heading-after {
+    display: block;
+}
+
+/* Alignment support for block mode */
+.rmt-advanced-heading.rmt-span-block[style*="text-align: center"] {
+    align-items: center;
+}
+
+.rmt-advanced-heading.rmt-span-block[style*="text-align: right"] {
+    align-items: flex-end;
+}
+
+.rmt-advanced-heading.rmt-span-block[style*="text-align: left"] {
+    align-items: flex-start;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .rmt-advanced-heading {
+        word-break: break-word;
+    }
+}
+
