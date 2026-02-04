@@ -148,34 +148,6 @@ class RMT_Faq_Accordion_Widget extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'item_border_color',
-            [
-                'label' => __( 'Border Color', 'rakmyat-core' ),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#E8E8E8',
-                'selectors' => [
-                    '{{WRAPPER}} .rmt-faq-item' => 'border-bottom-color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'item_border_width',
-            [
-                'label' => __( 'Border Width', 'rakmyat-core' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
-                'range' => [
-                    'px' => [ 'min' => 0, 'max' => 5 ],
-                ],
-                'default' => [ 'size' => 1 ],
-                'selectors' => [
-                    '{{WRAPPER}} .rmt-faq-item' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
         $this->add_responsive_control(
             'item_padding',
             [
@@ -204,7 +176,7 @@ class RMT_Faq_Accordion_Widget extends Widget_Base {
                 'range' => [
                     'px' => [ 'min' => 0, 'max' => 40 ],
                 ],
-                'default' => [ 'size' => 0 ],
+                'default' => [ 'size' => 16 ],
                 'selectors' => [
                     '{{WRAPPER}} .rmt-faq-item + .rmt-faq-item' => 'margin-top: {{SIZE}}{{UNIT}};',
                 ],
@@ -217,6 +189,13 @@ class RMT_Faq_Accordion_Widget extends Widget_Base {
                 'label' => __( 'Border Radius', 'rakmyat-core' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px' ],
+                'default' => [
+                    'top' => '8',
+                    'right' => '8',
+                    'bottom' => '8',
+                    'left' => '8',
+                    'unit' => 'px',
+                ],
                 'selectors' => [
                     '{{WRAPPER}} .rmt-faq-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
