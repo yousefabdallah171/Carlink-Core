@@ -1,252 +1,37 @@
 /**
- * Product Grid Widget Styles
+ * Product Grid Widget — Grid-only overrides
+ * Card styling comes from product-card.css
  */
 
-/* =====================
-   GRID CONTAINER
-   ===================== */
-.rmt-product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+/* Grid container: override ul.products layout inside this widget */
+.rmt-product-grid ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 24px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
 }
 
-/* =====================
-   CARD
-   ===================== */
-.rmt-product-card {
-    background-color: #FFFFFF;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+/* Cards fill grid cell */
+.rmt-product-grid ul.products li.product {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    clear: none !important;
 }
 
-/* =====================
-   IMAGE
-   ===================== */
-.rmt-product-image-wrap {
-    position: relative;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.rmt-product-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.rmt-product-image-wrap a {
-    display: block;
-    line-height: 0;
-}
-
-/* =====================
-   BADGE
-   ===================== */
-.rmt-product-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #ef4444;
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 4px;
-    line-height: 1;
-    z-index: 1;
-    letter-spacing: 0.02em;
-}
-
-/* =====================
-   CONTENT AREA
-   ===================== */
-.rmt-product-info {
-    padding: 12px 14px 14px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* =====================
-   CATEGORY
-   ===================== */
-.rmt-product-cat {
-    font-size: 12px;
-    color: #888888;
-    margin-bottom: 4px;
-    line-height: 1.3;
-}
-
-.rmt-product-cat a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.rmt-product-cat a:hover {
-    text-decoration: underline;
-}
-
-/* =====================
-   TITLE
-   ===================== */
-.rmt-product-title {
-    margin: 0 0 6px;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.rmt-product-title a {
-    color: #1E1E2F;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.rmt-product-title a:hover {
-    text-decoration: none;
-}
-
-/* =====================
-   RATING
-   ===================== */
-.rmt-product-rating {
-    margin-bottom: 6px;
-}
-
-.rmt-product-rating .star-rating {
-    font-size: 14px;
-}
-
-/* =====================
-   PRICE
-   ===================== */
-.rmt-product-price {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1E1E2F;
-    margin-bottom: 10px;
-}
-
-.rmt-product-price del {
-    color: #999;
-    font-weight: 400;
-    font-size: 13px;
-    margin-right: 4px;
-}
-
-.rmt-product-price ins {
-    text-decoration: none;
-}
-
-/* =====================
-   ADD TO CART BUTTON
-   Override WooCommerce & theme defaults
-   ===================== */
-.rmt-product-action {
-    margin-top: auto;
-}
-
-.rmt-product-card .rmt-product-action .button,
-.rmt-product-card .rmt-product-action a.button,
-.rmt-product-card .rmt-product-action .button.add_to_cart_button,
-.rmt-product-card .rmt-product-action a.button.add_to_cart_button,
-.rmt-product-card .rmt-product-action .button.ajax_add_to_cart {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px 16px;
-    background-color: #1E1E2F;
-    color: #FFFFFF;
-    font-size: 13px;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    line-height: 1.4;
-    box-sizing: border-box;
-    margin: 0;
-    float: none;
-    outline: none;
-    box-shadow: none;
-    -webkit-appearance: none;
-}
-
-.rmt-product-card .rmt-product-action .button:hover,
-.rmt-product-card .rmt-product-action a.button:hover {
-    color: #FFFFFF;
-    text-decoration: none;
-    background-color: #2D2D3A;
-}
-
-.rmt-product-card .rmt-product-action .button:focus,
-.rmt-product-card .rmt-product-action a.button:focus {
-    color: #FFFFFF;
-    outline: none;
-}
-
-/* WooCommerce "View Cart" link after AJAX add */
-.rmt-product-card .rmt-product-action .added_to_cart {
-    display: block;
-    text-align: center;
-    margin-top: 6px;
-    font-size: 12px;
-    color: #3A5F79;
-    text-decoration: none;
-}
-
-.rmt-product-card .rmt-product-action .added_to_cart:hover {
-    text-decoration: underline;
-}
-
-/* =====================
-   RESPONSIVE FALLBACKS
-   (Elementor overrides these when user sets values)
-   ===================== */
+/* Responsive fallbacks (Elementor overrides when user sets values) */
 @media (max-width: 1024px) {
-    .rmt-product-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .rmt-product-grid ul.products {
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
-@media (max-width: 767px) {
-    .rmt-product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    .rmt-product-title {
-        font-size: 13px;
-    }
-
-    .rmt-product-price {
-        font-size: 14px;
-    }
-
-    .rmt-product-card .rmt-product-action .button,
-    .rmt-product-card .rmt-product-action a.button {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .rmt-product-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 12px;
+@media (max-width: 576px) {
+    .rmt-product-grid ul.products {
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 16px !important;
     }
 }
