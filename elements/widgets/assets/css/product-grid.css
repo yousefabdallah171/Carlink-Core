@@ -2,25 +2,41 @@
  * Product Grid Widget Styles
  */
 
+/* =====================
+   GRID CONTAINER
+   ===================== */
 .rmt-product-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-/* Card */
+/* =====================
+   CARD
+   ===================== */
 .rmt-product-card {
     background-color: #FFFFFF;
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
-/* Image */
+/* =====================
+   IMAGE
+   ===================== */
 .rmt-product-image-wrap {
     position: relative;
     overflow: hidden;
+    line-height: 0;
 }
 
 .rmt-product-image {
@@ -31,7 +47,14 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Badge */
+.rmt-product-image-wrap a {
+    display: block;
+    line-height: 0;
+}
+
+/* =====================
+   BADGE
+   ===================== */
 .rmt-product-badge {
     position: absolute;
     top: 10px;
@@ -44,14 +67,22 @@
     border-radius: 4px;
     line-height: 1;
     z-index: 1;
+    letter-spacing: 0.02em;
 }
 
-/* Info */
+/* =====================
+   CONTENT AREA
+   ===================== */
 .rmt-product-info {
     padding: 12px 14px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Category */
+/* =====================
+   CATEGORY
+   ===================== */
 .rmt-product-cat {
     font-size: 12px;
     color: #888888;
@@ -68,7 +99,9 @@
     text-decoration: underline;
 }
 
-/* Title */
+/* =====================
+   TITLE
+   ===================== */
 .rmt-product-title {
     margin: 0 0 6px;
     font-size: 15px;
@@ -82,7 +115,13 @@
     transition: color 0.2s ease;
 }
 
-/* Rating */
+.rmt-product-title a:hover {
+    text-decoration: none;
+}
+
+/* =====================
+   RATING
+   ===================== */
 .rmt-product-rating {
     margin-bottom: 6px;
 }
@@ -91,7 +130,9 @@
     font-size: 14px;
 }
 
-/* Price */
+/* =====================
+   PRICE
+   ===================== */
 .rmt-product-price {
     font-size: 15px;
     font-weight: 700;
@@ -110,8 +151,19 @@
     text-decoration: none;
 }
 
-/* Add to cart button */
-.rmt-product-card .button {
+/* =====================
+   ADD TO CART BUTTON
+   Override WooCommerce & theme defaults
+   ===================== */
+.rmt-product-action {
+    margin-top: auto;
+}
+
+.rmt-product-card .rmt-product-action .button,
+.rmt-product-card .rmt-product-action a.button,
+.rmt-product-card .rmt-product-action .button.add_to_cart_button,
+.rmt-product-card .rmt-product-action a.button.add_to_cart_button,
+.rmt-product-card .rmt-product-action .button.ajax_add_to_cart {
     display: block;
     width: 100%;
     text-align: center;
@@ -127,10 +179,56 @@
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     line-height: 1.4;
     box-sizing: border-box;
+    margin: 0;
+    float: none;
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
 }
 
-/* Responsive */
+.rmt-product-card .rmt-product-action .button:hover,
+.rmt-product-card .rmt-product-action a.button:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: #2D2D3A;
+}
+
+.rmt-product-card .rmt-product-action .button:focus,
+.rmt-product-card .rmt-product-action a.button:focus {
+    color: #FFFFFF;
+    outline: none;
+}
+
+/* WooCommerce "View Cart" link after AJAX add */
+.rmt-product-card .rmt-product-action .added_to_cart {
+    display: block;
+    text-align: center;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #3A5F79;
+    text-decoration: none;
+}
+
+.rmt-product-card .rmt-product-action .added_to_cart:hover {
+    text-decoration: underline;
+}
+
+/* =====================
+   RESPONSIVE FALLBACKS
+   (Elementor overrides these when user sets values)
+   ===================== */
+@media (max-width: 1024px) {
+    .rmt-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 767px) {
+    .rmt-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
     .rmt-product-title {
         font-size: 13px;
     }
@@ -139,8 +237,16 @@
         font-size: 14px;
     }
 
-    .rmt-product-card .button {
+    .rmt-product-card .rmt-product-action .button,
+    .rmt-product-card .rmt-product-action a.button {
         font-size: 12px;
         padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rmt-product-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 12px;
     }
 }

@@ -1397,6 +1397,8 @@ class RMT_Product_Grid_Widget extends Widget_Base {
             <?php foreach ( $product_ids as $product_id ) :
                 $product = wc_get_product( $product_id );
                 if ( ! $product ) continue;
+                // Set up global product for WooCommerce hooks compatibility
+                $GLOBALS['product'] = $product;
             ?>
                 <div class="rmt-product-card">
                     <?php if ( $show_image ) : ?>
@@ -1451,16 +1453,38 @@ class RMT_Product_Grid_Widget extends Widget_Base {
                         <?php if ( $show_cart ) : ?>
                             <div class="rmt-product-action">
                                 <?php
+                                $atc_args = array(
+                                    'quantity'   => 1,
+                                    'class'      => implode(
+                                        ' ',
+                                        array_filter(
+                                            array(
+                                                'button',
+                                                $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
+                                                $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ? 'ajax_add_to_cart' : '',
+                                            )
+                                        )
+                                    ),
+                                    'attributes' => array(
+                                        'data-product_id'  => $product->get_id(),
+                                        'data-product_sku' => $product->get_sku(),
+                                        'aria-label'       => $product->add_to_cart_description(),
+                                        'rel'              => 'nofollow',
+                                    ),
+                                );
+
                                 echo apply_filters(
                                     'woocommerce_loop_add_to_cart_link',
                                     sprintf(
-                                        '<a href="%s" data-quantity="1" class="button %s" %s>%s</a>',
+                                        '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
                                         esc_url( $product->add_to_cart_url() ),
-                                        esc_attr( $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button ajax_add_to_cart' : '' ),
-                                        $product->is_purchasable() && $product->is_in_stock() ? 'data-product_id="' . esc_attr( $product->get_id() ) . '"' : '',
+                                        esc_attr( $atc_args['quantity'] ),
+                                        esc_attr( $atc_args['class'] ),
+                                        isset( $atc_args['attributes'] ) ? wc_implode_html_attributes( $atc_args['attributes'] ) : '',
                                         esc_html( $product->add_to_cart_text() )
                                     ),
-                                    $product
+                                    $product,
+                                    $atc_args
                                 );
                                 ?>
                             </div>
