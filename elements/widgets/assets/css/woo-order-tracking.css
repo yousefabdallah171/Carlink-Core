@@ -1,0 +1,523 @@
+/* ============================================
+   Order Tracking Page — Redesigned Layout
+   ============================================ */
+
+/* Main Card Container */
+.rmt-order-tracking {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px;
+    max-width: 1156px;
+    margin: 0 auto 40px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1F2937;
+    box-sizing: border-box;
+}
+
+.rmt-order-tracking *,
+.rmt-order-tracking *::before,
+.rmt-order-tracking *::after {
+    box-sizing: border-box;
+}
+
+/* ---- Status Badge (cancelled / refunded / failed) ---- */
+.rmt-ot-status-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 16px;
+}
+
+.rmt-ot-status-cancelled {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+.rmt-ot-status-refunded {
+    background: #FFF7ED;
+    color: #EA580C;
+}
+
+.rmt-ot-status-failed {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+/* ---- Header ---- */
+.rmt-ot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.rmt-ot-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 38px;
+    color: #1F2937;
+    margin: 0;
+    padding: 0;
+}
+
+.rmt-ot-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.rmt-ot-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.rmt-ot-btn svg {
+    flex-shrink: 0;
+}
+
+.rmt-ot-btn-outline {
+    border: 1px solid #D1D5DB;
+    background: transparent;
+    color: #374151;
+}
+
+.rmt-ot-btn-outline:hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+    color: #374151;
+}
+
+.rmt-ot-btn-filled {
+    border: 1px solid #3A5F79;
+    background: #3A5F79;
+    color: #ffffff;
+}
+
+.rmt-ot-btn-filled:hover {
+    background: #2D4D63;
+    border-color: #2D4D63;
+    color: #ffffff;
+}
+
+/* ---- Meta Row ---- */
+.rmt-ot-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.rmt-ot-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.rmt-ot-meta-item svg {
+    flex-shrink: 0;
+}
+
+.rmt-ot-meta-label {
+    color: #6B7280;
+}
+
+.rmt-ot-meta-value {
+    color: #1F2937;
+    font-weight: 500;
+}
+
+.rmt-ot-meta-delivery {
+    color: #22C55E;
+}
+
+/* ---- Progress Tracker ---- */
+.rmt-ot-progress {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+/* Connecting line behind dots */
+.rmt-ot-progress::before {
+    content: '';
+    position: absolute;
+    top: 34px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: #D1D5DB;
+    z-index: 0;
+}
+
+.rmt-ot-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    text-align: center;
+}
+
+/* Dot */
+.rmt-ot-step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #D1D5DB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.rmt-ot-step-completed .rmt-ot-step-dot {
+    background: #22C55E;
+}
+
+.rmt-ot-step-active .rmt-ot-step-dot {
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+}
+
+/* Step label */
+.rmt-ot-step-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #9CA3AF;
+    margin-bottom: 4px;
+}
+
+.rmt-ot-step-completed .rmt-ot-step-label {
+    color: #1F2937;
+}
+
+/* Step date */
+.rmt-ot-step-date {
+    font-size: 11px;
+    color: #9CA3AF;
+}
+
+/* ---- Section Titles ---- */
+.rmt-ot-section-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1F2937;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+/* ---- Product Items ---- */
+.rmt-ot-products {
+    margin-bottom: 30px;
+}
+
+.rmt-ot-product-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.rmt-ot-product-item:last-child {
+    border-bottom: none;
+}
+
+.rmt-ot-product-image {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+}
+
+.rmt-ot-product-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.rmt-ot-product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.rmt-ot-product-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1F2937;
+    margin-bottom: 4px;
+}
+
+.rmt-ot-product-sku {
+    font-size: 13px;
+    color: #9CA3AF;
+    margin-bottom: 2px;
+}
+
+.rmt-ot-product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.rmt-ot-product-meta-item {
+    font-size: 12px;
+    color: #6B7280;
+    background: #F3F4F6;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.rmt-ot-product-price-qty {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.rmt-ot-product-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 4px;
+}
+
+.rmt-ot-product-qty {
+    font-size: 13px;
+    color: #6B7280;
+}
+
+/* ---- Info Row (2-column grid) ---- */
+.rmt-ot-info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 24px 0;
+    border-top: 1px solid #E5E7EB;
+}
+
+.rmt-ot-info-col {
+    min-width: 0;
+}
+
+/* Payment Method */
+.rmt-ot-payment-method {
+    font-size: 14px;
+    color: #4B5563;
+    line-height: 1.6;
+}
+
+/* Delivery Address */
+.rmt-ot-delivery-address {
+    font-size: 14px;
+    color: #4B5563;
+    line-height: 1.6;
+}
+
+/* ---- Help Links ---- */
+.rmt-ot-help-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.rmt-ot-help-links li {
+    margin-bottom: 0;
+}
+
+.rmt-ot-help-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    text-decoration: none;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom: 1px solid #F3F4F6;
+    transition: color 0.2s ease;
+}
+
+.rmt-ot-help-links li:last-child a {
+    border-bottom: none;
+}
+
+.rmt-ot-help-links a:hover {
+    color: #3A5F79;
+}
+
+.rmt-ot-help-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.rmt-ot-help-arrow {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* ---- Order Summary Table ---- */
+.rmt-ot-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+.rmt-ot-summary-table tr {
+    border: none;
+}
+
+.rmt-ot-summary-table th,
+.rmt-ot-summary-table td {
+    padding: 8px 0;
+    font-size: 14px;
+    vertical-align: top;
+    border: none;
+}
+
+.rmt-ot-summary-table th {
+    text-align: left;
+    font-weight: 400;
+    color: #6B7280;
+}
+
+.rmt-ot-summary-table td {
+    text-align: right;
+    font-weight: 500;
+    color: #1F2937;
+}
+
+/* Total row emphasis */
+.rmt-ot-summary-table tr.order_total th,
+.rmt-ot-summary-table tr.order_total td {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+    padding-top: 14px;
+}
+
+/* ---- Hide WCFM Notes Section ---- */
+.woocommerce form[enctype] {
+    display: none !important;
+}
+
+.woocommerce h2:has(+ form[enctype]) {
+    display: none !important;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .rmt-order-tracking {
+        padding: 20px 16px;
+        border-radius: 10px;
+    }
+
+    .rmt-ot-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rmt-ot-title {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .rmt-ot-header-actions {
+        width: 100%;
+    }
+
+    .rmt-ot-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .rmt-ot-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    /* Progress tracker — 2x2 grid on mobile */
+    .rmt-ot-progress {
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .rmt-ot-progress::before {
+        display: none;
+    }
+
+    .rmt-ot-step {
+        flex: 0 0 calc(50% - 10px);
+    }
+
+    /* Info rows stack to single column */
+    .rmt-ot-info-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .rmt-ot-product-item {
+        flex-wrap: wrap;
+    }
+
+    .rmt-ot-product-price-qty {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        gap: 12px;
+        padding-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rmt-order-tracking {
+        padding: 16px 12px;
+    }
+
+    .rmt-ot-title {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .rmt-ot-product-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .rmt-ot-product-image img {
+        width: 60px;
+        height: 60px;
+    }
+}

@@ -57,6 +57,17 @@ class Global_Assets {
             );
         }
 
+        // Enqueue WooCommerce Order Tracking custom styling
+        // Scoped under .rmt-order-tracking so safe to load on all WooCommerce pages
+        if ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() || $this->is_tracking_page() ) {
+            wp_enqueue_style(
+                'rmt-woo-order-tracking',
+                RMT_URL . 'elements/widgets/assets/css/woo-order-tracking.css',
+                [],
+                filemtime( RMT_PATH . 'elements/widgets/assets/css/woo-order-tracking.css' )
+            );
+        }
+
         // Enqueue WooCommerce My Account custom styling
         if ( is_account_page() && ! is_checkout() ) {
             wp_enqueue_style(
@@ -66,6 +77,17 @@ class Global_Assets {
                 filemtime( RMT_PATH . 'elements/widgets/assets/css/woo-myaccount.css' )
             );
         }
+    }
+
+    /**
+     * Check if current page contains the order tracking shortcode
+     */
+    private function is_tracking_page() {
+        global $post;
+        if ( $post && has_shortcode( $post->post_content, 'woocommerce_order_tracking' ) ) {
+            return true;
+        }
+        return false;
     }
 
     /**
