@@ -1,0 +1,157 @@
+/* ============================================================
+   Product Brands Grid Widget
+   ============================================================ */
+
+.rmt-brands-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+.rmt-brands-grid__item {
+    display: flex;
+}
+
+/* ---- Card ---- */
+.rmt-brand-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #E8E8E8;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.rmt-brand-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.rmt-brand-card:focus {
+    outline: 2px solid #3A5F79;
+    outline-offset: 2px;
+}
+
+/* ---- Image ---- */
+.rmt-brand-card__image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.rmt-brand-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Hover zoom — only when parent grid has the class */
+.rmt-brands-hover-zoom .rmt-brand-card:hover .rmt-brand-card__image img {
+    transform: scale(1.05);
+}
+
+/* Placeholder when no image is set */
+.rmt-brand-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F3F4F6;
+}
+
+.rmt-brand-card__placeholder span {
+    font-size: 48px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+/* ---- Info Section ---- */
+.rmt-brand-card__info {
+    padding: 12px 12px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- Brand Name ---- */
+.rmt-brand-card__name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+/* ---- Country ---- */
+.rmt-brand-card__country {
+    font-size: 13px;
+    font-weight: 400;
+    color: #6B7280;
+    margin: 0 0 2px;
+    line-height: 1.4;
+}
+
+/* ---- Product Count ---- */
+.rmt-brand-card__count {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6B7280;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ---- Style 1 Adjustments ---- */
+.rmt-brands-style-1 .rmt-brand-card__name {
+    margin-bottom: 4px;
+}
+
+/* ---- Style 2 Adjustments ---- */
+.rmt-brands-style-2 .rmt-brand-card__info {
+    gap: 1px;
+}
+
+/* ---- Empty State (Elementor editor) ---- */
+.rmt-brands-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9CA3AF;
+    font-size: 14px;
+    background: #F9FAFB;
+    border-radius: 8px;
+    border: 1px dashed #D1D5DB;
+}
+
+/* ---- Responsive Fallbacks ---- */
+@media (max-width: 767px) {
+    .rmt-brand-card__image {
+        height: 140px;
+    }
+
+    .rmt-brand-card__placeholder span {
+        font-size: 36px;
+    }
+
+    .rmt-brand-card__name {
+        font-size: 14px;
+    }
+
+    .rmt-brand-card__country {
+        font-size: 12px;
+    }
+
+    .rmt-brand-card__count {
+        font-size: 13px;
+    }
+}

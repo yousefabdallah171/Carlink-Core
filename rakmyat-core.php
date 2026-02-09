@@ -22,6 +22,7 @@ require_once RMT_PATH . 'core/class-shop-customizer.php';
 require_once RMT_PATH . 'core/class-shop-sidebar.php';
 require_once RMT_PATH . 'core/class-checkout-customizer.php';
 require_once RMT_PATH . 'core/class-order-tracking.php';
+require_once RMT_PATH . 'core/class-brand-taxonomy.php';
 
 // Initialize All Managers
 add_action( 'plugins_loaded', function() {
@@ -33,6 +34,7 @@ add_action( 'plugins_loaded', function() {
     \RakmyatCore\Core\Shop_Sidebar::instance();
     \RakmyatCore\Core\Checkout_Customizer::instance();
     \RakmyatCore\Core\Order_Tracking::instance();
+    \RakmyatCore\Core\Brand_Taxonomy::instance();
 });
 
 // Disable WooCommerce Coming Soon mode (to allow shop to display)

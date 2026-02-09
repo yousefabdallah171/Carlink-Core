@@ -12,6 +12,8 @@ This plugin provides comprehensive customization for WooCommerce storefronts:
 - **Shop Sidebar Filters** - Accordion-style filters for category, brand, price, availability, collections, and ratings
 - **Product Reviews Widget** - Dynamic Elementor widget for single product page reviews
 - **Add to Cart Widget** - Quantity selector with wishlist and buy now buttons
+- **Product Brands Grid Widget** - Elementor widget displaying WooCommerce product brands in a grid with two layout styles
+- **Brand Showcase Slider Widget** - Full-width slider with centered title, overlay, arrow navigation, and subtitle text
 - **Elementor Widgets** - Hero slider, testimonial slider, wishlist icon, and more
 
 ## Plugin Structure
@@ -28,7 +30,8 @@ rakmyat-widget/
 │   ├── class-shop-page.php                   # Custom shop toolbar & grid layout
 │   ├── class-shop-sidebar.php                # Accordion-style shop sidebar filters
 │   ├── class-shop-customizer.php             # WordPress Customizer settings for sidebar
-│   └── class-checkout-customizer.php         # WooCommerce checkout customization via hooks/filters
+│   ├── class-checkout-customizer.php         # WooCommerce checkout customization via hooks/filters
+│   └── class-brand-taxonomy.php             # Product brand "Country" custom meta field
 │
 ├── templates/                                # WooCommerce template overrides
 │   └── content-product.php                   # Glassmorphic product card with dynamic ratings
@@ -53,6 +56,10 @@ rakmyat-widget/
 │       ├── woo-category-search.php           # Product search with category filter
 │       ├── product-reviews.php               # Single product reviews widget
 │       ├── add-to-cart.php                   # Add to cart widget with quantity selector
+│       ├── product-brands-grid.php          # Product brands grid widget with 2 layout styles
+│       ├── brand-showcase-slider.php        # Full-width brand showcase slider widget
+│       ├── cta-banner.php                   # CTA banner with glassmorphic button
+│       ├── icon-category-grid.php           # Neumorphic icon category grid
 │       └── assets/                           # Widget-specific assets
 │           ├── css/
 │           │   ├── glassmorphic-hero-slider.css
@@ -61,6 +68,10 @@ rakmyat-widget/
 │           │   ├── woo-category-search.css
 │           │   ├── product-reviews.css
 │           │   ├── add-to-cart.css
+│           │   ├── product-brands-grid.css   # Product brands grid styling
+│           │   ├── brand-showcase-slider.css # Brand showcase slider styling
+│           │   ├── cta-banner.css           # CTA banner styling
+│           │   ├── icon-category-grid.css   # Neumorphic icon grid styling
 │           │   ├── woo-cart.css              # WooCommerce cart page styling
 │           │   └── woo-checkout.css          # WooCommerce checkout page styling
 │           └── js/
@@ -69,7 +80,8 @@ rakmyat-widget/
 │               ├── wishlist-icon.js
 │               ├── woo-category-search.js
 │               ├── product-reviews.js
-│               └── add-to-cart.js
+│               ├── add-to-cart.js
+│               └── brand-showcase-slider.js  # Slider logic with fade/slide, autoplay, touch
 │
 └── README.md                                 # This file
 ```
@@ -298,6 +310,176 @@ Custom Elementor widgets registered under "RakMyat Elements" category.
 - **WooCommerce Category Search** - Product search with category filter dropdown
 - **Product Reviews** - Single product reviews with rating summary and individual review cards
 - **Add to Cart** - Quantity selector with wishlist and buy now buttons
+- **Product Brands Grid** - Brand taxonomy grid with two layout styles and full Elementor controls
+
+### 9. Product Brands Grid Widget (Elementor)
+
+Displays WooCommerce `product_brand` taxonomy terms in a customizable grid layout.
+
+**File:** `elements/widgets/product-brands-grid.php`
+**CSS:** `elements/widgets/assets/css/product-brands-grid.css`
+**Taxonomy Meta:** `core/class-brand-taxonomy.php`
+
+**Layout Styles:**
+- **Style 1 — Simple:** Brand Image + Brand Name + Product Count
+- **Style 2 — Detailed:** Brand Image + Brand Name + Country + Product Count
+
+**Features:**
+- Two layout styles switchable in Elementor controls
+- Thumbnail source: Choose between WooCommerce default (`thumbnail_id`) or Martfury second thumbnail (`brand_thumbnail_id`) with automatic fallback
+- Custom "Country" meta field added to `product_brand` taxonomy
+- Placeholder with brand initial when no image is set
+- Hover zoom effect on images (toggleable)
+- Links to brand archive pages
+
+**Elementor Controls — Content:**
+- Layout style selector (Style 1 / Style 2)
+- Thumbnail source (First / Second thumbnail)
+- Count suffix text (customizable, default: "parts")
+- Number formatting toggle (comma separators)
+- Show/hide product count
+- Show/hide brand image
+- Name HTML tag (H1-H6, p, span, div)
+
+**Elementor Controls — Query:**
+- Include specific brands (Select2 multi-select)
+- Exclude specific brands (Select2 multi-select)
+- Order by: Name, Product Count, Term ID, Slug, None
+- Order direction: ASC / DESC
+- Limit number of brands (1-50)
+- Hide empty brands toggle
+
+**Elementor Controls — Layout:**
+- Responsive columns (1-6 per device)
+- Responsive grid gap
+- Responsive text alignment
+
+**Elementor Controls — Style:**
+- **Card:** Background color, border, border-radius, box-shadow, content padding, hover states (bg, shadow, border color), transition duration
+- **Image:** Height, border-radius, object-fit (cover/contain/fill), hover zoom toggle and scale
+- **Brand Name:** Color, hover color, typography (full Elementor typography group), margin
+- **Country** (Style 2): Color, typography, margin
+- **Product Count:** Color, typography, margin
+
+**Brand Taxonomy — Country Field:**
+- Added via `class-brand-taxonomy.php`
+- Text input field on Add/Edit Brand screens
+- Meta key: `brand_country`
+- Displayed as a column in the Brands admin list table
+- Used in Style 2 layout to show country below brand name
+
+### 10. Brand Showcase Slider Widget (Elementor)
+
+Full-width slider with repeater slides, centered title, dark overlay, bottom-center arrow navigation, and bottom-right subtitle text.
+
+**File:** `elements/widgets/brand-showcase-slider.php`
+**CSS:** `elements/widgets/assets/css/brand-showcase-slider.css`
+**JS:** `elements/widgets/assets/js/brand-showcase-slider.js`
+
+**Features:**
+- Repeater-based slides (unlimited)
+- Fade and slide transition effects
+- Autoplay with pause-on-hover
+- Infinite loop support
+- Keyboard navigation (arrow keys)
+- Touch/swipe support for mobile
+- Per-slide overlay color override
+- Optional dot pagination
+- Accessible ARIA labels on all controls
+
+**Repeater Fields (per slide):**
+- Background image
+- Title text (centered, e.g., "KIA")
+- Subtitle text (bottom right, e.g., "Sportage | Seltos | ...")
+- Link (optional URL)
+- Overlay color override (optional)
+
+**Elementor Controls — Content:**
+- Title HTML tag (H1-H6, p, span, div)
+- Slider height (responsive, px/vh)
+- Autoplay toggle, speed, pause-on-hover
+- Infinite loop toggle
+- Transition speed and effect (fade/slide)
+- Show/hide arrows, show/hide dots
+
+**Elementor Controls — Style:**
+- **Overlay:** Color with opacity (default: rgba(55, 65, 81, 0.7))
+- **Container:** Border radius, box shadow
+- **Image:** Object fit (cover/contain/fill), object position
+- **Title:** Color, full typography (default: 64px, 700, 12px letter-spacing, uppercase), text shadow, vertical offset
+- **Subtitle:** Color, typography, bottom offset, right offset
+- **Arrows:** Icon size, color, hover color, container background, hover background, border, border-radius, padding, divider toggle/color, gap, bottom offset
+- **Dots:** Size, color, active color, gap, bottom offset
+
+### 11. CTA Banner Widget (Elementor)
+
+Full-width call-to-action banner with background image, overlay, centered title, description, and glassmorphic button (rmt-glass-btn style).
+
+**File:** `elements/widgets/cta-banner.php`
+**CSS:** `elements/widgets/assets/css/cta-banner.css`
+
+**Features:**
+- Background image with position and size controls
+- Overlay with adjustable color and opacity (default: rgba(55, 65, 81, 0.7))
+- Centered title and multi-line description
+- Glassmorphic CTA button matching `rmt-btn-buy` gradient style
+- Arrow icon on button (toggleable, position before/after)
+- Full content positioning controls (horizontal, vertical, alignment)
+
+**Elementor Controls — Content:**
+- Background image, position, size
+- Title text + HTML tag (H1-H6, p, div)
+- Description (textarea with line breaks)
+- Button text, link, show/hide, arrow icon toggle + position
+
+**Elementor Controls — Layout:**
+- Banner height (responsive, px/vh)
+- Content max width, alignment, horizontal/vertical position
+- Content padding
+
+**Elementor Controls — Style:**
+- **Overlay:** Color with opacity
+- **Container:** Border radius, box shadow
+- **Title:** Color, typography, text shadow, margin
+- **Description:** Color, typography, margin
+- **Button (Normal/Hover tabs):** Text color, gradient background, box shadow, hover lift, padding, border radius, border, arrow icon size/color/gap
+
+### 12. Icon Category Grid Widget (Elementor)
+
+Neumorphic grid of icon + title cards using a repeater. Features the exact Figma neumorphic multi-shadow effect with backdrop-filter blur.
+
+**File:** `elements/widgets/icon-category-grid.php`
+**CSS:** `elements/widgets/assets/css/icon-category-grid.css`
+
+**Neumorphic Shadow (from Figma):**
+```css
+box-shadow:
+    0px 0px 60px 0px #F2F2F2 inset,
+    0px 0px 11.25px 0px rgba(255,255,255,0.5) inset,
+    -3.75px -3.75px 1.87px -3.75px #FFFFFF inset,
+    3.75px 3.75px 1.87px -3.75px #FFFFFF inset,
+    -3.75px -3.75px 0px -1.87px #262626 inset,
+    3.75px 3.75px 0px -1.87px #333333 inset,
+    0px 3.75px 30px 0px rgba(0,0,0,0.12),
+    0px 0px 7.5px 0px rgba(0,0,0,0.1);
+backdrop-filter: blur(45px);
+```
+
+**Default Items (10):**
+Transmission & Drivetrain, Engine, Suspension & Steering, Braking System, Electrical & Electronics, HVAC, Intake & Exhaust, Body & Exterior, Interior Parts, Fluids & Lubricants
+
+**Elementor Controls — Content:**
+- Repeater: Icon (Elementor Icons), Title, Link per item
+- Title HTML tag (H2-H6, p, span, div)
+
+**Elementor Controls — Layout:**
+- Responsive columns (1-6, default: 5 / 3 / 2)
+- Grid gap, content alignment
+
+**Elementor Controls — Style:**
+- **Card:** Background color (#F2F2F2), padding, border-radius (16px), min-height, neumorphic toggle + intensity + backdrop blur, custom box-shadow fallback, hover background, hover lift, transition
+- **Icon:** Circle size (64px), circle background, circle border (2px solid #333), icon size (28px), icon color, hover icon color, hover circle bg, hover circle border color, spacing below
+- **Title:** Color, hover color, typography (14px/600), margin
 
 ## Technical Details
 
@@ -389,6 +571,7 @@ Assets are intelligently loaded:
 - Shop Sidebar: `core/class-shop-sidebar.php`
 - Shop Customizer: `core/class-shop-customizer.php`
 - **Checkout Customizer: `core/class-checkout-customizer.php`** ⭐ NEW
+- **Brand Taxonomy: `core/class-brand-taxonomy.php`** ⭐ NEW
 
 ### CSS Files
 - Product Card: `assets/css/product-card.css`
@@ -398,12 +581,17 @@ Assets are intelligently loaded:
 - **Checkout Page: `elements/widgets/assets/css/woo-checkout.css`** ⭐ NEW
 - Add to Cart Widget: `elements/widgets/assets/css/add-to-cart.css`
 - Product Reviews Widget: `elements/widgets/assets/css/product-reviews.css`
+- **Product Brands Grid: `elements/widgets/assets/css/product-brands-grid.css`** ⭐ NEW
+- **Brand Showcase Slider: `elements/widgets/assets/css/brand-showcase-slider.css`** ⭐ NEW
+- **CTA Banner: `elements/widgets/assets/css/cta-banner.css`** ⭐ NEW
+- **Icon Category Grid: `elements/widgets/assets/css/icon-category-grid.css`** ⭐ NEW
 
 ### JS Files
 - Product Card: `assets/js/product-card.js`
 - Shop Sidebar: `assets/js/shop-sidebar.js`
 - Add to Cart Widget: `elements/widgets/assets/js/add-to-cart.js`
 - Product Reviews Widget: `elements/widgets/assets/js/product-reviews.js`
+- **Brand Showcase Slider: `elements/widgets/assets/js/brand-showcase-slider.js`** ⭐ NEW
 
 ### Images
 - Cart Icon: `assets/img/add-to-cart.svg`
@@ -416,6 +604,10 @@ Assets are intelligently loaded:
 - Category Search: `elements/widgets/woo-category-search.php`
 - Product Reviews: `elements/widgets/product-reviews.php`
 - **Add to Cart: `elements/widgets/add-to-cart.php`** ⭐ NEW
+- **Product Brands Grid: `elements/widgets/product-brands-grid.php`** ⭐ NEW
+- **Brand Showcase Slider: `elements/widgets/brand-showcase-slider.php`** ⭐ NEW
+- **CTA Banner: `elements/widgets/cta-banner.php`** ⭐ NEW
+- **Icon Category Grid: `elements/widgets/icon-category-grid.php`** ⭐ NEW
 
 ### Templates
 - Product Card: `templates/content-product.php`
@@ -506,7 +698,56 @@ The plugin removes these WooCommerce actions to prevent duplication:
 
 ## Changelog
 
-### Version 3.0.0 (Latest)
+### Version 4.0.0 (Latest)
+- ⭐ **NEW: Product Brands Grid Elementor Widget**
+  - Two layout styles: Simple (Name + Count) and Detailed (Name + Country + Count)
+  - Thumbnail source: WooCommerce default or Martfury second thumbnail with fallback
+  - Full Elementor controls: content, query, layout, and style tabs
+  - Responsive grid columns (1-6 per device)
+  - Query controls: include/exclude brands, order by, limit, hide empty
+  - Card styling: background, border, radius, shadow, hover states, transition
+  - Image styling: height, radius, object-fit, hover zoom
+  - Typography controls for name, country, and count
+  - Placeholder with brand initial when no image is set
+  - Comma-formatted product counts with customizable suffix text
+
+- ⭐ **NEW: Brand Taxonomy Country Meta Field**
+  - Custom "Country" text field on Add/Edit Brand screens
+  - Meta key: `brand_country`
+  - Country column in Brands admin list table
+  - Used in Style 2 layout of Product Brands Grid widget
+
+- ⭐ **NEW: Icon Category Grid Elementor Widget**
+  - Neumorphic grid of icon + title cards with repeater
+  - Exact Figma neumorphic multi-shadow (8 box-shadows + backdrop-filter blur)
+  - Neumorphic toggle with intensity and blur controls
+  - Icon inside circle with full border/color/size controls
+  - 10 default items: Transmission, Engine, Suspension, Braking, Electrical, HVAC, Intake, Body, Interior, Fluids
+  - Responsive grid (default: 5 / 3 / 2 columns)
+  - Hover lift animation with transition controls
+
+- ⭐ **NEW: CTA Banner Elementor Widget**
+  - Full-width call-to-action banner with background image and overlay
+  - Centered title, multi-line description, and glassmorphic CTA button
+  - Button uses `rmt-glass-btn` / `rmt-btn-buy` gradient styling with inset shadow
+  - Arrow icon on button (toggleable, position before/after)
+  - Full content positioning controls (horizontal, vertical, alignment)
+  - Normal/Hover tabs for button styling with gradient background controls
+  - Responsive layout with adjustable height, max-width, padding
+
+- ⭐ **NEW: Brand Showcase Slider Elementor Widget**
+  - Full-width slider with repeater-based slides
+  - Centered title with dark overlay (default: rgba(55, 65, 81, 0.7))
+  - Bottom-center arrow navigation in rounded pill container with divider
+  - Bottom-right subtitle text (e.g., model names)
+  - Fade and slide transition effects
+  - Autoplay with pause-on-hover and infinite loop
+  - Keyboard navigation and touch/swipe support
+  - Optional dot pagination
+  - Per-slide overlay color override
+  - Full style controls: overlay, container, image, title, subtitle, arrows, dots
+
+### Version 3.0.0
 - ⭐ **NEW: WooCommerce Cart Page Styling**
   - Modern 2-column layout (cart table + order summary)
   - "Order Summary" title via `woocommerce_before_cart_totals` hook (Poppins, 31px, 600 weight)
