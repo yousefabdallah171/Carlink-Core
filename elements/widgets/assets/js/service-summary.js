@@ -1,6 +1,22 @@
 (function($) {
     "use strict";
 
+    /**
+     * Safely decode a URL parameter value.
+     * Handles malformed percent-encoding like %2 instead of %20.
+     */
+    function safeDecode(str) {
+        if (!str) return str;
+        try {
+            return decodeURIComponent(str);
+        } catch (e) {
+            // Fix malformed encoding: replace lone %XX patterns
+            return str.replace(/%([0-9A-Fa-f]?)(?=[^0-9A-Fa-f]|$)/g, function(match) {
+                return ' ';
+            }).replace(/\s+/g, ' ').trim();
+        }
+    }
+
     function initServiceSummary($scope) {
         var $widget = $scope ? $scope.find('.rmt-svc-summary') : $('.rmt-svc-summary');
 
@@ -11,13 +27,19 @@
             var taxPct    = parseFloat($card.data('tax-pct')) || 0;
             var currency  = $card.data('currency') || '$';
 
-            // Read URL parameters
+            // Read URL parameters with safe decoding
             var params    = new URLSearchParams(window.location.search);
-            var service   = params.get('service')   || $card.data('default-service');
-            var price     = params.get('price')      || $card.data('default-price');
-            var duration  = params.get('duration')   || $card.data('default-duration');
-            var workshop  = params.get('workshop')   || $card.data('default-workshop');
-            var address   = params.get('address')    || $card.data('default-address');
+            var rawService  = params.get('service');
+            var rawPrice    = params.get('price');
+            var rawDuration = params.get('duration');
+            var rawWorkshop = params.get('workshop');
+            var rawAddress  = params.get('address');
+
+            var service   = rawService  ? safeDecode(rawService)  : $card.data('default-service');
+            var price     = rawPrice    ? safeDecode(rawPrice)    : $card.data('default-price');
+            var duration  = rawDuration ? safeDecode(rawDuration) : $card.data('default-duration');
+            var workshop  = rawWorkshop ? safeDecode(rawWorkshop) : $card.data('default-workshop');
+            var address   = rawAddress  ? safeDecode(rawAddress)  : $card.data('default-address');
 
             var priceNum  = parseFloat(price) || 0;
             var taxAmount = priceNum * (taxPct / 100);
@@ -47,12 +69,8 @@
 
     /**
      * Fill Contact Form 7 hidden fields with URL param values.
-     * CF7 hidden fields use: [hidden field_name default:get]
-     * They render as <input type="hidden" name="field_name" value="">
-     * We fill them via JS in case default:get doesn't work or for extra safety.
      */
     function fillCF7HiddenFields(service, price, duration, workshop, total) {
-        // Target CF7 hidden inputs by name
         var mappings = {
             'service':  service  || '',
             'price':    price    || '',

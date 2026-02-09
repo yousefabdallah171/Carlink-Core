@@ -64,6 +64,20 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             'default' => '$',
         ] );
 
+        $this->add_responsive_control( 'text_alignment', [
+            'label'   => __( 'Text Alignment', 'rakmyat-core' ),
+            'type'    => Controls_Manager::CHOOSE,
+            'options' => [
+                'left'   => [ 'title' => __( 'Left', 'rakmyat-core' ), 'icon' => 'eicon-text-align-left' ],
+                'center' => [ 'title' => __( 'Center', 'rakmyat-core' ), 'icon' => 'eicon-text-align-center' ],
+                'right'  => [ 'title' => __( 'Right', 'rakmyat-core' ), 'icon' => 'eicon-text-align-right' ],
+            ],
+            'default'   => 'left',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary' => 'text-align: {{VALUE}};',
+            ],
+        ] );
+
         $this->end_controls_section();
 
         // ---- Default Values (fallbacks when no URL params) ----
@@ -399,6 +413,26 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             ],
         ] );
 
+        $this->add_responsive_control( 'meta_gap', [
+            'label'      => __( 'Gap Between Items', 'rakmyat-core' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [ 'px' ],
+            'range'      => [ 'px' => [ 'min' => 4, 'max' => 60 ] ],
+            'default'    => [ 'size' => 20, 'unit' => 'px' ],
+            'selectors'  => [
+                '{{WRAPPER}} .rmt-svc-summary__meta' => 'gap: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'meta_margin', [
+            'label'      => __( 'Margin', 'rakmyat-core' ),
+            'type'       => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'selectors'  => [
+                '{{WRAPPER}} .rmt-svc-summary__meta' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
         $this->end_controls_section();
 
         // ---- Divider Style ----
@@ -416,6 +450,20 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             ],
         ] );
 
+        $this->add_control( 'divider_style', [
+            'label'   => __( 'Style', 'rakmyat-core' ),
+            'type'    => Controls_Manager::SELECT,
+            'default' => 'solid',
+            'options' => [
+                'solid'  => __( 'Solid', 'rakmyat-core' ),
+                'dashed' => __( 'Dashed', 'rakmyat-core' ),
+                'dotted' => __( 'Dotted', 'rakmyat-core' ),
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__divider' => 'border-top-style: {{VALUE}};',
+            ],
+        ] );
+
         $this->add_responsive_control( 'divider_width', [
             'label'      => __( 'Width', 'rakmyat-core' ),
             'type'       => Controls_Manager::SLIDER,
@@ -423,7 +471,7 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             'range'      => [ 'px' => [ 'min' => 1, 'max' => 5 ] ],
             'default'    => [ 'size' => 1, 'unit' => 'px' ],
             'selectors'  => [
-                '{{WRAPPER}} .rmt-svc-summary__divider' => 'border-width: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .rmt-svc-summary__divider' => 'border-top-width: {{SIZE}}{{UNIT}};',
             ],
         ] );
 
@@ -447,8 +495,14 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             'condition' => [ 'show_workshop' => 'yes' ],
         ] );
 
+        // Section Title
+        $this->add_control( 'ws_heading_label', [
+            'label' => __( 'Section Title', 'rakmyat-core' ),
+            'type'  => Controls_Manager::HEADING,
+        ] );
+
         $this->add_control( 'workshop_heading_color', [
-            'label'     => __( 'Section Title Color', 'rakmyat-core' ),
+            'label'     => __( 'Color', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#6B7280',
             'selectors' => [
@@ -465,14 +519,42 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             ],
         ] );
 
+        $this->add_responsive_control( 'workshop_heading_margin', [
+            'label'      => __( 'Margin', 'rakmyat-core' ),
+            'type'       => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'default'    => [
+                'top' => '0', 'right' => '0', 'bottom' => '8', 'left' => '0',
+                'unit' => 'px', 'isLinked' => false,
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__workshop-heading' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
+        // Workshop Name
+        $this->add_control( 'ws_name_label', [
+            'label'     => __( 'Workshop Name', 'rakmyat-core' ),
+            'type'      => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ] );
+
         $this->add_control( 'workshop_name_color', [
-            'label'     => __( 'Workshop Name Color', 'rakmyat-core' ),
+            'label'     => __( 'Color', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#2563EB',
             'selectors' => [
                 '{{WRAPPER}} .rmt-svc-summary__workshop-name' => 'color: {{VALUE}};',
             ],
-            'separator' => 'before',
+        ] );
+
+        $this->add_control( 'workshop_name_hover_color', [
+            'label'     => __( 'Hover Color', 'rakmyat-core' ),
+            'type'      => Controls_Manager::COLOR,
+            'default'   => '#1D4ED8',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__workshop-name:hover' => 'color: {{VALUE}};',
+            ],
         ] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
@@ -484,18 +566,37 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             ],
         ] );
 
-        $this->add_control( 'workshop_address_color', [
-            'label'     => __( 'Address Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#6B7280',
-            'selectors' => [
-                '{{WRAPPER}} .rmt-svc-summary__workshop-address' => 'color: {{VALUE}};',
+        $this->add_responsive_control( 'workshop_name_margin', [
+            'label'      => __( 'Margin', 'rakmyat-core' ),
+            'type'       => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'default'    => [
+                'top' => '0', 'right' => '0', 'bottom' => '8', 'left' => '0',
+                'unit' => 'px', 'isLinked' => false,
             ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__workshop-name' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
+        // Address
+        $this->add_control( 'ws_address_label', [
+            'label'     => __( 'Address', 'rakmyat-core' ),
+            'type'      => Controls_Manager::HEADING,
             'separator' => 'before',
         ] );
 
+        $this->add_control( 'workshop_address_color', [
+            'label'     => __( 'Color', 'rakmyat-core' ),
+            'type'      => Controls_Manager::COLOR,
+            'default'   => '#6B7280',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__workshop-address span' => 'color: {{VALUE}};',
+            ],
+        ] );
+
         $this->add_control( 'workshop_address_icon_color', [
-            'label'     => __( 'Address Icon Color', 'rakmyat-core' ),
+            'label'     => __( 'Icon Color', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#9CA3AF',
             'selectors' => [
@@ -503,9 +604,20 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             ],
         ] );
 
+        $this->add_responsive_control( 'workshop_address_icon_size', [
+            'label'      => __( 'Icon Size', 'rakmyat-core' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [ 'px' ],
+            'range'      => [ 'px' => [ 'min' => 10, 'max' => 30 ] ],
+            'default'    => [ 'size' => 16, 'unit' => 'px' ],
+            'selectors'  => [
+                '{{WRAPPER}} .rmt-svc-summary__workshop-address svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
         $this->add_group_control( Group_Control_Typography::get_type(), [
             'name'     => 'workshop_address_typography',
-            'selector' => '{{WRAPPER}} .rmt-svc-summary__workshop-address',
+            'selector' => '{{WRAPPER}} .rmt-svc-summary__workshop-address span',
             'fields_options' => [
                 'font_size'   => [ 'default' => [ 'size' => 13, 'unit' => 'px' ] ],
                 'font_weight' => [ 'default' => '400' ],
@@ -520,18 +632,36 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             'tab'   => Controls_Manager::TAB_STYLE,
         ] );
 
+        $this->add_responsive_control( 'breakdown_row_gap', [
+            'label'      => __( 'Row Spacing', 'rakmyat-core' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [ 'px' ],
+            'range'      => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
+            'default'    => [ 'size' => 10, 'unit' => 'px' ],
+            'selectors'  => [
+                '{{WRAPPER}} .rmt-svc-summary__breakdown' => 'gap: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        // Service Price Row
+        $this->add_control( 'price_row_heading', [
+            'label'     => __( 'Service Price Row', 'rakmyat-core' ),
+            'type'      => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ] );
+
         $this->add_control( 'price_label_color', [
             'label'     => __( 'Label Color', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#374151',
             'selectors' => [
-                '{{WRAPPER}} .rmt-svc-summary__row-label' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-svc-summary__price-row .rmt-svc-summary__row-label' => 'color: {{VALUE}};',
             ],
         ] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
             'name'     => 'price_label_typography',
-            'selector' => '{{WRAPPER}} .rmt-svc-summary__row-label',
+            'selector' => '{{WRAPPER}} .rmt-svc-summary__price-row .rmt-svc-summary__row-label',
             'fields_options' => [
                 'font_size'   => [ 'default' => [ 'size' => 14, 'unit' => 'px' ] ],
                 'font_weight' => [ 'default' => '400' ],
@@ -543,28 +673,85 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             'type'      => Controls_Manager::COLOR,
             'default'   => '#111827',
             'selectors' => [
-                '{{WRAPPER}} .rmt-svc-summary__row-value' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .rmt-svc-summary__price-row .rmt-svc-summary__row-value' => 'color: {{VALUE}};',
             ],
-            'separator' => 'before',
         ] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
             'name'     => 'price_value_typography',
-            'selector' => '{{WRAPPER}} .rmt-svc-summary__row-value',
+            'selector' => '{{WRAPPER}} .rmt-svc-summary__price-row .rmt-svc-summary__row-value',
             'fields_options' => [
                 'font_size'   => [ 'default' => [ 'size' => 14, 'unit' => 'px' ] ],
                 'font_weight' => [ 'default' => '600' ],
             ],
         ] );
 
-        $this->add_control( 'total_label_heading', [
+        // Tax Row
+        $this->add_control( 'tax_row_heading', [
+            'label'     => __( 'Tax Row', 'rakmyat-core' ),
+            'type'      => Controls_Manager::HEADING,
+            'separator' => 'before',
+            'condition' => [ 'show_tax' => 'yes' ],
+        ] );
+
+        $this->add_control( 'tax_label_color', [
+            'label'     => __( 'Label Color', 'rakmyat-core' ),
+            'type'      => Controls_Manager::COLOR,
+            'default'   => '#6B7280',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__tax-row .rmt-svc-summary__row-label' => 'color: {{VALUE}};',
+            ],
+            'condition' => [ 'show_tax' => 'yes' ],
+        ] );
+
+        $this->add_group_control( Group_Control_Typography::get_type(), [
+            'name'      => 'tax_label_typography',
+            'selector'  => '{{WRAPPER}} .rmt-svc-summary__tax-row .rmt-svc-summary__row-label',
+            'condition' => [ 'show_tax' => 'yes' ],
+            'fields_options' => [
+                'font_size'   => [ 'default' => [ 'size' => 13, 'unit' => 'px' ] ],
+                'font_weight' => [ 'default' => '400' ],
+            ],
+        ] );
+
+        $this->add_control( 'tax_value_color', [
+            'label'     => __( 'Value Color', 'rakmyat-core' ),
+            'type'      => Controls_Manager::COLOR,
+            'default'   => '#6B7280',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__tax-row .rmt-svc-summary__row-value' => 'color: {{VALUE}};',
+            ],
+            'condition' => [ 'show_tax' => 'yes' ],
+        ] );
+
+        $this->add_group_control( Group_Control_Typography::get_type(), [
+            'name'      => 'tax_value_typography',
+            'selector'  => '{{WRAPPER}} .rmt-svc-summary__tax-row .rmt-svc-summary__row-value',
+            'condition' => [ 'show_tax' => 'yes' ],
+            'fields_options' => [
+                'font_size'   => [ 'default' => [ 'size' => 13, 'unit' => 'px' ] ],
+                'font_weight' => [ 'default' => '400' ],
+            ],
+        ] );
+
+        // Total Row
+        $this->add_control( 'total_row_heading', [
             'label'     => __( 'Total Row', 'rakmyat-core' ),
             'type'      => Controls_Manager::HEADING,
             'separator' => 'before',
         ] );
 
+        $this->add_control( 'total_border_color', [
+            'label'     => __( 'Top Border Color', 'rakmyat-core' ),
+            'type'      => Controls_Manager::COLOR,
+            'default'   => '#E5E7EB',
+            'selectors' => [
+                '{{WRAPPER}} .rmt-svc-summary__total' => 'border-top-color: {{VALUE}};',
+            ],
+        ] );
+
         $this->add_control( 'total_label_color', [
-            'label'     => __( 'Total Label Color', 'rakmyat-core' ),
+            'label'     => __( 'Label Color', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#111827',
             'selectors' => [
@@ -582,7 +769,7 @@ class RMT_Service_Summary_Widget extends Widget_Base {
         ] );
 
         $this->add_control( 'total_value_color', [
-            'label'     => __( 'Total Value Color', 'rakmyat-core' ),
+            'label'     => __( 'Value Color', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#DC2626',
             'selectors' => [
@@ -696,7 +883,7 @@ class RMT_Service_Summary_Widget extends Widget_Base {
             <!-- Price Breakdown -->
             <div class="rmt-svc-summary__breakdown">
                 <!-- Service Price -->
-                <div class="rmt-svc-summary__row">
+                <div class="rmt-svc-summary__row rmt-svc-summary__price-row">
                     <span class="rmt-svc-summary__row-label"><?php echo esc_html( $s['price_label'] ); ?></span>
                     <span class="rmt-svc-summary__row-value" data-field="price-value"><?php echo $currency . esc_html( $s['default_price'] ); ?></span>
                 </div>
