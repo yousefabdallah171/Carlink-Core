@@ -80,20 +80,20 @@ class RMT_Service_Summary_Widget extends Widget_Base {
         $this->add_control( 'default_service', [
             'label'       => __( 'Service Name', 'rakmyat-core' ),
             'type'        => Controls_Manager::TEXT,
-            'default'     => 'Advanced Brake System Service',
+            'default'     => '—',
             'label_block' => true,
         ] );
 
         $this->add_control( 'default_price', [
             'label'   => __( 'Price', 'rakmyat-core' ),
             'type'    => Controls_Manager::TEXT,
-            'default' => '299.99',
+            'default' => '0.00',
         ] );
 
         $this->add_control( 'default_duration', [
             'label'   => __( 'Duration', 'rakmyat-core' ),
             'type'    => Controls_Manager::TEXT,
-            'default' => '2 hours',
+            'default' => '—',
         ] );
 
         $this->end_controls_section();
@@ -148,7 +148,7 @@ class RMT_Service_Summary_Widget extends Widget_Base {
         $this->add_control( 'default_workshop', [
             'label'       => __( 'Workshop Name', 'rakmyat-core' ),
             'type'        => Controls_Manager::TEXT,
-            'default'     => 'Premium Auto Care Center',
+            'default'     => '—',
             'label_block' => true,
             'condition'   => [ 'show_workshop' => 'yes' ],
         ] );
@@ -163,7 +163,7 @@ class RMT_Service_Summary_Widget extends Widget_Base {
         $this->add_control( 'default_address', [
             'label'       => __( 'Address', 'rakmyat-core' ),
             'type'        => Controls_Manager::TEXTAREA,
-            'default'     => '123 Auto Service Road, Al AAAA EEEEE Area Iraq',
+            'default'     => '—',
             'rows'        => 2,
             'condition'   => [ 'show_workshop' => 'yes' ],
         ] );
