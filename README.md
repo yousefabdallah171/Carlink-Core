@@ -481,6 +481,111 @@ Transmission & Drivetrain, Engine, Suspension & Steering, Braking System, Electr
 - **Icon:** Circle size (64px), circle background, circle border (2px solid #333), icon size (28px), icon color, hover icon color, hover circle bg, hover circle border color, spacing below
 - **Title:** Color, hover color, typography (14px/600), margin
 
+### 13. Service Summary Widget (Elementor)
+
+Sidebar card for the appointment/booking details page. Displays service name, duration, price, workshop info, tax calculation, and total — all dynamically populated from URL parameters.
+
+**File:** `elements/widgets/service-summary.php`
+**CSS:** `elements/widgets/assets/css/service-summary.css`
+**JS:** `elements/widgets/assets/js/service-summary.js`
+
+**UX Flow:**
+1. On the workshops/services page, each service has a "Book Now" link with URL parameters:
+   ```
+   /appointment-details/?service=Advanced%20Brake%20System%20Service&price=299.99&duration=2%20hours&workshop=Premium%20Auto%20Care%20Center&address=123%20Auto%20Service%20Road
+   ```
+2. On the appointment-details page, this widget reads URL parameters via JavaScript
+3. Calculates tax and total dynamically, fills CF7 hidden fields automatically
+
+**URL Parameters:**
+- `?service=` — Service name
+- `?price=` — Service price (numeric)
+- `?duration=` — Duration text
+- `?workshop=` — Workshop name (optional)
+- `?address=` — Workshop address (optional)
+
+**Features:**
+- Reads URL parameters via JavaScript (no server-side logic needed)
+- Configurable tax percentage via Elementor controls
+- Automatically fills Contact Form 7 hidden fields
+- Sticky positioning on desktop
+- Default/fallback values for Elementor editor preview
+- Mobile-first responsive design
+
+**Elementor Controls — Content:**
+- Card title, HTML tag, currency symbol
+- Default values: service name, price, duration (fallbacks when no URL params)
+- Tax percentage (0-100%, 0.5 step), tax label, show/hide tax
+- Workshop: section title, name, URL, address, show/hide workshop
+- Visibility: show/hide duration, show/hide meta price row
+- Labels: service price label, total label
+
+**Elementor Controls — Style:**
+- **Card:** Background, border, border-radius, box-shadow, padding
+- **Card Title:** Color, typography, margin
+- **Service Name:** Color, typography, margin
+- **Meta Row:** Text color, icon color, typography, icon size
+- **Dividers:** Color, width, spacing
+- **Workshop:** Section title color/typography, name color/typography, address color/typography, address icon color
+- **Price Breakdown:** Label color/typography, value color/typography, total label color/typography, total value color/typography
+
+**Contact Form 7 Integration:**
+The JS automatically fills hidden fields named: `service`, `price`, `duration`, `workshop`, `total`
+
+**CF7 Form Code:**
+```
+[hidden service default:get]
+[hidden price default:get]
+[hidden duration default:get]
+[hidden workshop default:get]
+[hidden total ""]
+
+<label>First Name*
+[text* first-name placeholder "Joe"]</label>
+
+<label>Last Name*
+[text* last-name placeholder "Doe"]</label>
+
+<label>Phone*
+[tel* phone placeholder "+091 III IIII"]</label>
+
+<label>Email*
+[email* email placeholder "joe@example.com"]</label>
+
+<label>Preferred Date*
+[date* preferred-date]</label>
+
+<label>Preferred Time*
+[select* preferred-time "9:00" "9:30" "10:00" "10:30" "11:00" "11:30" "12:00" "12:30" "13:00" "13:30" "14:00" "14:30" "15:00" "15:30" "16:00" "16:30" "17:00"]</label>
+
+<div class="rmt-form-row">
+<div class="rmt-form-col">
+<label>Vehicle Make*
+[text* vehicle-make placeholder "e.g. Toyota"]</label>
+</div>
+<div class="rmt-form-col">
+<label>Year
+[number vehicle-year min:1990 max:2030 placeholder "e.g. 2020"]</label>
+</div>
+</div>
+
+<label>Additional Notes (Optional)
+[textarea notes placeholder "Any specific concerns or requests"]</label>
+
+[acceptance save-info optional] Save this information for faster booking next time [/acceptance]
+
+[submit "Confirm Booking"]
+```
+
+**Wrap in Elementor HTML widget or page:**
+```html
+<div class="rmt-appointment-form">
+  [contact-form-7 id="YOUR_FORM_ID" title="Appointment Details"]
+</div>
+```
+
+The `.rmt-appointment-form` wrapper activates the appointment form styling from `service-summary.css`.
+
 ## Technical Details
 
 ### WooCommerce Template Override
@@ -585,6 +690,7 @@ Assets are intelligently loaded:
 - **Brand Showcase Slider: `elements/widgets/assets/css/brand-showcase-slider.css`** ⭐ NEW
 - **CTA Banner: `elements/widgets/assets/css/cta-banner.css`** ⭐ NEW
 - **Icon Category Grid: `elements/widgets/assets/css/icon-category-grid.css`** ⭐ NEW
+- **Service Summary: `elements/widgets/assets/css/service-summary.css`** ⭐ NEW
 
 ### JS Files
 - Product Card: `assets/js/product-card.js`
@@ -592,6 +698,7 @@ Assets are intelligently loaded:
 - Add to Cart Widget: `elements/widgets/assets/js/add-to-cart.js`
 - Product Reviews Widget: `elements/widgets/assets/js/product-reviews.js`
 - **Brand Showcase Slider: `elements/widgets/assets/js/brand-showcase-slider.js`** ⭐ NEW
+- **Service Summary: `elements/widgets/assets/js/service-summary.js`** ⭐ NEW
 
 ### Images
 - Cart Icon: `assets/img/add-to-cart.svg`
@@ -608,6 +715,7 @@ Assets are intelligently loaded:
 - **Brand Showcase Slider: `elements/widgets/brand-showcase-slider.php`** ⭐ NEW
 - **CTA Banner: `elements/widgets/cta-banner.php`** ⭐ NEW
 - **Icon Category Grid: `elements/widgets/icon-category-grid.php`** ⭐ NEW
+- **Service Summary: `elements/widgets/service-summary.php`** ⭐ NEW
 
 ### Templates
 - Product Card: `templates/content-product.php`

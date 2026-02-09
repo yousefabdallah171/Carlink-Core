@@ -1,0 +1,451 @@
+/* ============================================================
+   Service Summary Widget
+   Mobile-first responsive sidebar card
+   ============================================================ */
+
+.rmt-svc-summary {
+    background-color: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    position: sticky;
+    top: 20px;
+}
+
+/* ---- Card Title ---- */
+.rmt-svc-summary__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px;
+    padding: 0;
+    line-height: 1.3;
+}
+
+/* ---- Service Name ---- */
+.rmt-svc-summary__service-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 12px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+/* ---- Meta Row (duration + price) ---- */
+.rmt-svc-summary__meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.rmt-svc-summary__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rmt-svc-summary__meta-item svg {
+    width: 16px;
+    height: 16px;
+    fill: #9CA3AF;
+    flex-shrink: 0;
+}
+
+.rmt-svc-summary__meta-item span {
+    font-size: 13px;
+    font-weight: 400;
+    color: #6B7280;
+    line-height: 1;
+}
+
+/* ---- Divider ---- */
+.rmt-svc-summary__divider {
+    border: none;
+    border-top: 1px solid #E5E7EB;
+    margin: 16px 0;
+}
+
+/* ---- Workshop Section ---- */
+.rmt-svc-summary__workshop {
+    margin: 0;
+}
+
+.rmt-svc-summary__workshop-heading {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
+}
+
+.rmt-svc-summary__workshop-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2563EB;
+    text-decoration: none;
+    margin: 0 0 8px;
+    transition: color 0.2s ease;
+}
+
+.rmt-svc-summary__workshop-name:hover {
+    color: #1D4ED8;
+    text-decoration: underline;
+}
+
+.rmt-svc-summary__workshop-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #6B7280;
+    line-height: 1.5;
+}
+
+.rmt-svc-summary__workshop-address svg {
+    width: 16px;
+    height: 16px;
+    fill: #9CA3AF;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ---- Price Breakdown ---- */
+.rmt-svc-summary__breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rmt-svc-summary__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rmt-svc-summary__row-label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #374151;
+}
+
+.rmt-svc-summary__row-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Tax row */
+.rmt-svc-summary__tax-row .rmt-svc-summary__row-label,
+.rmt-svc-summary__tax-row .rmt-svc-summary__row-value {
+    font-size: 13px;
+}
+
+/* Total row */
+.rmt-svc-summary__total {
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.rmt-svc-summary__total .rmt-svc-summary__row-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.rmt-svc-summary__total .rmt-svc-summary__row-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #DC2626;
+}
+
+/* ---- Responsive ---- */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .rmt-svc-summary {
+        position: static;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .rmt-svc-summary {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .rmt-svc-summary__title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .rmt-svc-summary__service-name {
+        font-size: 14px;
+    }
+
+    .rmt-svc-summary__meta {
+        gap: 14px;
+    }
+
+    .rmt-svc-summary__meta-item span {
+        font-size: 12px;
+    }
+
+    .rmt-svc-summary__total .rmt-svc-summary__row-value {
+        font-size: 16px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .rmt-svc-summary {
+        padding: 14px;
+    }
+
+    .rmt-svc-summary__meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+
+/* ============================================================
+   Appointment Details Form (CF7)
+   Paired with Service Summary widget on appointment-details page
+   Wrap CF7 shortcode in: <div class="rmt-appointment-form">...</div>
+   ============================================================ */
+
+.rmt-appointment-form {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.rmt-appointment-form .wpcf7-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ---- Form Title (add via Elementor heading widget above) ---- */
+
+/* ---- Labels ---- */
+.rmt-appointment-form label {
+    display: block;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.rmt-appointment-form label br {
+    display: none !important;
+}
+
+/* ---- All Input Fields ---- */
+.rmt-appointment-form .wpcf7-form-control:not([type="submit"]):not([type="checkbox"]):not(.wpcf7-acceptance) {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1F2937;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.rmt-appointment-form .wpcf7-form-control:not([type="submit"]):not([type="checkbox"]):not(.wpcf7-acceptance):focus {
+    outline: none;
+    border-color: #3A5F79;
+    box-shadow: 0 0 0 3px rgba(58, 95, 121, 0.1);
+}
+
+.rmt-appointment-form .wpcf7-form-control::placeholder {
+    color: #9CA3AF;
+    font-weight: 400;
+}
+
+/* ---- Paragraph Spacing (CF7 wraps each field in <p>) ---- */
+.rmt-appointment-form .wpcf7-form > p {
+    margin: 0 0 18px;
+}
+
+.rmt-appointment-form .wpcf7-form > p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* ---- Form Control Wrap ---- */
+.rmt-appointment-form .wpcf7-form-control-wrap {
+    display: block;
+}
+
+/* ---- Select (Preferred Time) ---- */
+.rmt-appointment-form select.wpcf7-form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+    color: #6B7280;
+}
+
+.rmt-appointment-form select.wpcf7-form-control:focus {
+    color: #1F2937;
+}
+
+/* ---- Date Field ---- */
+.rmt-appointment-form input[type="date"].wpcf7-form-control {
+    color: #6B7280;
+}
+
+.rmt-appointment-form input[type="date"].wpcf7-form-control:valid {
+    color: #1F2937;
+}
+
+/* ---- Textarea ---- */
+.rmt-appointment-form textarea.wpcf7-form-control {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* ---- Two-Column Row (Vehicle Make + Year) ---- */
+.rmt-appointment-form .rmt-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.rmt-appointment-form .rmt-form-row .rmt-form-col {
+    min-width: 0;
+}
+
+/* ---- Checkbox (Save Info) ---- */
+.rmt-appointment-form .wpcf7-acceptance {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.rmt-appointment-form .wpcf7-acceptance input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3A5F79;
+    border-radius: 4px;
+    cursor: pointer;
+    accent-color: #3A5F79;
+    flex-shrink: 0;
+}
+
+.rmt-appointment-form .wpcf7-acceptance .wpcf7-list-item-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #374151;
+    line-height: 1.3;
+    cursor: pointer;
+}
+
+/* ---- Submit Button ---- */
+.rmt-appointment-form input[type="submit"],
+.rmt-appointment-form .wpcf7-submit {
+    width: 100%;
+    padding: 16px 24px;
+    background: #3A5F79 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: 8px;
+}
+
+.rmt-appointment-form input[type="submit"]:hover,
+.rmt-appointment-form .wpcf7-submit:hover {
+    background: #2D4A5E !important;
+}
+
+.rmt-appointment-form input[type="submit"]:active,
+.rmt-appointment-form .wpcf7-submit:active {
+    transform: translateY(1px);
+}
+
+/* ---- Validation Errors ---- */
+.rmt-appointment-form .wpcf7-not-valid {
+    border-color: #EF4444 !important;
+}
+
+.rmt-appointment-form .wpcf7-not-valid-tip {
+    font-size: 12px;
+    color: #EF4444;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+.rmt-appointment-form .wpcf7-response-output {
+    margin: 16px 0 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ---- Hide Spinner ---- */
+.rmt-appointment-form .wpcf7-spinner {
+    display: none !important;
+}
+
+/* ---- Responsive: Form ---- */
+@media (max-width: 767px) {
+    .rmt-appointment-form .wpcf7-form > p {
+        margin-bottom: 14px;
+    }
+
+    .rmt-appointment-form label {
+        font-size: 13px;
+    }
+
+    .rmt-appointment-form .wpcf7-form-control:not([type="submit"]):not([type="checkbox"]):not(.wpcf7-acceptance) {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .rmt-appointment-form input[type="submit"],
+    .rmt-appointment-form .wpcf7-submit {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rmt-appointment-form .rmt-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
