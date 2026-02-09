@@ -85,41 +85,12 @@
     padding: 0;
 }
 
-/* ---- Button (Glassmorphic - matches rmt-btn / rmt-btn-buy) ---- */
+/* ---- Button — styled via shared .rmt-glass-btn class ---- */
 .rmt-cta-banner__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 24px;
-    border-radius: 50px;
     font-size: 13px;
     font-weight: 600;
-    color: #FFFFFF;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-
-    /* Glassmorphic gradient (matches .rmt-btn-buy) */
-    background: linear-gradient(90deg, #3A5F79 0%, rgba(58, 95, 121, 0.4) 100%);
-
-    /* Glassmorphic shadow */
-    box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.25),
-                4px 4px 7px 0px rgba(255, 255, 255, 0.25) inset;
-}
-
-.rmt-cta-banner__btn:hover {
-    background: linear-gradient(90deg, #2c4a5e 0%, rgba(58, 95, 121, 0.6) 100%);
-    color: #FFFFFF;
-    transform: translateY(-1px);
-}
-
-.rmt-cta-banner__btn:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
-    outline-offset: 2px;
+    gap: 8px;
+    justify-content: center;
 }
 
 /* ---- Button Arrow Icon ---- */

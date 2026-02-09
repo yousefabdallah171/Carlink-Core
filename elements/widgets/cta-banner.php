@@ -10,8 +10,6 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Border;
-use Elementor\Group_Control_Background;
 use Elementor\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -26,7 +24,7 @@ class RMT_Cta_Banner_Widget extends Widget_Base {
 
     public function get_categories() { return [ 'rakmyat-elements' ]; }
 
-    public function get_style_depends() { return [ 'rmt-cta-banner-css' ]; }
+    public function get_style_depends() { return [ 'rmt-glassmorphic-hero-slider-css', 'rmt-cta-banner-css' ]; }
 
     public function get_keywords() { return [ 'cta', 'banner', 'call to action', 'hero', 'promo', 'brand' ]; }
 
@@ -382,178 +380,7 @@ class RMT_Cta_Banner_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
-        // ---- Button Style (Glassmorphic) ----
-        $this->start_controls_section( 'section_button_style', [
-            'label'     => __( 'Button', 'rakmyat-core' ),
-            'tab'       => Controls_Manager::TAB_STYLE,
-            'condition' => [ 'show_button' => 'yes' ],
-        ] );
-
-        $this->add_group_control( Group_Control_Typography::get_type(), [
-            'name'     => 'button_typography',
-            'selector' => '{{WRAPPER}} .rmt-cta-banner__btn',
-            'fields_options' => [
-                'font_size'   => [ 'default' => [ 'size' => 13, 'unit' => 'px' ] ],
-                'font_weight' => [ 'default' => '600' ],
-            ],
-        ] );
-
-        $this->start_controls_tabs( 'button_style_tabs' );
-
-        // Normal state
-        $this->start_controls_tab( 'button_normal_tab', [
-            'label' => __( 'Normal', 'rakmyat-core' ),
-        ] );
-
-        $this->add_control( 'button_text_color', [
-            'label'     => __( 'Text Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#FFFFFF',
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn' => 'color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_group_control( Group_Control_Background::get_type(), [
-            'name'     => 'button_background',
-            'types'    => [ 'classic', 'gradient' ],
-            'exclude'  => [ 'image' ],
-            'selector' => '{{WRAPPER}} .rmt-cta-banner__btn',
-            'fields_options' => [
-                'background' => [ 'default' => 'gradient' ],
-                'color' => [ 'default' => '#3A5F79' ],
-                'color_b' => [ 'default' => 'rgba(58, 95, 121, 0.4)' ],
-                'gradient_type' => [ 'default' => 'linear' ],
-                'gradient_angle' => [ 'default' => [ 'size' => 90, 'unit' => 'deg' ] ],
-            ],
-        ] );
-
-        $this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-            'name'     => 'button_box_shadow',
-            'selector' => '{{WRAPPER}} .rmt-cta-banner__btn',
-            'fields_options' => [
-                'box_shadow_type' => [ 'default' => 'yes' ],
-                'box_shadow' => [
-                    'default' => [
-                        'horizontal' => 4,
-                        'vertical'   => 4,
-                        'blur'       => 6,
-                        'spread'     => 0,
-                        'color'      => 'rgba(0,0,0,0.25)',
-                    ],
-                ],
-            ],
-        ] );
-
-        $this->end_controls_tab();
-
-        // Hover state
-        $this->start_controls_tab( 'button_hover_tab', [
-            'label' => __( 'Hover', 'rakmyat-core' ),
-        ] );
-
-        $this->add_control( 'button_hover_text_color', [
-            'label'     => __( 'Text Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn:hover' => 'color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_group_control( Group_Control_Background::get_type(), [
-            'name'     => 'button_hover_background',
-            'types'    => [ 'classic', 'gradient' ],
-            'exclude'  => [ 'image' ],
-            'selector' => '{{WRAPPER}} .rmt-cta-banner__btn:hover',
-        ] );
-
-        $this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-            'name'     => 'button_hover_box_shadow',
-            'selector' => '{{WRAPPER}} .rmt-cta-banner__btn:hover',
-        ] );
-
-        $this->add_control( 'button_hover_transform', [
-            'label'     => __( 'Hover Lift', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 0, 'max' => 10, 'step' => 1 ] ],
-            'default'   => [ 'size' => 1, 'unit' => 'px' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn:hover' => 'transform: translateY(-{{SIZE}}{{UNIT}});',
-            ],
-        ] );
-
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-
-        $this->add_responsive_control( 'button_padding', [
-            'label'      => __( 'Padding', 'rakmyat-core' ),
-            'type'       => Controls_Manager::DIMENSIONS,
-            'size_units' => [ 'px', 'em' ],
-            'default'    => [
-                'top' => '10', 'right' => '24', 'bottom' => '10', 'left' => '24',
-                'unit' => 'px', 'isLinked' => false,
-            ],
-            'separator' => 'before',
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-        ] );
-
-        $this->add_responsive_control( 'button_border_radius', [
-            'label'      => __( 'Border Radius', 'rakmyat-core' ),
-            'type'       => Controls_Manager::SLIDER,
-            'range'      => [ 'px' => [ 'min' => 0, 'max' => 100 ] ],
-            'default'    => [ 'size' => 50, 'unit' => 'px' ],
-            'selectors'  => [
-                '{{WRAPPER}} .rmt-cta-banner__btn' => 'border-radius: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        $this->add_group_control( Group_Control_Border::get_type(), [
-            'name'     => 'button_border',
-            'selector' => '{{WRAPPER}} .rmt-cta-banner__btn',
-        ] );
-
-        $this->add_control( 'arrow_icon_heading', [
-            'label'     => __( 'Arrow Icon', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-            'condition' => [ 'button_icon' => 'yes' ],
-        ] );
-
-        $this->add_responsive_control( 'arrow_icon_size', [
-            'label'     => __( 'Icon Size', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 8, 'max' => 30 ] ],
-            'default'   => [ 'size' => 16, 'unit' => 'px' ],
-            'condition' => [ 'button_icon' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        $this->add_control( 'arrow_icon_color', [
-            'label'     => __( 'Icon Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#FFFFFF',
-            'condition' => [ 'button_icon' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn-icon svg' => 'fill: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_responsive_control( 'arrow_icon_gap', [
-            'label'     => __( 'Gap', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 0, 'max' => 20 ] ],
-            'default'   => [ 'size' => 8, 'unit' => 'px' ],
-            'condition' => [ 'button_icon' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-cta-banner__btn' => 'gap: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        $this->end_controls_section();
+        // Button style is handled by the shared .rmt-glass-btn class (glassmorphic-hero-slider.css)
     }
 
     /**

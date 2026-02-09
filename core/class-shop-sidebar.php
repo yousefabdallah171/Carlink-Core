@@ -230,7 +230,7 @@ class Shop_Sidebar {
     /**
      * Output the sidebar HTML
      */
-    private function output_sidebar_html() {
+    public function output_sidebar_html() {
         $filters_title = get_theme_mod( 'rmt_filters_title', __( 'Filters', 'rakmyat-core' ) );
         ?>
         <div class="rmt-shop-sidebar">
