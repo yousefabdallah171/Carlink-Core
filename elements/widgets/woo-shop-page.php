@@ -158,12 +158,6 @@ class RMT_Woo_Shop_Page_Widget extends Widget_Base {
             'default' => 'yes',
         ] );
 
-        $this->add_control( 'show_breadcrumbs', [
-            'label'   => __( 'Show Breadcrumbs', 'rakmyat-core' ),
-            'type'    => Controls_Manager::SWITCHER,
-            'default' => 'yes',
-        ] );
-
         $this->add_control( 'show_toolbar', [
             'label'   => __( 'Show Toolbar', 'rakmyat-core' ),
             'type'    => Controls_Manager::SWITCHER,
@@ -454,18 +448,6 @@ class RMT_Woo_Shop_Page_Widget extends Widget_Base {
                             </svg>
                             <span><?php esc_html_e( 'Filters', 'rakmyat-core' ); ?></span>
                         </button>
-                    <?php endif; ?>
-
-                    <?php if ( $settings['show_breadcrumbs'] === 'yes' && function_exists( 'woocommerce_breadcrumb' ) ) : ?>
-                        <div class="rmt-breadcrumbs-wrapper">
-                            <?php woocommerce_breadcrumb( [
-                                'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
-                                'wrap_after'  => '</nav>',
-                                'before'      => '<span class="rmt-breadcrumb-item">',
-                                'after'       => '</span>',
-                                'delimiter'   => '&nbsp;/&nbsp;',
-                            ] ); ?>
-                        </div>
                     <?php endif; ?>
 
                     <?php if ( $settings['show_toolbar'] === 'yes' ) : ?>

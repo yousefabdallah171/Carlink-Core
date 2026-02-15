@@ -1,17 +1,14 @@
 <?php
 /**
  * Icon Category Grid Widget
- * Neumorphic grid of icon + title cards with repeater.
- * Uses Figma neumorphic box-shadow with backdrop-filter blur.
+ * Displays WooCommerce product categories with icons dynamically
  */
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Repeater;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Icons_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -27,7 +24,7 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
 
     public function get_style_depends() { return [ 'rmt-icon-category-grid-css' ]; }
 
-    public function get_keywords() { return [ 'icon', 'category', 'grid', 'neumorphic', 'card', 'service' ]; }
+    public function get_keywords() { return [ 'icon', 'category', 'grid', 'neumorphic', 'woocommerce', 'product' ]; }
 
     protected function register_controls() {
 
@@ -35,94 +32,91 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
          * CONTENT TAB
          * ============================================================ */
 
-        // ---- Items Repeater ----
-        $this->start_controls_section( 'section_items', [
-            'label' => __( 'Items', 'rakmyat-core' ),
+        // ---- Query Controls ----
+        $this->start_controls_section( 'section_query', [
+            'label' => __( 'Query', 'rakmyat-core' ),
         ] );
 
-        $repeater = new Repeater();
-
-        $repeater->add_control( 'item_icon', [
-            'label'   => __( 'Icon', 'rakmyat-core' ),
-            'type'    => Controls_Manager::ICONS,
-            'default' => [
-                'value'   => 'fas fa-cog',
-                'library' => 'fa-solid',
-            ],
-        ] );
-
-        $repeater->add_control( 'item_title', [
-            'label'       => __( 'Title', 'rakmyat-core' ),
-            'type'        => Controls_Manager::TEXT,
-            'default'     => 'Category',
-            'label_block' => true,
-            'dynamic'     => [ 'active' => true ],
-        ] );
-
-        $repeater->add_control( 'item_link', [
-            'label'   => __( 'Link', 'rakmyat-core' ),
-            'type'    => Controls_Manager::URL,
-            'dynamic' => [ 'active' => true ],
-        ] );
-
-        $this->add_control( 'items', [
-            'label'   => __( 'Items', 'rakmyat-core' ),
-            'type'    => Controls_Manager::REPEATER,
-            'fields'  => $repeater->get_controls(),
-            'default' => [
-                [
-                    'item_title' => 'Transmission & Drivetrain',
-                    'item_icon'  => [ 'value' => 'fas fa-cogs', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Engine',
-                    'item_icon'  => [ 'value' => 'fas fa-cog', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Suspension & Steering',
-                    'item_icon'  => [ 'value' => 'fas fa-car', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Braking System',
-                    'item_icon'  => [ 'value' => 'fas fa-compact-disc', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Electrical & Electronics',
-                    'item_icon'  => [ 'value' => 'fas fa-bolt', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'HVAC',
-                    'item_icon'  => [ 'value' => 'fas fa-snowflake', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Intake & Exhaust',
-                    'item_icon'  => [ 'value' => 'fas fa-wind', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Body & Exterior',
-                    'item_icon'  => [ 'value' => 'fas fa-car-side', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Interior Parts',
-                    'item_icon'  => [ 'value' => 'fas fa-couch', 'library' => 'fa-solid' ],
-                ],
-                [
-                    'item_title' => 'Fluids & Lubricants',
-                    'item_icon'  => [ 'value' => 'fas fa-oil-can', 'library' => 'fa-solid' ],
-                ],
-            ],
-            'title_field' => '<i class="{{ item_icon.value }}"></i> {{{ item_title }}}',
-        ] );
-
-        $this->add_control( 'title_html_tag', [
-            'label'   => __( 'Title HTML Tag', 'rakmyat-core' ),
+        $this->add_control( 'data_source', [
+            'label'   => __( 'Data Source', 'rakmyat-core' ),
             'type'    => Controls_Manager::SELECT,
-            'default' => 'h3',
+            'default' => 'dynamic',
             'options' => [
-                'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4',
-                'h5' => 'H5', 'h6' => 'H6', 'p' => 'p',
-                'span' => 'span', 'div' => 'div',
+                'dynamic' => __( 'WooCommerce Categories', 'rakmyat-core' ),
+                'manual'  => __( 'Manual (Custom Items)', 'rakmyat-core' ),
             ],
+        ] );
+
+        // ---- Dynamic Categories ----
+        $this->add_control( 'hide_empty', [
+            'label'     => __( 'Hide Empty Categories', 'rakmyat-core' ),
+            'type'      => Controls_Manager::SWITCHER,
+            'default'   => 'yes',
+            'condition' => [ 'data_source' => 'dynamic' ],
+        ] );
+
+        $this->add_control( 'category_limit', [
+            'label'       => __( 'Limit Categories', 'rakmyat-core' ),
+            'type'        => Controls_Manager::NUMBER,
+            'default'     => 10,
+            'min'         => 1,
+            'max'         => 100,
+            'condition'   => [ 'data_source' => 'dynamic' ],
+        ] );
+
+        $this->add_control( 'category_orderby', [
+            'label'     => __( 'Order By', 'rakmyat-core' ),
+            'type'      => Controls_Manager::SELECT,
+            'default'   => 'name',
+            'options'   => [
+                'name'  => __( 'Name', 'rakmyat-core' ),
+                'count' => __( 'Product Count', 'rakmyat-core' ),
+                'id'    => __( 'Term ID', 'rakmyat-core' ),
+                'slug'  => __( 'Slug', 'rakmyat-core' ),
+            ],
+            'condition' => [ 'data_source' => 'dynamic' ],
+        ] );
+
+        $this->add_control( 'category_order', [
+            'label'     => __( 'Order Direction', 'rakmyat-core' ),
+            'type'      => Controls_Manager::SELECT,
+            'default'   => 'asc',
+            'options'   => [
+                'asc'  => __( 'Ascending', 'rakmyat-core' ),
+                'desc' => __( 'Descending', 'rakmyat-core' ),
+            ],
+            'condition' => [ 'data_source' => 'dynamic' ],
+        ] );
+
+        // Get all categories for include/exclude controls
+        $categories = get_terms( [
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => false,
+            'number'     => 100,
+        ] );
+
+        $cat_options = [];
+        if ( ! is_wp_error( $categories ) ) {
+            foreach ( $categories as $cat ) {
+                $cat_options[ $cat->term_id ] = $cat->name;
+            }
+        }
+
+        $this->add_control( 'include_categories', [
+            'label'       => __( 'Include Categories', 'rakmyat-core' ),
+            'type'        => Controls_Manager::SELECT2,
+            'options'     => $cat_options,
+            'multiple'    => true,
+            'condition'   => [ 'data_source' => 'dynamic' ],
+            'description' => __( 'Leave empty to include all categories.', 'rakmyat-core' ),
+        ] );
+
+        $this->add_control( 'exclude_categories', [
+            'label'     => __( 'Exclude Categories', 'rakmyat-core' ),
+            'type'      => Controls_Manager::SELECT2,
+            'options'   => $cat_options,
+            'multiple'  => true,
+            'condition' => [ 'data_source' => 'dynamic' ],
         ] );
 
         $this->end_controls_section();
@@ -171,6 +165,17 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
             'default'   => 'center',
             'selectors' => [
                 '{{WRAPPER}} .rmt-icon-cat-card__inner' => 'align-items: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'title_html_tag', [
+            'label'   => __( 'Title HTML Tag', 'rakmyat-core' ),
+            'type'    => Controls_Manager::SELECT,
+            'default' => 'h3',
+            'options' => [
+                'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4',
+                'h5' => 'H5', 'h6' => 'H6', 'p' => 'p',
+                'span' => 'span', 'div' => 'div',
             ],
         ] );
 
@@ -231,167 +236,17 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
             ],
         ] );
 
-        // Neumorphic shadow toggle
-        $this->add_control( 'neumorphic_heading', [
-            'label'     => __( 'Neumorphic Shadow', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-        ] );
-
         $this->add_control( 'neumorphic_style', [
             'label'        => __( 'Enable Neumorphic Shadow', 'rakmyat-core' ),
             'type'         => Controls_Manager::SWITCHER,
             'default'      => 'yes',
-            'description'  => __( 'Applies the Figma neumorphic multi-shadow effect. Turn off to use a custom box-shadow.', 'rakmyat-core' ),
+            'separator'    => 'before',
             'prefix_class' => 'rmt-neumorphic-',
             'return_value' => 'yes',
         ] );
 
-        // -- Neumorphic: Outer Drop Shadow --
-        $this->add_control( 'neu_outer_heading', [
-            'label'     => __( 'Outer Drop Shadow', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-        ] );
-
-        $this->add_control( 'neu_outer_color', [
-            'label'     => __( 'Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => 'rgba(0, 0, 0, 0.12)',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-outer-color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'neu_outer_blur', [
-            'label'     => __( 'Blur', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 0, 'max' => 80 ] ],
-            'default'   => [ 'size' => 30, 'unit' => 'px' ],
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-outer-blur: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        $this->add_control( 'neu_outer_spread_color', [
-            'label'     => __( 'Spread Shadow Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => 'rgba(0, 0, 0, 0.1)',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-spread-color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'neu_outer_spread_blur', [
-            'label'     => __( 'Spread Shadow Blur', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 0, 'max' => 30 ] ],
-            'default'   => [ 'size' => 7.5, 'unit' => 'px' ],
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-spread-blur: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        // -- Neumorphic: Inner Glow --
-        $this->add_control( 'neu_inner_heading', [
-            'label'     => __( 'Inner Glow', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-        ] );
-
-        $this->add_control( 'neu_glow_color', [
-            'label'     => __( 'Glow Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#F2F2F2',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-glow-color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'neu_glow_blur', [
-            'label'     => __( 'Glow Blur', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 0, 'max' => 120 ] ],
-            'default'   => [ 'size' => 60, 'unit' => 'px' ],
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-glow-blur: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        // -- Neumorphic: Inner Highlight --
-        $this->add_control( 'neu_highlight_heading', [
-            'label'     => __( 'Inner Light Highlight', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-        ] );
-
-        $this->add_control( 'neu_highlight_color', [
-            'label'     => __( 'Highlight Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => 'rgba(255, 255, 255, 0.5)',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-highlight-color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'neu_edge_light_color', [
-            'label'     => __( 'Edge Light Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#FFFFFF',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-edge-light: {{VALUE}};',
-            ],
-        ] );
-
-        // -- Neumorphic: Inner Dark Edge --
-        $this->add_control( 'neu_dark_heading', [
-            'label'     => __( 'Inner Dark Edge', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-        ] );
-
-        $this->add_control( 'neu_edge_dark_tl', [
-            'label'     => __( 'Dark Edge (Top-Left)', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#262626',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-edge-dark-tl: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'neu_edge_dark_br', [
-            'label'     => __( 'Dark Edge (Bottom-Right)', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#333333',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner' => '--rmt-neu-edge-dark-br: {{VALUE}};',
-            ],
-        ] );
-
-        // -- Backdrop Blur --
-        $this->add_control( 'neu_blur_heading', [
-            'label'     => __( 'Backdrop Blur', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-            'condition' => [ 'neumorphic_style' => 'yes' ],
-        ] );
-
         $this->add_control( 'neumorphic_blur_amount', [
-            'label'     => __( 'Blur Amount', 'rakmyat-core' ),
+            'label'     => __( 'Backdrop Blur (px)', 'rakmyat-core' ),
             'type'      => Controls_Manager::SLIDER,
             'range'     => [ 'px' => [ 'min' => 0, 'max' => 100 ] ],
             'default'   => [ 'size' => 45, 'unit' => 'px' ],
@@ -401,23 +256,16 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
             ],
         ] );
 
-        // Custom shadow (when neumorphic is off)
         $this->add_group_control( Group_Control_Box_Shadow::get_type(), [
             'name'      => 'card_custom_shadow',
             'selector'  => '{{WRAPPER}} .rmt-icon-cat-card__inner',
             'condition' => [ 'neumorphic_style' => '' ],
         ] );
 
-        // Hover
-        $this->add_control( 'card_hover_heading', [
-            'label'     => __( 'Hover', 'rakmyat-core' ),
-            'type'      => Controls_Manager::HEADING,
-            'separator' => 'before',
-        ] );
-
         $this->add_control( 'card_hover_bg_color', [
             'label'     => __( 'Hover Background', 'rakmyat-core' ),
             'type'      => Controls_Manager::COLOR,
+            'separator' => 'before',
             'selectors' => [
                 '{{WRAPPER}} .rmt-icon-cat-card__inner:hover' => 'background-color: {{VALUE}};',
             ],
@@ -445,14 +293,14 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
-        // ---- Icon Circle Style ----
+        // ---- Icon Style ----
         $this->start_controls_section( 'section_icon_style', [
-            'label' => __( 'Icon', 'rakmyat-core' ),
+            'label' => __( 'Icon / Image', 'rakmyat-core' ),
             'tab'   => Controls_Manager::TAB_STYLE,
         ] );
 
-        $this->add_responsive_control( 'icon_circle_size', [
-            'label'     => __( 'Circle Size', 'rakmyat-core' ),
+        $this->add_responsive_control( 'icon_size', [
+            'label'     => __( 'Icon/Image Size', 'rakmyat-core' ),
             'type'      => Controls_Manager::SLIDER,
             'range'     => [ 'px' => [ 'min' => 30, 'max' => 120 ] ],
             'default'   => [ 'size' => 64, 'unit' => 'px' ],
@@ -461,80 +309,27 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
             ],
         ] );
 
-        $this->add_control( 'icon_circle_bg', [
-            'label'     => __( 'Circle Background', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => 'transparent',
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap' => 'background-color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_group_control( Group_Control_Border::get_type(), [
-            'name'     => 'icon_circle_border',
-            'selector' => '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap',
-            'fields_options' => [
-                'border' => [ 'default' => 'solid' ],
-                'width'  => [ 'default' => [
-                    'top' => '2', 'right' => '2', 'bottom' => '2', 'left' => '2', 'isLinked' => true,
-                ] ],
-                'color' => [ 'default' => '#333333' ],
-            ],
-        ] );
-
-        $this->add_responsive_control( 'icon_size', [
-            'label'     => __( 'Icon Size', 'rakmyat-core' ),
-            'type'      => Controls_Manager::SLIDER,
-            'range'     => [ 'px' => [ 'min' => 10, 'max' => 80 ] ],
-            'default'   => [ 'size' => 28, 'unit' => 'px' ],
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap i' => 'font-size: {{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-            ],
-        ] );
-
-        $this->add_control( 'icon_color', [
-            'label'     => __( 'Icon Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'default'   => '#1a1a1a',
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap i' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap svg' => 'fill: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'icon_hover_color', [
-            'label'     => __( 'Icon Hover Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner:hover .rmt-icon-cat-card__icon-wrap i' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .rmt-icon-cat-card__inner:hover .rmt-icon-cat-card__icon-wrap svg' => 'fill: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'icon_hover_circle_bg', [
-            'label'     => __( 'Circle Hover Background', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner:hover .rmt-icon-cat-card__icon-wrap' => 'background-color: {{VALUE}};',
-            ],
-        ] );
-
-        $this->add_control( 'icon_hover_circle_border', [
-            'label'     => __( 'Circle Hover Border Color', 'rakmyat-core' ),
-            'type'      => Controls_Manager::COLOR,
-            'selectors' => [
-                '{{WRAPPER}} .rmt-icon-cat-card__inner:hover .rmt-icon-cat-card__icon-wrap' => 'border-color: {{VALUE}};',
-            ],
-        ] );
-
         $this->add_responsive_control( 'icon_spacing', [
-            'label'     => __( 'Spacing Below Icon', 'rakmyat-core' ),
+            'label'     => __( 'Spacing Below', 'rakmyat-core' ),
             'type'      => Controls_Manager::SLIDER,
             'range'     => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
             'default'   => [ 'size' => 14, 'unit' => 'px' ],
             'selectors' => [
                 '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_control( 'image_object_fit', [
+            'label'   => __( 'Image Fit', 'rakmyat-core' ),
+            'type'    => Controls_Manager::SELECT,
+            'default' => 'cover',
+            'options' => [
+                'cover'   => __( 'Cover', 'rakmyat-core' ),
+                'contain' => __( 'Contain', 'rakmyat-core' ),
+                'fill'    => __( 'Fill', 'rakmyat-core' ),
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .rmt-icon-cat-card__icon-wrap img' => 'object-fit: {{VALUE}};',
             ],
         ] );
 
@@ -589,47 +384,78 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
      */
     protected function render() {
         $settings = $this->get_settings_for_display();
-        $items    = $settings['items'];
-
-        if ( empty( $items ) ) return;
-
         $title_tag = in_array( $settings['title_html_tag'], [ 'h2','h3','h4','h5','h6','p','span','div' ], true )
                      ? $settings['title_html_tag'] : 'h3';
-        ?>
 
+        // Get categories
+        if ( $settings['data_source'] === 'dynamic' ) {
+            $categories = $this->get_dynamic_categories( $settings );
+        } else {
+            $categories = [];
+        }
+
+        if ( empty( $categories ) ) {
+            echo '<div class="rmt-icon-cat-empty">' . esc_html__( 'No categories found.', 'rakmyat-core' ) . '</div>';
+            return;
+        }
+
+        ?>
         <div class="rmt-icon-cat-grid">
-            <?php foreach ( $items as $index => $item ) :
-                $has_link = ! empty( $item['item_link']['url'] );
-                $tag      = $has_link ? 'a' : 'div';
-                $link_attr = '';
-                if ( $has_link ) {
-                    $link_attr .= ' href="' . esc_url( $item['item_link']['url'] ) . '"';
-                    if ( ! empty( $item['item_link']['is_external'] ) ) $link_attr .= ' target="_blank"';
-                    if ( ! empty( $item['item_link']['nofollow'] ) )    $link_attr .= ' rel="nofollow"';
-                }
+            <?php foreach ( $categories as $category ) :
+                $cat_link = get_term_link( $category->term_id, 'product_cat' );
+                if ( is_wp_error( $cat_link ) ) $cat_link = '';
+
+                $icon_id = get_term_meta( $category->term_id, 'product_cat_icon_id', true );
+                $icon_url = $icon_id ? wp_get_attachment_image_url( $icon_id, 'medium' ) : '';
             ?>
             <div class="rmt-icon-cat-grid__item">
-                <<?php echo $tag; ?> class="rmt-icon-cat-card__inner"<?php echo $link_attr; ?>>
+                <a href="<?php echo esc_url( $cat_link ); ?>" class="rmt-icon-cat-card__inner">
 
                     <div class="rmt-icon-cat-card__icon-wrap">
-                        <?php
-                        if ( ! empty( $item['item_icon']['value'] ) ) {
-                            Icons_Manager::render_icon( $item['item_icon'], [ 'aria-hidden' => 'true' ] );
-                        }
-                        ?>
+                        <?php if ( $icon_url ) : ?>
+                            <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $category->name ); ?>">
+                        <?php else : ?>
+                            <div class="rmt-icon-cat-card__placeholder">
+                                <span><?php echo esc_html( substr( $category->name, 0, 1 ) ); ?></span>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
-                    <?php if ( ! empty( $item['item_title'] ) ) : ?>
                     <<?php echo esc_html( $title_tag ); ?> class="rmt-icon-cat-card__title">
-                        <?php echo esc_html( $item['item_title'] ); ?>
+                        <?php echo esc_html( $category->name ); ?>
                     </<?php echo esc_html( $title_tag ); ?>>
-                    <?php endif; ?>
 
-                </<?php echo $tag; ?>>
+                </a>
             </div>
             <?php endforeach; ?>
         </div>
-
         <?php
+    }
+
+    /**
+     * Get dynamic WooCommerce categories
+     */
+    private function get_dynamic_categories( $settings ) {
+        $args = [
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => $settings['hide_empty'] === 'yes',
+            'number'     => intval( $settings['category_limit'] ),
+            'orderby'    => $settings['category_orderby'],
+            'order'      => strtoupper( $settings['category_order'] ),
+        ];
+
+        // Include specific categories
+        if ( ! empty( $settings['include_categories'] ) ) {
+            $args['include'] = $settings['include_categories'];
+        }
+
+        // Exclude specific categories
+        if ( ! empty( $settings['exclude_categories'] ) ) {
+            $args['exclude'] = $settings['exclude_categories'];
+        }
+
+        $categories = get_terms( $args );
+
+        return is_wp_error( $categories ) ? [] : $categories;
     }
 }

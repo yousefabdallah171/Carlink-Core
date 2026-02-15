@@ -98,6 +98,15 @@ a.rmt-icon-cat-card__inner:hover {
     margin-bottom: 14px;
     flex-shrink: 0;
     transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.rmt-icon-cat-card__icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .rmt-icon-cat-card__icon-wrap i {
@@ -114,6 +123,24 @@ a.rmt-icon-cat-card__inner:hover {
     transition: fill 0.3s ease;
 }
 
+/* ---- Icon Placeholder ---- */
+.rmt-icon-cat-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #F3F4F6;
+    color: #9CA3AF;
+}
+
+.rmt-icon-cat-card__placeholder span {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
 /* ---- Title ---- */
 .rmt-icon-cat-card__title {
     font-size: 14px;
@@ -124,6 +151,17 @@ a.rmt-icon-cat-card__inner:hover {
     line-height: 1.3;
     text-align: center;
     transition: color 0.3s ease;
+}
+
+/* ---- Empty State ---- */
+.rmt-icon-cat-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9CA3AF;
+    font-size: 14px;
+    background: #F9FAFB;
+    border-radius: 8px;
+    border: 1px dashed #D1D5DB;
 }
 
 /* ---- Responsive ---- */
@@ -140,6 +178,10 @@ a.rmt-icon-cat-card__inner:hover {
     .rmt-icon-cat-card__icon-wrap svg {
         width: 22px;
         height: 22px;
+    }
+
+    .rmt-icon-cat-card__placeholder span {
+        font-size: 20px;
     }
 
     .rmt-icon-cat-card__title {

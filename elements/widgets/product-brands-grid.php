@@ -227,9 +227,9 @@ class RMT_Product_Brands_Grid_Widget extends Widget_Base {
                 'center' => [ 'title' => __( 'Center', 'rakmyat-core' ), 'icon' => 'eicon-text-align-center' ],
                 'right'  => [ 'title' => __( 'Right', 'rakmyat-core' ), 'icon' => 'eicon-text-align-right' ],
             ],
-            'default'   => 'left',
+            'default'   => 'center',
             'selectors' => [
-                '{{WRAPPER}} .rmt-brand-card__info' => 'text-align: {{VALUE}};',
+                '{{WRAPPER}} .rmt-brand-card__info' => 'text-align: {{VALUE}}; align-items: {{VALUE}};',
             ],
         ] );
 
