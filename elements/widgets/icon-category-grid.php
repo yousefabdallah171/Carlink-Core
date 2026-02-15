@@ -71,7 +71,7 @@ class RMT_Icon_Category_Grid_Widget extends Widget_Base {
             'options'   => [
                 'name'  => __( 'Name', 'rakmyat-core' ),
                 'count' => __( 'Product Count', 'rakmyat-core' ),
-                'id'    => __( 'Term ID', 'rakmyat-core' ),
+                'id'    => __( 'Date Added (Newest First)', 'rakmyat-core' ),
                 'slug'  => __( 'Slug', 'rakmyat-core' ),
             ],
             'condition' => [ 'data_source' => 'dynamic' ],

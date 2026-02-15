@@ -455,6 +455,9 @@ body.tax-product_tag .mf-catalog-page .site-content {
 /* ========================================
    GLOBAL TOOLBAR STYLING (Fallback for all category pages)
 ======================================== */
+.site-content .rmt-shop-toolbar,
+#content.site-content .rmt-shop-toolbar,
+#primary.content-area .rmt-shop-toolbar,
 .product-category .rmt-shop-toolbar,
 .product-tag .rmt-shop-toolbar,
 .post-type-archive-product .rmt-shop-toolbar,
@@ -468,6 +471,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     flex-wrap: wrap !important;
 }
 
+#primary.content-area .rmt-toolbar-left,
+.site-content .rmt-toolbar-left,
 .product-category .rmt-toolbar-left,
 .product-tag .rmt-toolbar-left,
 .post-type-archive-product .rmt-toolbar-left {
@@ -476,6 +481,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     gap: 10px;
 }
 
+#primary.content-area .rmt-result-title,
+.site-content .rmt-result-title,
 .product-category .rmt-result-title,
 .product-tag .rmt-result-title,
 .post-type-archive-product .rmt-result-title {
@@ -486,6 +493,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     margin: 0;
 }
 
+#primary.content-area .rmt-product-search,
+.site-content .rmt-product-search,
 .product-category .rmt-product-search,
 .product-tag .rmt-product-search,
 .post-type-archive-product .rmt-product-search {
@@ -495,6 +504,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     max-width: 305px;
 }
 
+#primary.content-area .rmt-search-field,
+.site-content .rmt-search-field,
 .product-category .rmt-search-field,
 .product-tag .rmt-search-field,
 .post-type-archive-product .rmt-search-field {
@@ -510,18 +521,24 @@ body.tax-product_tag .mf-catalog-page .site-content {
     transition: border-color 0.3s ease;
 }
 
+#primary.content-area .rmt-search-field::placeholder,
+.site-content .rmt-search-field::placeholder,
 .product-category .rmt-search-field::placeholder,
 .product-tag .rmt-search-field::placeholder,
 .post-type-archive-product .rmt-search-field::placeholder {
     color: #8C8C8C;
 }
 
+#primary.content-area .rmt-search-field:focus,
+.site-content .rmt-search-field:focus,
 .product-category .rmt-search-field:focus,
 .product-tag .rmt-search-field:focus,
 .post-type-archive-product .rmt-search-field:focus {
     border-color: #3A5F79;
 }
 
+#primary.content-area .rmt-search-btn,
+.site-content .rmt-search-btn,
 .product-category .rmt-search-btn,
 .product-tag .rmt-search-btn,
 .post-type-archive-product .rmt-search-btn {
@@ -540,12 +557,16 @@ body.tax-product_tag .mf-catalog-page .site-content {
     transition: opacity 0.3s ease;
 }
 
+#primary.content-area .rmt-search-btn:hover,
+.site-content .rmt-search-btn:hover,
 .product-category .rmt-search-btn:hover,
 .product-tag .rmt-search-btn:hover,
 .post-type-archive-product .rmt-search-btn:hover {
     opacity: 0.7;
 }
 
+#primary.content-area .rmt-search-btn svg,
+.site-content .rmt-search-btn svg,
 .product-category .rmt-search-btn svg,
 .product-tag .rmt-search-btn svg,
 .post-type-archive-product .rmt-search-btn svg {
@@ -554,6 +575,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     height: 18px;
 }
 
+#primary.content-area .rmt-toolbar-right,
+.site-content .rmt-toolbar-right,
 .product-category .rmt-toolbar-right,
 .product-tag .rmt-toolbar-right,
 .post-type-archive-product .rmt-toolbar-right {
@@ -561,12 +584,16 @@ body.tax-product_tag .mf-catalog-page .site-content {
     align-items: center;
 }
 
+#primary.content-area .rmt-ordering,
+.site-content .rmt-ordering,
 .product-category .rmt-ordering,
 .product-tag .rmt-ordering,
 .post-type-archive-product .rmt-ordering {
     position: relative;
 }
 
+#primary.content-area .rmt-orderby-wrapper,
+.site-content .rmt-orderby-wrapper,
 .product-category .rmt-orderby-wrapper,
 .product-tag .rmt-orderby-wrapper,
 .post-type-archive-product .rmt-orderby-wrapper {
@@ -575,6 +602,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     align-items: center;
 }
 
+#primary.content-area .rmt-orderby,
+.site-content .rmt-orderby,
 .product-category .rmt-orderby,
 .product-tag .rmt-orderby,
 .post-type-archive-product .rmt-orderby {
@@ -594,6 +623,8 @@ body.tax-product_tag .mf-catalog-page .site-content {
     transition: border-color 0.3s ease;
 }
 
+#primary.content-area .rmt-orderby-icon,
+.site-content .rmt-orderby-icon,
 .product-category .rmt-orderby-icon,
 .product-tag .rmt-orderby-icon,
 .post-type-archive-product .rmt-orderby-icon {
@@ -605,12 +636,16 @@ body.tax-product_tag .mf-catalog-page .site-content {
     pointer-events: none;
 }
 
+#primary.content-area .rmt-orderby:focus,
+.site-content .rmt-orderby:focus,
 .product-category .rmt-orderby:focus,
 .product-tag .rmt-orderby:focus,
 .post-type-archive-product .rmt-orderby:focus {
     border-color: #3A5F79;
 }
 
+#primary.content-area .rmt-orderby:hover,
+.site-content .rmt-orderby:hover,
 .product-category .rmt-orderby:hover,
 .product-tag .rmt-orderby:hover,
 .post-type-archive-product .rmt-orderby:hover {
