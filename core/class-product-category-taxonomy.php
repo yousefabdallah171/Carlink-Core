@@ -21,7 +21,6 @@ class Product_Category_Taxonomy {
         add_filter( 'manage_edit-product_cat_columns', [ $this, 'add_icon_column' ] );
         add_filter( 'manage_product_cat_custom_column', [ $this, 'icon_column_content' ], 10, 3 );
         add_action( 'admin_footer-edit-tags.php', [ $this, 'enqueue_media_uploader' ] );
-        add_action( 'wp_ajax_rmt_upload_category_icon', [ $this, 'handle_icon_upload' ] );
     }
 
     /**
@@ -121,80 +120,14 @@ class Product_Category_Taxonomy {
      * Enqueue media uploader scripts
      */
     public function enqueue_media_uploader() {
-        if ( ! did_action( 'wp_enqueue_media' ) ) {
-            wp_enqueue_media();
-        }
-        wp_add_inline_script( 'media-upload', $this->get_media_uploader_script() );
+        wp_enqueue_media();
+        wp_enqueue_script(
+            'rmt-category-icon-uploader',
+            RMT_URL . 'core/assets/js/category-icon-uploader.js',
+            [ 'jquery', 'media-views' ],
+            '1.0.0',
+            true
+        );
     }
 
-    /**
-     * JavaScript for media uploader
-     */
-    private function get_media_uploader_script() {
-        return "
-        jQuery(document).ready(function($) {
-            let mediaFrame;
-
-            $(document).on('click', '.rmt-upload-icon-btn', function(e) {
-                e.preventDefault();
-
-                if (mediaFrame) {
-                    mediaFrame.open();
-                    return;
-                }
-
-                mediaFrame = wp.media({
-                    title: '" . esc_js( __( 'Select Category Icon', 'rakmyat-core' ) ) . "',
-                    button: { text: '" . esc_js( __( 'Select Icon', 'rakmyat-core' ) ) . "' },
-                    multiple: false,
-                    library: { type: 'image' }
-                });
-
-                mediaFrame.on('select', function() {
-                    let attachment = mediaFrame.state().get('selection').first().toJSON();
-                    $('#product_cat_icon_id').val(attachment.id);
-                    $('#icon-preview-img').attr('src', attachment.url).show();
-                    $('.rmt-remove-icon-btn').show();
-                });
-
-                mediaFrame.open();
-            });
-
-            $(document).on('click', '.rmt-remove-icon-btn', function(e) {
-                e.preventDefault();
-                $('#product_cat_icon_id').val('');
-                $('#icon-preview-img').hide();
-                $(this).hide();
-            });
-        });
-        ";
-    }
-
-    /**
-     * Handle AJAX icon upload (optional fallback)
-     */
-    public function handle_icon_upload() {
-        if ( ! current_user_can( 'manage_product_terms' ) ) {
-            wp_die( 'Unauthorized' );
-        }
-
-        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rmt_category_icon' ) ) {
-            wp_die( 'Nonce verification failed' );
-        }
-
-        if ( empty( $_FILES['icon'] ) ) {
-            wp_send_json_error( 'No file uploaded' );
-        }
-
-        $attachment_id = media_handle_upload( 'icon', 0 );
-
-        if ( is_wp_error( $attachment_id ) ) {
-            wp_send_json_error( $attachment_id->get_error_message() );
-        }
-
-        wp_send_json_success( [
-            'attachment_id' => $attachment_id,
-            'url' => wp_get_attachment_image_url( $attachment_id, 'thumbnail' ),
-        ] );
-    }
 }

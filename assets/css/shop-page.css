@@ -112,8 +112,19 @@ body.tax-product_tag .mf-catalog-page .site-content {
 
 /* Additional fallback — hide shop-view globally on category/tag pages */
 .product-category .shop-view,
-.product-tag .shop-view {
+.product-tag .shop-view,
+.product-category .shop-toolbar .shop-view,
+.product-tag .shop-toolbar .shop-view,
+.woocommerce .shop-toolbar .shop-view,
+.woocommerce.product-category .shop-view,
+.woocommerce.product-tag .shop-view {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* ========================================
@@ -446,13 +457,15 @@ body.tax-product_tag .mf-catalog-page .site-content {
 ======================================== */
 .product-category .rmt-shop-toolbar,
 .product-tag .rmt-shop-toolbar,
-.post-type-archive-product .rmt-shop-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 20px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+.post-type-archive-product .rmt-shop-toolbar,
+.woocommerce.product-category .rmt-shop-toolbar,
+.woocommerce.product-tag .rmt-shop-toolbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    gap: 20px !important;
+    margin-bottom: 30px !important;
+    flex-wrap: wrap !important;
 }
 
 .product-category .rmt-toolbar-left,
