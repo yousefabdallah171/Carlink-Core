@@ -156,6 +156,12 @@ msgid "RakMyat Elements"
 msgstr "عناصر رقميات"
 
 #. elements/widgets/user-account.php
+msgid "Hello"
+msgstr "مرحبا"
+
+msgid "Sign In"
+msgstr "تسجيل الدخول"
+
 msgid "User Account"
 msgstr "حساب المستخدم"
 

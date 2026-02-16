@@ -20,6 +20,7 @@ add_action( 'init', function() {
 
 // Load Multilang Integration
 require_once RMT_PATH . 'multilang/class-polylang-woocommerce.php';
+require_once RMT_PATH . 'multilang/class-string-overrides.php';
 
 // Load Core Classes
 require_once RMT_PATH . 'core/class-global-assets.php';
@@ -46,6 +47,7 @@ add_action( 'plugins_loaded', function() {
     \RakmyatCore\Core\Brand_Taxonomy::instance();
     \RakmyatCore\Core\Product_Category_Taxonomy::instance();
     \RakmyatCore\Multilang\Polylang_WooCommerce::instance();
+    \RakmyatCore\Multilang\String_Overrides::instance();
 });
 
 // Disable WooCommerce Coming Soon mode (to allow shop to display)
