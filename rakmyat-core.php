@@ -13,6 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define( 'RMT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RMT_URL', plugin_dir_url( __FILE__ ) );
 
+// Load Multilang Integration
+require_once RMT_PATH . 'multilang/class-polylang-woocommerce.php';
+
 // Load Core Classes
 require_once RMT_PATH . 'core/class-global-assets.php';
 require_once RMT_PATH . 'core/class-widget-manager.php';
@@ -37,6 +40,7 @@ add_action( 'plugins_loaded', function() {
     \RakmyatCore\Core\Order_Tracking::instance();
     \RakmyatCore\Core\Brand_Taxonomy::instance();
     \RakmyatCore\Core\Product_Category_Taxonomy::instance();
+    \RakmyatCore\Multilang\Polylang_WooCommerce::instance();
 });
 
 // Disable WooCommerce Coming Soon mode (to allow shop to display)
