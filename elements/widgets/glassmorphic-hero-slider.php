@@ -409,33 +409,41 @@ class RMT_Glassmorphic_Hero_Slider_Widget extends Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
+        $is_rtl   = is_rtl();
         ?>
         <div class="rmt-slider-container">
-            <div class="swiper rmt-glass-slider" data-autoplay="<?php echo esc_attr($settings['autoplay']); ?>" data-delay="<?php echo esc_attr($settings['autoplay_delay']); ?>">
+            <div class="swiper rmt-glass-slider"
+                 <?php echo $is_rtl ? 'dir="rtl"' : ''; ?>
+                 data-autoplay="<?php echo esc_attr( $settings['autoplay'] ); ?>"
+                 data-delay="<?php echo esc_attr( $settings['autoplay_delay'] ); ?>">
                 <div class="swiper-wrapper">
                     <?php foreach ( $settings['slides'] as $slide ) : ?>
-                        <div class="swiper-slide rmt-glass-slide" style="background-image: url('<?php echo esc_url($slide['image']['url']); ?>');">
+                        <div class="swiper-slide rmt-glass-slide" style="background-image: url('<?php echo esc_url( $slide['image']['url'] ); ?>');">
                             <div class="rmt-slide-overlay"></div>
                             <div class="rmt-slide-container">
                                 <div class="rmt-slide-content">
-                                <h2 class="rmt-title"><?php echo wp_kses_post(preg_replace('/\{\{(.*?)\}\}/', '<span class="rmt-highlight">$1</span>', $slide['title'])); ?></h2>
-                                <h4 class="rmt-subtitle"><?php echo esc_html($slide['subtitle']); ?></h4>
-                                <a href="<?php echo esc_url($slide['button_link']['url']); ?>" class="rmt-glass-btn">
-                                    <?php echo esc_html($slide['button_text']); ?>
-                                    <i class="fas fa-chevron-right" style="margin-left:10px; font-size: 0.8em;"></i>
-                                </a>
-                            </div>
+                                    <h2 class="rmt-title"><?php echo wp_kses_post( preg_replace( '/\{\{(.*?)\}\}/', '<span class="rmt-highlight">$1</span>', $slide['title'] ) ); ?></h2>
+                                    <h4 class="rmt-subtitle"><?php echo esc_html( $slide['subtitle'] ); ?></h4>
+                                    <a href="<?php echo esc_url( $slide['button_link']['url'] ); ?>" class="rmt-glass-btn">
+                                        <?php echo esc_html( $slide['button_text'] ); ?>
+                                        <?php if ( $is_rtl ) : ?>
+                                            <i class="fas fa-chevron-left" style="margin-right:10px; font-size:0.8em;"></i>
+                                        <?php else : ?>
+                                            <i class="fas fa-chevron-right" style="margin-left:10px; font-size:0.8em;"></i>
+                                        <?php endif; ?>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
-                <!-- Navigation -->
+                <!-- Navigation: icons swapped in RTL so arrows point in the correct travel direction -->
                 <div class="swiper-button-prev rmt-nav-btn">
-                    <?php Icons_Manager::render_icon( $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                    <?php Icons_Manager::render_icon( $is_rtl ? $settings['next_icon'] : $settings['prev_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                 </div>
                 <div class="swiper-button-next rmt-nav-btn">
-                    <?php Icons_Manager::render_icon( $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                    <?php Icons_Manager::render_icon( $is_rtl ? $settings['prev_icon'] : $settings['next_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                 </div>
 
                 <!-- Pagination -->
