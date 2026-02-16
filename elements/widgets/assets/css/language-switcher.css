@@ -1,0 +1,148 @@
+/**
+ * Language Switcher Widget
+ * Minimal "En ∨" button + dropdown design
+ */
+
+/* ── Wrapper ── */
+.rmt-ls-switcher {
+    position: relative;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ── Trigger button ── */
+.rmt-ls-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #0A0A0A;
+    line-height: 1;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.rmt-ls-btn:focus-visible {
+    outline: 2px solid #3A5F79;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ── Label ── */
+.rmt-ls-label {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: inherit;
+}
+
+/* ── Chevron ── */
+.rmt-ls-chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.rmt-ls-chevron svg {
+    width: 12px;
+    height: 8px;
+    display: block;
+}
+
+/* Rotate chevron when open */
+.rmt-ls-open .rmt-ls-chevron {
+    transform: rotate(180deg);
+}
+
+/* ── Dropdown ── */
+.rmt-ls-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 100px;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    z-index: 9999;
+    animation: rmt-ls-fade-in 0.15s ease;
+}
+
+.rmt-ls-open .rmt-ls-dropdown {
+    display: block;
+}
+
+@keyframes rmt-ls-fade-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Dropdown items ── */
+.rmt-ls-dropdown li {
+    margin: 0;
+    padding: 0;
+}
+
+.rmt-ls-dropdown a {
+    display: block;
+    padding: 8px 16px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.rmt-ls-dropdown a:hover,
+.rmt-ls-dropdown a:focus {
+    color: #3A5F79;
+    background-color: #F3F4F6;
+    text-decoration: none;
+    outline: none;
+}
+
+/* ── Editor notice (Polylang not active) ── */
+.rmt-ls-notice {
+    padding: 8px 12px;
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* ══════════════════════════════════════
+   RTL SUPPORT
+══════════════════════════════════════ */
+
+/* Flip dropdown to open from right edge in RTL */
+.rmt-ls-rtl .rmt-ls-dropdown,
+[dir="rtl"] .rmt-ls-dropdown {
+    left: auto;
+    right: 0;
+}
+
+/* Button direction */
+.rmt-ls-rtl .rmt-ls-btn,
+[dir="rtl"] .rmt-ls-btn {
+    direction: rtl;
+}
+
+/* Dropdown item text */
+.rmt-ls-rtl .rmt-ls-dropdown a,
+[dir="rtl"] .rmt-ls-dropdown a {
+    text-align: right;
+    direction: rtl;
+}

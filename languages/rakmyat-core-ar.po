@@ -185,3 +185,58 @@ msgstr "الاسم / نص تسجيل الدخول"
 
 msgid "Hover Color"
 msgstr "لون التحويم"
+
+#. elements/widgets/language-switcher.php
+msgid "Language Switcher"
+msgstr "مبدّل اللغة"
+
+msgid "Display Format"
+msgstr "تنسيق العرض"
+
+msgid "Code — En / Ar"
+msgstr "كود — En / Ar"
+
+msgid "Name — English / Arabic"
+msgstr "الاسم — English / Arabic"
+
+msgid "Native — English / العربية"
+msgstr "النطق الأصلي — English / العربية"
+
+msgid "Show Chevron Arrow"
+msgstr "إظهار سهم القائمة"
+
+msgid "Hide Current Language in Dropdown"
+msgstr "إخفاء اللغة الحالية من القائمة"
+
+msgid "Recommended: hide the active language from the list."
+msgstr "موصى به: إخفاء اللغة النشطة من القائمة."
+
+msgid "Hover / Open"
+msgstr "تحويم / مفتوح"
+
+msgid "Gap from Text"
+msgstr "المسافة من النص"
+
+msgid "Dropdown"
+msgstr "القائمة المنسدلة"
+
+msgid "Min Width"
+msgstr "الحد الأدنى للعرض"
+
+msgid "Dropdown Items"
+msgstr "عناصر القائمة"
+
+msgid "Item Padding"
+msgstr "تباعد العناصر"
+
+msgid "Hover Text Color"
+msgstr "لون النص عند التحويم"
+
+msgid "Hover Background"
+msgstr "خلفية التحويم"
+
+msgid "Select language"
+msgstr "اختر اللغة"
+
+msgid "Polylang is not active. Install Polylang to use this widget."
+msgstr "Polylang غير مفعّل. قم بتثبيت Polylang لاستخدام هذه الأداة."
