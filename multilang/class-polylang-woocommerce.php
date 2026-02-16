@@ -16,7 +16,8 @@
  * current active language. Falls back to the original ID if no translation
  * exists, so the site never fully breaks.
  *
- * Covered pages: Shop, Cart, Checkout, My Account, Pay (Order Pay), Terms.
+ * Covered pages: Shop, Cart, Checkout, My Account, Pay (Order Pay), Terms,
+ *                Order Tracking.
  *
  * Requirements:
  * - Polylang (free) must be installed and active.
@@ -50,12 +51,17 @@ class Polylang_WooCommerce {
      * Attach translate_page_id() to every WooCommerce page-ID filter.
      */
     private function register_filters() {
-        add_filter( 'woocommerce_get_shop_page_id',      [ $this, 'translate_page_id' ] );
-        add_filter( 'woocommerce_get_cart_page_id',      [ $this, 'translate_page_id' ] );
-        add_filter( 'woocommerce_get_checkout_page_id',  [ $this, 'translate_page_id' ] );
-        add_filter( 'woocommerce_get_myaccount_page_id', [ $this, 'translate_page_id' ] );
-        add_filter( 'woocommerce_get_pay_page_id',       [ $this, 'translate_page_id' ] );
-        add_filter( 'woocommerce_get_terms_page_id',     [ $this, 'translate_page_id' ] );
+        add_filter( 'woocommerce_get_shop_page_id',           [ $this, 'translate_page_id' ] );
+        add_filter( 'woocommerce_get_cart_page_id',           [ $this, 'translate_page_id' ] );
+        add_filter( 'woocommerce_get_checkout_page_id',       [ $this, 'translate_page_id' ] );
+        add_filter( 'woocommerce_get_myaccount_page_id',      [ $this, 'translate_page_id' ] );
+        add_filter( 'woocommerce_get_pay_page_id',            [ $this, 'translate_page_id' ] );
+        add_filter( 'woocommerce_get_terms_page_id',          [ $this, 'translate_page_id' ] );
+
+        // Order Tracking page — makes WooCommerce generate Arabic tracking URLs
+        // for Arabic customers, and recognises the translated page as the
+        // tracking page (so is_page() checks and shortcode routing work correctly).
+        add_filter( 'woocommerce_get_order_tracking_page_id', [ $this, 'translate_page_id' ] );
     }
 
     /**
