@@ -64,7 +64,7 @@ class String_Overrides {
 
     // ─────────────────────────────────────────────────────────────
     // Translation map
-    // Covers: WCFM, Martfury theme, WooCommerce gaps
+    // Covers: WCFM, Martfury theme, WooCommerce, Wishlist plugin gaps
     // ─────────────────────────────────────────────────────────────
     private function get_map(): array {
         if ( null !== $this->map ) {
@@ -108,6 +108,31 @@ class String_Overrides {
             'Edit Shipping address'            => 'تعديل عنوان الشحن',
             'Add Billing address'              => 'إضافة عنوان الفواتير',
             'Add Shipping address'             => 'إضافة عنوان الشحن',
+
+            /* ── Wishlist plugin — table headers ── */
+            'Price'                            => 'السعر',
+            'Stock status'                     => 'حالة المخزون',
+            'In stock'                         => 'متوفر',
+            'Out of stock'                     => 'غير متوفر',
+            'Edit wishlist'                    => 'تعديل قائمة المفضلة',
+            'Remove this product from wishlist' => 'إزالة هذا المنتج من المفضلة',
+            'Add to cart'                      => 'أضف إلى السلة',
+
+            /* ── Wishlist plugin — social share bar ── */
+            'Share'                            => 'مشاركة',
+            'Copy link'                        => 'نسخ الرابط',
+            'Email'                            => 'البريد الإلكتروني',
+            'Facebook'                         => 'فيسبوك',
+            'Twitter'                          => 'تويتر',
+            'Linkedin'                         => 'لينكدإن',
+            'Telegram'                         => 'تيليغرام',
+            'Whatsapp'                         => 'واتساب',
+            'Tumblr'                           => 'تمبلر',
+            'Reddit'                           => 'ريديت',
+            'Stumbleupon'                      => 'ستامبل أبون',
+            'Pocket'                           => 'بوكيت',
+            'Digg'                             => 'ديغ',
+            'Vk'                               => 'VK',
 
         ];
 

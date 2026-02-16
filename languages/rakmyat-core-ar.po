@@ -83,6 +83,24 @@ msgstr "التقييمات"
 msgid "stars"
 msgstr "نجوم"
 
+msgid "Price"
+msgstr "السعر"
+
+msgid "Stock status"
+msgstr "حالة المخزون"
+
+msgid "In stock"
+msgstr "متوفر"
+
+msgid "Out of stock"
+msgstr "غير متوفر"
+
+msgid "Share"
+msgstr "مشاركة"
+
+msgid "Edit wishlist"
+msgstr "تعديل قائمة المفضلة"
+
 #. templates/order/tracking.php
 msgid "Order Confirmed"
 msgstr "تم تأكيد الطلب"
