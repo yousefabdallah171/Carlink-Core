@@ -521,3 +521,49 @@
         height: 60px;
     }
 }
+
+/* ══════════════════════════════════════
+   RTL SUPPORT
+══════════════════════════════════════ */
+
+/* Help links: push arrow to the visual end (left) in RTL
+   and flip the chevron to point ← instead of → */
+[dir="rtl"] .rmt-ot-help-arrow {
+    margin-left: 0;
+    margin-right: auto;
+    transform: scaleX(-1);
+}
+
+/* Summary table: swap th/td alignment */
+[dir="rtl"] .rmt-ot-summary-table th {
+    text-align: right;
+}
+
+[dir="rtl"] .rmt-ot-summary-table td {
+    text-align: left;
+}
+
+/* Product price-qty: on desktop it sits at the visual right
+   in RTL (flex row flips), so align its text to the right edge */
+[dir="rtl"] .rmt-ot-product-price-qty {
+    text-align: right;
+}
+
+/* Mobile: price-qty wraps to full-width row — align to start (right) in RTL */
+@media (max-width: 768px) {
+    [dir="rtl"] .rmt-ot-product-price-qty {
+        text-align: right;
+        justify-content: flex-start;
+    }
+}
+
+/* Meta items: ensure label + value read correctly in RTL */
+[dir="rtl"] .rmt-ot-meta-item {
+    direction: rtl;
+}
+
+/* Buttons: icon stays at visual start in RTL (flex row auto-reverses,
+   so we don't need to change anything — but ensure gap is correct) */
+[dir="rtl"] .rmt-ot-btn {
+    direction: rtl;
+}
