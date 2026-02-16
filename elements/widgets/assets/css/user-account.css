@@ -1,0 +1,93 @@
+/**
+ * User Account Widget
+ * Figma: person icon (left) + Hello / Sign In (right), clean minimal design
+ */
+
+/* ── Wrapper link ── */
+.rmt-ua-wrap {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.rmt-ua-wrap:hover {
+    opacity: 0.85;
+    text-decoration: none;
+}
+
+/* ── Person icon ── */
+.rmt-ua-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rmt-ua-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: #0A0A0A;
+    fill: none;
+    display: block;
+    transition: stroke 0.2s ease;
+}
+
+.rmt-ua-wrap:hover .rmt-ua-icon svg {
+    stroke: #3A5F79;
+}
+
+/* ── Text column ── */
+.rmt-ua-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.3;
+}
+
+/* ── Hello line ── */
+.rmt-ua-hello {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #0A0A0A;
+    display: block;
+    white-space: nowrap;
+}
+
+/* ── Name / Sign In line ── */
+.rmt-ua-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0A0A0A;
+    display: block;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.rmt-ua-wrap:hover .rmt-ua-name {
+    color: #3A5F79;
+}
+
+/* ══════════════════════════════════════
+   RTL SUPPORT
+══════════════════════════════════════ */
+
+/* In RTL the flex row naturally reverses (icon goes to the right,
+   text to the left) because the page has direction:rtl.
+   We just make sure text alignment is correct. */
+.rmt-ua-rtl .rmt-ua-text,
+[dir="rtl"] .rmt-ua-text {
+    text-align: right;
+}
+
+.rmt-ua-rtl .rmt-ua-hello,
+.rmt-ua-rtl .rmt-ua-name,
+[dir="rtl"] .rmt-ua-hello,
+[dir="rtl"] .rmt-ua-name {
+    direction: rtl;
+}

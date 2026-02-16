@@ -154,3 +154,34 @@ msgstr "دولة منشأ هذه العلامة التجارية (مثل: ألم
 #. core/class-widget-manager.php
 msgid "RakMyat Elements"
 msgstr "عناصر رقميات"
+
+#. elements/widgets/user-account.php
+msgid "User Account"
+msgstr "حساب المستخدم"
+
+msgid "Hello Text"
+msgstr "نص الترحيب"
+
+msgid "Shown above the name or Sign In link."
+msgstr "يظهر فوق الاسم أو رابط تسجيل الدخول."
+
+msgid "Sign In Text"
+msgstr "نص تسجيل الدخول"
+
+msgid "Shown when the user is not logged in."
+msgstr "يظهر عندما لا يكون المستخدم مسجلاً للدخول."
+
+msgid "Show Icon"
+msgstr "عرض الأيقونة"
+
+msgid "Gap Between Icon & Text"
+msgstr "المسافة بين الأيقونة والنص"
+
+msgid "Gap Between Hello & Name"
+msgstr "المسافة بين الترحيب والاسم"
+
+msgid "Name / Sign In Text"
+msgstr "الاسم / نص تسجيل الدخول"
+
+msgid "Hover Color"
+msgstr "لون التحويم"
