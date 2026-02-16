@@ -13,6 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define( 'RMT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RMT_URL', plugin_dir_url( __FILE__ ) );
 
+// Load plugin translations
+add_action( 'init', function() {
+    load_plugin_textdomain( 'rakmyat-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+});
+
 // Load Multilang Integration
 require_once RMT_PATH . 'multilang/class-polylang-woocommerce.php';
 

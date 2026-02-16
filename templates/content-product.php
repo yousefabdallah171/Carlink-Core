@@ -52,7 +52,7 @@ if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
             </a>
 
             <?php if ( $product->is_on_sale() ) : ?>
-                <span class="prod-sale-badge">Sale</span>
+                <span class="prod-sale-badge"><?php esc_html_e( 'Sale', 'rakmyat-core' ); ?></span>
             <?php endif; ?>
 
             <?php
@@ -76,20 +76,20 @@ if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
             </h3>
 
             <div class="prod-safety-center">
-                <span class="safety-text">Safety Center</span>
+                <span class="safety-text"><?php esc_html_e( 'Safety Center', 'rakmyat-core' ); ?></span>
                 <span class="safety-rating">(<?php echo esc_html( $rating_display ); ?> <span class="star">⭐</span>)</span>
             </div>
 
             <div class="prod-stock">
                 <?php if ( $in_stock ) : ?>
-                    <span class="stock-status in-stock">In Stock</span>
+                    <span class="stock-status in-stock"><?php esc_html_e( 'In Stock', 'rakmyat-core' ); ?></span>
                 <?php else : ?>
-                    <span class="stock-status out-of-stock">Out of Stock</span>
+                    <span class="stock-status out-of-stock"><?php esc_html_e( 'Out of Stock', 'rakmyat-core' ); ?></span>
                 <?php endif; ?>
             </div>
 
             <div class="prod-price">
-                <span class="price-label">Price :</span>
+                <span class="price-label"><?php esc_html_e( 'Price :', 'rakmyat-core' ); ?></span>
                 <?php echo $product_price; ?>
             </div>
 
@@ -102,18 +102,18 @@ if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
                        class="rmt-btn rmt-btn-cart add_to_cart_button ajax_add_to_cart"
                        aria-label="<?php echo esc_attr( sprintf( __( 'Add %s to cart', 'woocommerce' ), $product_title ) ); ?>">
                         <span class="btn-icon"><img src="<?php echo esc_url( RMT_URL . 'assets/img/add-to-cart.svg' ); ?>" alt=""></span>
-                        <span class="btn-text">Add to Cart</span>
+                        <span class="btn-text"><?php esc_html_e( 'Add to Cart', 'rakmyat-core' ); ?></span>
                         <span class="btn-loading"></span>
                     </a>
 
                     <a href="<?php echo esc_url( add_query_arg( 'add-to-cart', $product_id, wc_get_checkout_url() ) ); ?>"
                        class="rmt-btn rmt-btn-buy"
                        data-product_id="<?php echo esc_attr( $product_id ); ?>">
-                        Buy Now
+                        <?php esc_html_e( 'Buy Now', 'rakmyat-core' ); ?>
                     </a>
                 <?php else : ?>
                     <a href="<?php echo esc_url( $product_link ); ?>" class="rmt-btn rmt-btn-view">
-                        View Product
+                        <?php esc_html_e( 'View Product', 'rakmyat-core' ); ?>
                     </a>
                 <?php endif; ?>
             </div>

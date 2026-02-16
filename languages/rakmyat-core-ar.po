@@ -1,0 +1,156 @@
+# Arabic Translation of Carlink Core Plugin
+# Copyright (C) 2025 Yousef Abdallah
+# This file is distributed under the GPL v2 or later license.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Carlink Core 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/yousefabdallah171/Carlink-Core\n"
+"POT-Creation-Date: 2026-02-16 00:00+0000\n"
+"PO-Revision-Date: 2026-02-16 00:00+0000\n"
+"Last-Translator: Yousef Abdallah\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Carlink Core i18n build\n"
+
+#. templates/content-product.php
+msgid "Sale"
+msgstr "تخفيض"
+
+msgid "Safety Center"
+msgstr "مركز الأمان"
+
+msgid "In Stock"
+msgstr "متوفر"
+
+msgid "Out of Stock"
+msgstr "غير متوفر"
+
+msgid "Price :"
+msgstr "السعر :"
+
+msgid "Add to Cart"
+msgstr "أضف إلى السلة"
+
+msgid "Buy Now"
+msgstr "اشتري الآن"
+
+msgid "View Product"
+msgstr "عرض المنتج"
+
+#. core/class-shop-page.php
+msgid "RESULT"
+msgstr "النتائج"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Selecte Sorting"
+msgstr "اختر الترتيب"
+
+#. core/class-shop-sidebar.php
+msgid "Filters"
+msgstr "الفلاتر"
+
+msgid "Category"
+msgstr "الفئة"
+
+msgid "Brand"
+msgstr "العلامة التجارية"
+
+msgid "Price Range"
+msgstr "نطاق السعر"
+
+msgid "Apply"
+msgstr "تطبيق"
+
+msgid "Availability"
+msgstr "التوفر"
+
+msgid "Out Of Stock"
+msgstr "غير متوفر"
+
+msgid "Collections"
+msgstr "المجموعات"
+
+msgid "Ratings"
+msgstr "التقييمات"
+
+msgid "stars"
+msgstr "نجوم"
+
+#. templates/order/tracking.php
+msgid "Order Confirmed"
+msgstr "تم تأكيد الطلب"
+
+msgid "Shipped"
+msgstr "تم الشحن"
+
+msgid "Out For Delivery"
+msgstr "في طريق التسليم"
+
+msgid "Delivered"
+msgstr "تم التسليم"
+
+#, php-format
+msgid "Order ID: #%s"
+msgstr "رقم الطلب: #%s"
+
+msgid "Invoice"
+msgstr "الفاتورة"
+
+msgid "Track Order"
+msgstr "تتبع الطلب"
+
+msgid "Order date:"
+msgstr "تاريخ الطلب:"
+
+msgid "Estimated delivery:"
+msgstr "التسليم المتوقع:"
+
+msgid "Product"
+msgstr "المنتج"
+
+#, php-format
+msgid "SKU: %s"
+msgstr "الكود: %s"
+
+#, php-format
+msgid "Qty: %s"
+msgstr "الكمية: %s"
+
+msgid "Payment"
+msgstr "طريقة الدفع"
+
+msgid "Delivery"
+msgstr "التوصيل"
+
+msgid "Need Help?"
+msgstr "هل تحتاج مساعدة؟"
+
+msgid "Order Issues"
+msgstr "مشاكل الطلب"
+
+msgid "Delivery Info"
+msgstr "معلومات التوصيل"
+
+msgid "Returns & Refunds"
+msgstr "الإرجاع والاسترداد"
+
+msgid "Order Summary"
+msgstr "ملخص الطلب"
+
+#. core/class-brand-taxonomy.php
+msgid "Country"
+msgstr "الدولة"
+
+msgid "The country or origin of this brand (e.g., Germany, Japan, USA)."
+msgstr "دولة منشأ هذه العلامة التجارية (مثل: ألمانيا، اليابان، أمريكا)."
+
+#. core/class-widget-manager.php
+msgid "RakMyat Elements"
+msgstr "عناصر رقميات"
