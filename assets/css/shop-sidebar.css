@@ -405,3 +405,56 @@
         width: 100%;
     }
 }
+
+/* ========================================
+   RTL SUPPORT
+======================================== */
+
+/* Filter text alignment */
+[dir="rtl"] .rmt-sidebar-title,
+[dir="rtl"] .rmt-filter-title,
+[dir="rtl"] .rmt-filter-label {
+    text-align: right;
+}
+
+/* Accordion arrow: flip from (>) to (<) in closed state,
+   both directions rotate to (↓) when open */
+[dir="rtl"] .rmt-filter-arrow {
+    transform: rotate(180deg);
+}
+
+[dir="rtl"] .rmt-filter-section.rmt-filter-open .rmt-filter-arrow {
+    transform: rotate(90deg);
+}
+
+/* Filter items: keep gap but reverse the row direction */
+[dir="rtl"] .rmt-filter-item {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .rmt-filter-header {
+    flex-direction: row-reverse;
+}
+
+/* Currency symbol: swap margin side */
+[dir="rtl"] .rmt-currency {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+/* Rating text: auto-margin on the correct side */
+[dir="rtl"] .rmt-rating-text {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* Rating stars: RTL direction */
+[dir="rtl"] .rmt-rating-stars {
+    flex-direction: row-reverse;
+}
+
+/* Mobile close button: flip to left corner */
+[dir="rtl"] .rmt-filter-close-btn {
+    right: auto;
+    left: 16px;
+}

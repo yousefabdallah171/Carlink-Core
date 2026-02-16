@@ -651,3 +651,51 @@ body.tax-product_tag .mf-catalog-page .site-content {
 .post-type-archive-product .rmt-orderby:hover {
     border-color: #8C8C8C;
 }
+
+/* ========================================
+   RTL SUPPORT
+======================================== */
+
+/* Search field: swap padding so the icon gap is on the left side */
+[dir="rtl"] .rmt-search-field,
+[dir="rtl"] #primary.content-area .rmt-search-field,
+[dir="rtl"] .site-content .rmt-search-field,
+[dir="rtl"] .post-type-archive-product .rmt-search-field,
+[dir="rtl"] .tax-product_cat .rmt-search-field,
+[dir="rtl"] .product-tag .rmt-search-field {
+    padding: 12px 16px 12px 90px;
+    text-align: right;
+}
+
+/* Search button: move from right edge to left edge */
+[dir="rtl"] .rmt-search-btn,
+[dir="rtl"] #primary.content-area .rmt-search-btn,
+[dir="rtl"] .site-content .rmt-search-btn,
+[dir="rtl"] .post-type-archive-product .rmt-search-btn,
+[dir="rtl"] .tax-product_cat .rmt-search-btn,
+[dir="rtl"] .product-tag .rmt-search-btn {
+    right: auto;
+    left: 8px;
+}
+
+/* Sort select: swap padding so the icon gap is on the left side */
+[dir="rtl"] .rmt-orderby,
+[dir="rtl"] #primary.content-area .rmt-orderby,
+[dir="rtl"] .site-content .rmt-orderby,
+[dir="rtl"] .post-type-archive-product .rmt-orderby,
+[dir="rtl"] .tax-product_cat .rmt-orderby,
+[dir="rtl"] .product-tag .rmt-orderby {
+    padding: 12px 16px 12px 40px;
+    text-align: right;
+}
+
+/* Sort icon: move from right edge to left edge */
+[dir="rtl"] .rmt-orderby-icon,
+[dir="rtl"] #primary.content-area .rmt-orderby-icon,
+[dir="rtl"] .site-content .rmt-orderby-icon,
+[dir="rtl"] .post-type-archive-product .rmt-orderby-icon,
+[dir="rtl"] .tax-product_cat .rmt-orderby-icon,
+[dir="rtl"] .product-tag .rmt-orderby-icon {
+    right: auto;
+    left: 12px;
+}
