@@ -77,17 +77,27 @@ body.woocommerce-checkout #order_review {
     min-width: 300px !important;
 }
 
-/* Override Bootstrap grid classes - Make 50/50 layout */
-body.woocommerce-checkout .col-md-7 {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex-basis: auto !important;
+/* Fix Bootstrap .row negative margins and make it a flex container */
+body.woocommerce-checkout form.checkout > .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    gap: 30px !important;
+    flex-wrap: nowrap !important;
+    box-sizing: border-box !important;
 }
 
-body.woocommerce-checkout .col-md-5 {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex-basis: auto !important;
+/* Override Bootstrap grid classes - equal 50/50 columns */
+body.woocommerce-checkout form.checkout > .row > .col-woo-checkout-details,
+body.woocommerce-checkout form.checkout > .row > .col-md-5 {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    float: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
 }
 
 body.woocommerce-checkout .col-md-12,
@@ -747,37 +757,24 @@ body.woocommerce-checkout #order_comments_heading {
 }
 
 /* ========================================
-   GLOBAL INPUT FIELDS
-======================================== */
-input[type="text"],
-input[type="email"],
-textarea {
-    border: 1px solid #d9d9d9 !important;
-    background: #fff !important;
-    padding: 15px !important;
-    width: 63% !important;
-    box-sizing: border-box !important;
-}
-
-/* ========================================
    RESPONSIVE - TABLET (991px and below)
 ======================================== */
-@media (max-width: 991px) {
-    input[type="text"],
-    input[type="email"],
-    textarea {
-        width: 55% !important;
-        -webkit-appearance: none;
-        appearance: none;
-        border-radius: 0;
-    }
-}
 
 @media (max-width: 992px) {
     body.woocommerce-checkout form.checkout {
         flex-direction: column !important;
         gap: 30px !important;
-      
+    }
+
+    body.woocommerce-checkout form.checkout > .row {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    body.woocommerce-checkout form.checkout > .row > .col-woo-checkout-details,
+    body.woocommerce-checkout form.checkout > .row > .col-md-5 {
+        flex: 1 1 100% !important;
+        width: 100% !important;
     }
 
     body.woocommerce-checkout #customer_details,
@@ -1071,7 +1068,9 @@ textarea {
         font-size: 14px !important;
         margin-top: 16px !important;
     }
-}.woocommerce table.shop_table th {
+}
+
+.woocommerce table.shop_table th {
     border-bottom: 0px solid #e1e1e1;
 }
 

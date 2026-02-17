@@ -109,6 +109,20 @@ class String_Overrides {
             'Add Billing address'              => 'إضافة عنوان الفواتير',
             'Add Shipping address'             => 'إضافة عنوان الشحن',
 
+            /* ── WooCommerce Cart / Order totals ── */
+            'Order Summary'                    => 'ملخص الطلب',
+            'Subtotal'                         => 'المجموع الفرعي',
+            'Free shipping'                    => 'شحن مجاني',
+            'Total'                            => 'المجموع',
+
+            /* ── Martfury theme — Cart reassurance bar ── */
+            'Secure checkout'                  => 'الدفع الآمن',
+            'Free returns within 30 days'      => 'إرجاع مجاني خلال 30 يومًا',
+            'Quality guaranteed'               => 'جودة مضمونة',
+
+            /* ── WooCommerce My Account ── */
+            'Dashboard'                        => 'لوحة التحكم',
+
             /* ── Wishlist plugin — table headers ── */
             'Price'                            => 'السعر',
             'Stock status'                     => 'حالة المخزون',

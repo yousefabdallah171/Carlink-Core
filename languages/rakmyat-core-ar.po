@@ -264,3 +264,27 @@ msgstr "اختر اللغة"
 
 msgid "Polylang is not active. Install Polylang to use this widget."
 msgstr "Polylang غير مفعّل. قم بتثبيت Polylang لاستخدام هذه الأداة."
+
+#. multilang/class-string-overrides.php — WooCommerce Cart
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+msgid "Free shipping"
+msgstr "شحن مجاني"
+
+msgid "Total"
+msgstr "المجموع"
+
+#. multilang/class-string-overrides.php — Martfury Cart reassurance
+msgid "Secure checkout"
+msgstr "الدفع الآمن"
+
+msgid "Free returns within 30 days"
+msgstr "إرجاع مجاني خلال 30 يومًا"
+
+msgid "Quality guaranteed"
+msgstr "جودة مضمونة"
+
+#. multilang/class-string-overrides.php — WooCommerce My Account
+msgid "Dashboard"
+msgstr "لوحة التحكم"

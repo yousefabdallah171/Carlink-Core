@@ -367,7 +367,6 @@ class RMT_Language_Switcher_Widget extends Widget_Base {
         $hide_current  = 'yes' === $settings['hide_current'];
         $other_langs   = array_filter( $raw_languages, function( $lang ) use ( $current_slug, $hide_current ) {
             if ( $hide_current && $lang['slug'] === $current_slug ) return false;
-            if ( ! empty( $lang['no_translation'] ) ) return false;
             return true;
         } );
 
