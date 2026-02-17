@@ -265,6 +265,105 @@ msgstr "اختر اللغة"
 msgid "Polylang is not active. Install Polylang to use this widget."
 msgstr "Polylang غير مفعّل. قم بتثبيت Polylang لاستخدام هذه الأداة."
 
+#. multilang/class-string-overrides.php — WCFM Vendor Registration basic fields
+msgid "Registration"
+msgstr "التسجيل"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "First Name"
+msgstr "الاسم الأول"
+
+msgid "Last Name"
+msgstr "الاسم الأخير"
+
+msgid "Store Name"
+msgstr "اسم المتجر"
+
+msgid "Store Phone"
+msgstr "هاتف المتجر"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Confirm Password"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Register"
+msgstr "تسجيل"
+
+msgid "Confirm"
+msgstr "تأكيد"
+
+msgid "Plans"
+msgstr "الخطط"
+
+#. multilang/class-string-overrides.php — WCFM Vendor Registration address fields
+msgid "Address 1"
+msgstr "العنوان 1"
+
+msgid "Address 2"
+msgstr "العنوان 2"
+
+msgid "Country"
+msgstr "الدولة"
+
+msgid "City/Town"
+msgstr "المدينة/البلدة"
+
+msgid "State/County"
+msgstr "المحافظة/المنطقة"
+
+msgid "Postcode/Zip"
+msgstr "الرمز البريدي"
+
+msgid "-Select-"
+msgstr "- اختر -"
+
+#. multilang/class-string-overrides.php — WCFM Vendor Registration verification & terms
+msgid "Email already verified"
+msgstr "تم التحقق من البريد الإلكتروني"
+
+msgid "Verification Code"
+msgstr "رمز التحقق"
+
+msgid "Re-send Code"
+msgstr "إعادة إرسال الرمز"
+
+msgid "Email Verification Code: "
+msgstr "رمز التحقق من البريد: "
+
+msgid "Phone already verified"
+msgstr "تم التحقق من الهاتف"
+
+msgid "Phone Verification Code: "
+msgstr "رمز التحقق من الهاتف: "
+
+msgid "OTP"
+msgstr "رمز التحقق (OTP)"
+
+msgid "This field is required."
+msgstr "هذا الحقل مطلوب."
+
+msgid "Password and Confirm-password are not same."
+msgstr "كلمة المرور وتأكيدها غير متطابقتين."
+
+msgid "Agree"
+msgstr "أوافق"
+
+msgid "Terms & Conditions"
+msgstr "الشروط والأحكام"
+
+msgid "Available"
+msgstr "متاح"
+
+msgid "Un-available"
+msgstr "غير متاح"
+
+msgid "Your user role not allowed to subscription!"
+msgstr "دورك كمستخدم لا يسمح بالاشتراك!"
+
 #. multilang/class-string-overrides.php — WooCommerce Cart
 msgid "Subtotal"
 msgstr "المجموع الفرعي"

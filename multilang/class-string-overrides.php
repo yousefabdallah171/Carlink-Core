@@ -109,6 +109,44 @@ class String_Overrides {
             'Add Billing address'              => 'إضافة عنوان الفواتير',
             'Add Shipping address'             => 'إضافة عنوان الشحن',
 
+            /* ── WCFM Vendor Registration — basic fields ── */
+            'Registration'                     => 'التسجيل',
+            'Username'                         => 'اسم المستخدم',
+            'First Name'                       => 'الاسم الأول',
+            'Last Name'                        => 'الاسم الأخير',
+            'Store Name'                       => 'اسم المتجر',
+            'Store Phone'                      => 'هاتف المتجر',
+            'Password'                         => 'كلمة المرور',
+            'Confirm Password'                 => 'تأكيد كلمة المرور',
+            'Register'                         => 'تسجيل',
+            'Confirm'                          => 'تأكيد',
+            'Plans'                            => 'الخطط',
+
+            /* ── WCFM Vendor Registration — address fields ── */
+            'Address 1'                        => 'العنوان 1',
+            'Address 2'                        => 'العنوان 2',
+            'Country'                          => 'الدولة',
+            'City/Town'                        => 'المدينة/البلدة',
+            'State/County'                     => 'المحافظة/المنطقة',
+            'Postcode/Zip'                     => 'الرمز البريدي',
+            '-Select-'                         => '- اختر -',
+
+            /* ── WCFM Vendor Registration — verification & terms ── */
+            'Email already verified'           => 'تم التحقق من البريد الإلكتروني',
+            'Verification Code'                => 'رمز التحقق',
+            'Re-send Code'                     => 'إعادة إرسال الرمز',
+            'Email Verification Code: '        => 'رمز التحقق من البريد: ',
+            'Phone already verified'           => 'تم التحقق من الهاتف',
+            'Phone Verification Code: '        => 'رمز التحقق من الهاتف: ',
+            'OTP'                              => 'رمز التحقق (OTP)',
+            'This field is required.'          => 'هذا الحقل مطلوب.',
+            'Password and Confirm-password are not same.' => 'كلمة المرور وتأكيدها غير متطابقتين.',
+            'Agree'                            => 'أوافق',
+            'Terms & Conditions'               => 'الشروط والأحكام',
+            'Available'                        => 'متاح',
+            'Un-available'                     => 'غير متاح',
+            'Your user role not allowed to subscription!' => 'دورك كمستخدم لا يسمح بالاشتراك!',
+
             /* ── WooCommerce Cart / Order totals ── */
             'Order Summary'                    => 'ملخص الطلب',
             'Subtotal'                         => 'المجموع الفرعي',
