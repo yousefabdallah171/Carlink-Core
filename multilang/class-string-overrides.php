@@ -115,6 +115,23 @@ class String_Overrides {
             'Free shipping'                    => 'شحن مجاني',
             'Total'                            => 'المجموع',
 
+            /* ── WooCommerce / Martfury — Cart quantity & product labels ── */
+            '%s quantity'                      => '%s الكمية',
+            'Quantity'                         => 'الكمية',
+            'Product quantity'                 => 'كمية المنتج',
+            'Remove %s from cart'              => 'إزالة %s من السلة',
+            'Remove this item'                 => 'إزالة هذا المنتج',
+            'Remove'                           => 'إزالة',
+            'Available on backorder'           => 'متاح عند الطلب',
+            '(estimated for %s)'               => '(تقديري لـ %s)',
+
+            /* ── Martfury theme — Cart buttons ── */
+            'Back To Shop'                     => 'العودة للتسوق',
+            'Update cart'                      => 'تحديث السلة',
+            'Coupon code'                      => 'رمز الكوبون',
+            'Apply coupon'                     => 'تطبيق الكوبون',
+            'Coupon Discount'                  => 'خصم الكوبون',
+
             /* ── Martfury theme — Cart reassurance bar ── */
             'Secure checkout'                  => 'الدفع الآمن',
             'Free returns within 30 days'      => 'إرجاع مجاني خلال 30 يومًا',

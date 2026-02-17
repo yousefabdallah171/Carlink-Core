@@ -275,6 +275,50 @@ msgstr "شحن مجاني"
 msgid "Total"
 msgstr "المجموع"
 
+#. multilang/class-string-overrides.php — Cart quantity labels
+#, php-format
+msgid "%s quantity"
+msgstr "%s الكمية"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "Product quantity"
+msgstr "كمية المنتج"
+
+#, php-format
+msgid "Remove %s from cart"
+msgstr "إزالة %s من السلة"
+
+msgid "Remove this item"
+msgstr "إزالة هذا المنتج"
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "Available on backorder"
+msgstr "متاح عند الطلب"
+
+#, php-format
+msgid "(estimated for %s)"
+msgstr "(تقديري لـ %s)"
+
+#. multilang/class-string-overrides.php — Martfury Cart buttons
+msgid "Back To Shop"
+msgstr "العودة للتسوق"
+
+msgid "Update cart"
+msgstr "تحديث السلة"
+
+msgid "Coupon code"
+msgstr "رمز الكوبون"
+
+msgid "Apply coupon"
+msgstr "تطبيق الكوبون"
+
+msgid "Coupon Discount"
+msgstr "خصم الكوبون"
+
 #. multilang/class-string-overrides.php — Martfury Cart reassurance
 msgid "Secure checkout"
 msgstr "الدفع الآمن"
