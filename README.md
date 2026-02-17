@@ -24,7 +24,7 @@ rakmyat-widget/
 ├── rakmyat-core.php                          # Main plugin file (entry point)
 │
 ├── core/                                     # Core functionality classes
-│   ├── class-global-assets.php               # Enqueue CSS/JS for cart & checkout pages
+│   ├── class-global-assets.php               # Enqueue CSS/JS for cart & checkout pages; add_trust_badges() + add_order_summary_title()
 │   ├── class-widget-manager.php              # Elementor widgets registration & asset management
 │   ├── class-wc-override.php                 # WooCommerce template override logic
 │   ├── class-shop-page.php                   # Custom shop toolbar & grid layout
@@ -32,6 +32,14 @@ rakmyat-widget/
 │   ├── class-shop-customizer.php             # WordPress Customizer settings for sidebar
 │   ├── class-checkout-customizer.php         # WooCommerce checkout customization via hooks/filters
 │   └── class-brand-taxonomy.php             # Product brand "Country" custom meta field
+│
+├── multilang/                                # Multilingual / Arabic support
+│   ├── class-polylang-woocommerce.php        # Polylang: translates WC page IDs for 7 WC pages
+│   └── class-string-overrides.php           # gettext filter: 100+ Arabic overrides for WC/Martfury/WCFM/Wishlist
+│
+├── languages/                                # Plugin translation files
+│   ├── rakmyat-core-ar.po                    # Arabic source (human-readable, 100 strings)
+│   └── rakmyat-core-ar.mo                    # Arabic compiled binary (loaded by WordPress)
 │
 ├── templates/                                # WooCommerce template overrides
 │   └── content-product.php                   # Glassmorphic product card with dynamic ratings
@@ -60,6 +68,7 @@ rakmyat-widget/
 │       ├── brand-showcase-slider.php        # Full-width brand showcase slider widget
 │       ├── cta-banner.php                   # CTA banner with glassmorphic button
 │       ├── icon-category-grid.php           # Neumorphic icon category grid
+│       ├── language-switcher.php            # Polylang language switcher (works on WC archives)
 │       └── assets/                           # Widget-specific assets
 │           ├── css/
 │           │   ├── glassmorphic-hero-slider.css
@@ -72,8 +81,10 @@ rakmyat-widget/
 │           │   ├── brand-showcase-slider.css # Brand showcase slider styling
 │           │   ├── cta-banner.css           # CTA banner styling
 │           │   ├── icon-category-grid.css   # Neumorphic icon grid styling
+│           │   ├── language-switcher.css    # Language switcher dropdown + RTL
 │           │   ├── woo-cart.css              # WooCommerce cart page styling
-│           │   └── woo-checkout.css          # WooCommerce checkout page styling
+│           │   ├── woo-checkout.css          # WooCommerce checkout 50/50 layout
+│           │   └── woo-order-tracking.css    # Order tracking page + RTL support
 │           └── js/
 │               ├── glassmorphic-hero-slider.js
 │               ├── modern-testimonial-slider.js
@@ -81,6 +92,7 @@ rakmyat-widget/
 │               ├── woo-category-search.js
 │               ├── product-reviews.js
 │               ├── add-to-cart.js
+│               ├── language-switcher.js      # Toggle open/close, outside-click, Escape key, Elementor re-init
 │               └── brand-showcase-slider.js  # Slider logic with fade/slide, autoplay, touch
 │
 └── README.md                                 # This file
@@ -586,6 +598,149 @@ The JS automatically fills hidden fields named: `service`, `price`, `duration`, 
 
 The `.rmt-appointment-form` wrapper activates the appointment form styling from `service-summary.css`.
 
+### 14. Language Switcher Widget (Elementor)
+
+Polylang-powered language switcher for the site header. Shows the current language with a chevron and a dropdown of all other languages. Works correctly on all page types including WooCommerce product archives (shop, category, tag) — a common failure point for other switchers.
+
+**Files:**
+- `elements/widgets/language-switcher.php` — Widget PHP class
+- `elements/widgets/assets/css/language-switcher.css` — Dropdown styling + RTL
+- `elements/widgets/assets/js/language-switcher.js` — Toggle, outside-click, Escape key
+
+**Display Formats (Elementor Control):**
+- **Code** — `En` / `Ar`
+- **Name** — `English` / `Arabic`
+- **Native** — `English` / `العربية`
+
+**Key Behaviour:**
+- Does NOT filter out languages with `no_translation=1` — this means the switcher always shows all languages even on WooCommerce archive pages (shop, category) where Polylang sets that flag
+- Reads from `pll_the_languages(['raw' => 1])` — uses Polylang's URL for each language
+- RTL-aware: adds `.rmt-ls-rtl` class when `is_rtl()` is true
+- Elementor editor re-initialises via `frontend/element_ready` hook
+
+**Elementor Style Controls:**
+- Button: background, text color, padding, border, border-radius (normal + hover/open tabs)
+- Chevron: size, gap from text
+- Dropdown: background, min-width, border, border-radius, box-shadow
+- Items: typography, padding, text color, hover text color, hover background
+
+---
+
+## Multilingual / Arabic Support
+
+The plugin includes a complete Arabic translation system split across three layers:
+
+---
+
+### Layer 1 — Polylang WooCommerce Page ID Translation
+
+**File:** `multilang/class-polylang-woocommerce.php`
+
+WooCommerce hard-codes English page IDs in its options. This class hooks into every WC page-ID filter and replaces the ID with its Polylang Arabic translation via `pll_get_post()`.
+
+**Filters registered:**
+
+| Filter | English page | Arabic equivalent |
+|---|---|---|
+| `woocommerce_get_shop_page_id` | `/shop/` | `/ar/المتجر/` |
+| `woocommerce_get_cart_page_id` | `/cart/` | `/ar/السلة/` |
+| `woocommerce_get_checkout_page_id` | `/checkout/` | `/ar/الدفع/` |
+| `woocommerce_get_myaccount_page_id` | `/my-account/` | `/ar/حسابي/` |
+| `woocommerce_get_pay_page_id` | `/checkout/pay/` | `/ar/الدفع/pay/` |
+| `woocommerce_get_terms_page_id` | `/terms/` | `/ar/الشروط/` |
+| `woocommerce_get_order_tracking_page_id` | `/order-tracking/` | `/ar/تتبع-الطلب/` |
+
+The Order Tracking filter also ensures Arabic order-confirmation emails contain the Arabic tracking URL.
+
+**Requirement:** Each WC page must have an Arabic translation page created in WordPress AND linked in Polylang (Pages list → Language column → + icon for Arabic).
+
+---
+
+### Layer 2 — Arabic String Overrides (gettext filter)
+
+**File:** `multilang/class-string-overrides.php`
+
+Intercepts untranslated strings from WooCommerce, Martfury theme, WCFM, and the Wishlist plugin via a `gettext` filter. Only fires when:
+1. The string is NOT already translated by its own plugin/theme domain (`$translated === $text`)
+2. The current locale is RTL (`is_rtl()` returns true)
+
+This means it only fills genuine gaps — it will never override a string that's already properly translated.
+
+**String categories covered:**
+
+| Category | Strings |
+|---|---|
+| WooCommerce My Account | Hello, Hello!, Sign In |
+| WooCommerce Cart / Totals | Order Summary, Subtotal, Free shipping, Total, Cart totals |
+| WooCommerce Cart — Quantity | %s quantity, Quantity, Product quantity, Remove %s from cart, Remove this item, Remove, Available on backorder, (estimated for %s) |
+| Martfury theme — Cart buttons | Back To Shop, Update cart, Coupon code, Apply coupon, Coupon Discount, Product |
+| Martfury theme — Cart reassurance | Secure checkout, Free returns within 30 days, Quality guaranteed |
+| WooCommerce My Account | Dashboard |
+| Martfury — Account dropdown | Account Settings, Orders History, Logout |
+| WCFM — Sidebar menu | Followings, Support Tickets, Inquiries |
+| WCFM — Tickets table | Ticket(s), Priority, Actions, You don't have any support ticket yet! |
+| WCFM — Inquiries table | Query, Store, Additional Info, You do not have any inquiry yet! |
+| WooCommerce Addresses | Billing address, Shipping address, Edit, Add, Edit/Add Billing/Shipping address |
+| Wishlist plugin — table | Price, Stock status, In stock, Out of stock, Edit wishlist, Remove this product from wishlist, Add to cart |
+| Wishlist plugin — social share | Share, Copy link, Email, Facebook, Twitter, Linkedin, Telegram, Whatsapp, Tumblr, Reddit, Stumbleupon, Pocket, Digg, Vk |
+
+---
+
+### Layer 3 — Plugin Translation Files (.po / .mo)
+
+**Files:** `languages/rakmyat-core-ar.po` / `languages/rakmyat-core-ar.mo`
+
+Standard WordPress GNU gettext translation for all strings in our plugin's own code (domain: `rakmyat-core`). This covers strings in our templates, widgets, and the `class-global-assets.php` trust badges / Order Summary heading.
+
+**Current count:** 100 strings
+
+**Adding new strings:**
+1. In PHP, always use `__( 'text', 'rakmyat-core' )` or `esc_html_e( 'text', 'rakmyat-core' )`
+2. Add `msgid`/`msgstr` pair to `languages/rakmyat-core-ar.po`
+3. Compile: run `php languages/build-mo.php` (or any standard `msgfmt` tool) to regenerate `rakmyat-core-ar.mo`
+
+---
+
+### Order Tracking Page — RTL Fix
+
+**File:** `elements/widgets/assets/css/woo-order-tracking.css`
+
+The order tracking template (`templates/order/tracking.php`) is our own PHP template. The CSS file includes an RTL section activated by the `[dir="rtl"]` attribute:
+- Help arrow: flipped horizontally (`scaleX(-1)`) + margin swap
+- Summary table: `text-align: right`
+- Product price/qty: `flex-direction: row-reverse`
+- Meta items: `direction: rtl`
+
+---
+
+### WooCommerce Checkout — 50/50 Column Fix
+
+**File:** `elements/widgets/assets/css/woo-checkout.css`
+
+The Martfury theme uses Bootstrap 3 grid inside `form.checkout`:
+```html
+form.checkout
+  └─ div.row           ← Bootstrap: margin: 0 -15px (overflows 30px!)
+       ├─ div.col-md-7 ← 58.33% by default
+       └─ div.col-md-5 ← 41.67% by default
+```
+
+Fix applied:
+```css
+/* Remove Bootstrap negative margins, make it a flex container */
+body.woocommerce-checkout form.checkout > .row {
+    margin-left: 0 !important; margin-right: 0 !important;
+    display: flex !important; gap: 30px !important; width: 100% !important;
+}
+/* Both columns equal 50% */
+body.woocommerce-checkout form.checkout > .row > .col-woo-checkout-details,
+body.woocommerce-checkout form.checkout > .row > .col-md-5 {
+    flex: 1 1 0 !important; float: none !important; padding: 0 !important;
+}
+```
+
+---
+
 ## Technical Details
 
 ### WooCommerce Template Override
@@ -675,30 +830,41 @@ Assets are intelligently loaded:
 - Shop Page: `core/class-shop-page.php`
 - Shop Sidebar: `core/class-shop-sidebar.php`
 - Shop Customizer: `core/class-shop-customizer.php`
-- **Checkout Customizer: `core/class-checkout-customizer.php`** ⭐ NEW
-- **Brand Taxonomy: `core/class-brand-taxonomy.php`** ⭐ NEW
+- Checkout Customizer: `core/class-checkout-customizer.php`
+- Brand Taxonomy: `core/class-brand-taxonomy.php`
+
+### Multilingual Classes
+- **Polylang WooCommerce: `multilang/class-polylang-woocommerce.php`** — 7 WC page ID filters
+- **String Overrides: `multilang/class-string-overrides.php`** — 100+ Arabic gettext overrides
+
+### Translation Files
+- **Arabic PO: `languages/rakmyat-core-ar.po`** — 100 strings (human-editable)
+- **Arabic MO: `languages/rakmyat-core-ar.mo`** — compiled binary (auto-generated)
 
 ### CSS Files
 - Product Card: `assets/css/product-card.css`
 - Shop Page: `assets/css/shop-page.css`
 - Shop Sidebar: `assets/css/shop-sidebar.css`
-- **Cart Page: `elements/widgets/assets/css/woo-cart.css`** ⭐ NEW
-- **Checkout Page: `elements/widgets/assets/css/woo-checkout.css`** ⭐ NEW
+- Cart Page: `elements/widgets/assets/css/woo-cart.css`
+- Checkout Page: `elements/widgets/assets/css/woo-checkout.css`
+- Order Tracking + RTL: `elements/widgets/assets/css/woo-order-tracking.css`
+- Language Switcher: `elements/widgets/assets/css/language-switcher.css`
 - Add to Cart Widget: `elements/widgets/assets/css/add-to-cart.css`
 - Product Reviews Widget: `elements/widgets/assets/css/product-reviews.css`
-- **Product Brands Grid: `elements/widgets/assets/css/product-brands-grid.css`** ⭐ NEW
-- **Brand Showcase Slider: `elements/widgets/assets/css/brand-showcase-slider.css`** ⭐ NEW
-- **CTA Banner: `elements/widgets/assets/css/cta-banner.css`** ⭐ NEW
-- **Icon Category Grid: `elements/widgets/assets/css/icon-category-grid.css`** ⭐ NEW
-- **Service Summary: `elements/widgets/assets/css/service-summary.css`** ⭐ NEW
+- Product Brands Grid: `elements/widgets/assets/css/product-brands-grid.css`
+- Brand Showcase Slider: `elements/widgets/assets/css/brand-showcase-slider.css`
+- CTA Banner: `elements/widgets/assets/css/cta-banner.css`
+- Icon Category Grid: `elements/widgets/assets/css/icon-category-grid.css`
+- Service Summary: `elements/widgets/assets/css/service-summary.css`
 
 ### JS Files
 - Product Card: `assets/js/product-card.js`
 - Shop Sidebar: `assets/js/shop-sidebar.js`
+- Language Switcher: `elements/widgets/assets/js/language-switcher.js`
 - Add to Cart Widget: `elements/widgets/assets/js/add-to-cart.js`
 - Product Reviews Widget: `elements/widgets/assets/js/product-reviews.js`
-- **Brand Showcase Slider: `elements/widgets/assets/js/brand-showcase-slider.js`** ⭐ NEW
-- **Service Summary: `elements/widgets/assets/js/service-summary.js`** ⭐ NEW
+- Brand Showcase Slider: `elements/widgets/assets/js/brand-showcase-slider.js`
+- Service Summary: `elements/widgets/assets/js/service-summary.js`
 
 ### Images
 - Cart Icon: `assets/img/add-to-cart.svg`
@@ -710,12 +876,13 @@ Assets are intelligently loaded:
 - Wishlist Icon: `elements/widgets/wishlist-icon.php`
 - Category Search: `elements/widgets/woo-category-search.php`
 - Product Reviews: `elements/widgets/product-reviews.php`
-- **Add to Cart: `elements/widgets/add-to-cart.php`** ⭐ NEW
-- **Product Brands Grid: `elements/widgets/product-brands-grid.php`** ⭐ NEW
-- **Brand Showcase Slider: `elements/widgets/brand-showcase-slider.php`** ⭐ NEW
-- **CTA Banner: `elements/widgets/cta-banner.php`** ⭐ NEW
-- **Icon Category Grid: `elements/widgets/icon-category-grid.php`** ⭐ NEW
-- **Service Summary: `elements/widgets/service-summary.php`** ⭐ NEW
+- Add to Cart: `elements/widgets/add-to-cart.php`
+- Product Brands Grid: `elements/widgets/product-brands-grid.php`
+- Brand Showcase Slider: `elements/widgets/brand-showcase-slider.php`
+- CTA Banner: `elements/widgets/cta-banner.php`
+- Icon Category Grid: `elements/widgets/icon-category-grid.php`
+- Service Summary: `elements/widgets/service-summary.php`
+- Language Switcher: `elements/widgets/language-switcher.php`
 
 ### Templates
 - Product Card: `templates/content-product.php`
@@ -729,10 +896,12 @@ Assets are intelligently loaded:
 
 ## Optional Integrations
 
+- **Polylang** - Required for Language Switcher widget and Polylang WooCommerce page ID translation
 - **WCBoost Wishlist** - Wishlist button integration
 - **YITH WooCommerce Wishlist** - Alternative wishlist support
-- **WCFM Marketplace** - Vendor name display
+- **WCFM Marketplace** - Vendor management; Arabic string overrides included
 - **Dokan** - Vendor name display
+- **WCBoost / TI WooCommerce Wishlist** - Wishlist page Arabic strings included
 
 ## Installation
 
@@ -792,8 +961,8 @@ The plugin removes these WooCommerce actions to prevent duplication:
 - `woocommerce_catalog_ordering` (sort dropdown)
 
 ### Cart Page Hooks Used
-- `woocommerce_before_cart_totals` - Add Order Summary title
-- `woocommerce_after_cart_totals` - Add trust badges
+- `woocommerce_before_cart_totals` - Add "Order Summary" heading (translated via `.mo`)
+- `woocommerce_after_cart_totals` - Add trust badges (translated via `.mo`)
 
 ### Checkout Hooks Used
 - `woocommerce_form_field` - Customize form field output
@@ -801,12 +970,57 @@ The plugin removes these WooCommerce actions to prevent duplication:
 - `woocommerce_coupons_enabled` - Enable coupons
 - `woocommerce_checkout_show_terms` - Hide/show terms
 
+### Multilingual Hooks Used
+- `gettext` (priority 20) — `class-string-overrides.php`: intercepts any untranslated string when RTL is active
+- `woocommerce_get_shop_page_id` — translate shop page ID via Polylang
+- `woocommerce_get_cart_page_id` — translate cart page ID
+- `woocommerce_get_checkout_page_id` — translate checkout page ID
+- `woocommerce_get_myaccount_page_id` — translate my account page ID
+- `woocommerce_get_pay_page_id` — translate order pay page ID
+- `woocommerce_get_terms_page_id` — translate terms page ID
+- `woocommerce_get_order_tracking_page_id` — translate order tracking page ID (also fixes Arabic email links)
+
 ### AJAX Endpoints
 - `get_wishlist_count` - Returns current wishlist count
 
 ## Changelog
 
-### Version 4.0.0 (Latest)
+### Version 5.0.0 (Latest) — Arabic / Multilingual Support
+
+- ⭐ **NEW: Polylang WooCommerce Integration** (`multilang/class-polylang-woocommerce.php`)
+  - Hooks into 7 WooCommerce page-ID filters to return the correct Arabic page ID
+  - Covers: Shop, Cart, Checkout, My Account, Order Pay, Terms, Order Tracking
+  - Arabic order-confirmation emails now contain the Arabic tracking URL
+  - Language switcher fixed on WooCommerce archive pages (shop, category, tag) by removing the `no_translation` filter that was hiding Arabic from the dropdown
+
+- ⭐ **NEW: Arabic String Overrides** (`multilang/class-string-overrides.php`)
+  - `gettext` filter (priority 20) fills translation gaps from WooCommerce, Martfury theme, WCFM, and Wishlist plugins
+  - Only fires when `is_rtl()` is true AND the string is not already translated by its own domain
+  - Covers 50+ strings across: cart page, checkout, My Account, WCFM sidebar/tickets/inquiries, address fields, wishlist table, wishlist social share bar
+
+- ⭐ **NEW: Language Switcher Widget** (`elements/widgets/language-switcher.php`)
+  - Polylang-powered Elementor widget with Code / Name / Native display formats
+  - Chevron toggle, dropdown with all languages, RTL-aware layout
+  - Full style controls: button, chevron, dropdown, items
+  - Works correctly on WooCommerce shop/archive pages (no_translation guard removed)
+
+- ⭐ **NEW: Arabic Translation Files** (`languages/rakmyat-core-ar.po` / `.mo`)
+  - 100 Arabic strings for all plugin-owned text
+  - Covers: order tracking template, cart trust badges, Order Summary heading, widget UI strings, all Language Switcher controls
+
+- ⭐ **NEW: Order Tracking RTL Support** (`elements/widgets/assets/css/woo-order-tracking.css`)
+  - RTL section: arrow flip, text-align swap, flex-direction reverse for price/qty, direction: rtl on meta
+  - Arabic order tracking page now uses our custom template (via Polylang page ID fix)
+
+- **FIX: Checkout 50/50 column layout** (`elements/widgets/assets/css/woo-checkout.css`)
+  - Removed Bootstrap `.row` negative margins (`margin: 0 -15px`) that caused the right column to overflow
+  - Both columns now use `flex: 1 1 0` for a true 50/50 split with `gap: 30px`
+  - Removed unscoped `input[type="text"] { width: 63% }` global rule that affected all site inputs
+
+- **FIX: Cart trust badges and Order Summary heading** (`core/class-global-assets.php`)
+  - Wrapped hardcoded English strings with `esc_html_e('...', 'rakmyat-core')` so `.mo` translations apply
+
+### Version 4.0.0
 - ⭐ **NEW: Product Brands Grid Elementor Widget**
   - Two layout styles: Simple (Name + Count) and Detailed (Name + Country + Count)
   - Thumbnail source: WooCommerce default or Martfury second thumbnail with fallback
