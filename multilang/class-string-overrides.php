@@ -125,6 +125,10 @@ class String_Overrides {
             'Available on backorder'           => 'متاح عند الطلب',
             '(estimated for %s)'               => '(تقديري لـ %s)',
 
+            /* ── Martfury theme — Cart headings & columns ── */
+            'Cart totals'                      => 'إجمالي السلة',
+            'Product'                          => 'المنتج',
+
             /* ── Martfury theme — Cart buttons ── */
             'Back To Shop'                     => 'العودة للتسوق',
             'Update cart'                      => 'تحديث السلة',

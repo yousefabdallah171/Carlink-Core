@@ -303,6 +303,13 @@ msgstr "متاح عند الطلب"
 msgid "(estimated for %s)"
 msgstr "(تقديري لـ %s)"
 
+#. multilang/class-string-overrides.php — Martfury Cart headings
+msgid "Cart totals"
+msgstr "إجمالي السلة"
+
+msgid "Product"
+msgstr "المنتج"
+
 #. multilang/class-string-overrides.php — Martfury Cart buttons
 msgid "Back To Shop"
 msgstr "العودة للتسوق"

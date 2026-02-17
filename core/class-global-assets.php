@@ -95,7 +95,7 @@ class Global_Assets {
      */
     public function add_order_summary_title() {
         ?>
-        <h2>Order Summary</h2>
+        <h2><?php esc_html_e( 'Order Summary', 'rakmyat-core' ); ?></h2>
         <?php
     }
 
@@ -105,9 +105,9 @@ class Global_Assets {
     public function add_trust_badges() {
         ?>
         <div class="trust-badges">
-            <div class="trust-badge">Secure checkout</div>
-            <div class="trust-badge">Free returns within 30 days</div>
-            <div class="trust-badge">Quality guaranteed</div>
+            <div class="trust-badge"><?php esc_html_e( 'Secure checkout', 'rakmyat-core' ); ?></div>
+            <div class="trust-badge"><?php esc_html_e( 'Free returns within 30 days', 'rakmyat-core' ); ?></div>
+            <div class="trust-badge"><?php esc_html_e( 'Quality guaranteed', 'rakmyat-core' ); ?></div>
         </div>
         <?php
     }
