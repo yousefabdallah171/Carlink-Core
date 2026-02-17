@@ -82,6 +82,52 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
             'condition' => [ 'show_view_more' => 'yes' ],
         ]);
 
+        $this->add_control('labels_heading', [
+            'label' => __( 'Labels & Messages', 'rakmyat-core' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('out_of_5_text', [
+            'label' => __( '"Out of 5" Text', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => __( 'out of 5', 'rakmyat-core' ),
+        ]);
+
+        $this->add_control('global_ratings_text', [
+            'label' => __( '"Global Ratings" Text', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => __( 'global ratings', 'rakmyat-core' ),
+        ]);
+
+        $this->add_control('star_label_text', [
+            'label' => __( '"Star" Label Text', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => __( 'star', 'rakmyat-core' ),
+            'description' => __( 'Used as suffix: "5 star", "4 star", etc.', 'rakmyat-core' ),
+        ]);
+
+        $this->add_control('like_text', [
+            'label' => __( 'Like Button Text', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => __( 'Like', 'rakmyat-core' ),
+            'condition' => [ 'show_like_dislike' => 'yes' ],
+        ]);
+
+        $this->add_control('dislike_text', [
+            'label' => __( 'Dislike Button Text', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => __( 'Dislike', 'rakmyat-core' ),
+            'condition' => [ 'show_like_dislike' => 'yes' ],
+        ]);
+
+        $this->add_control('no_reviews_text', [
+            'label' => __( 'No Reviews Message', 'rakmyat-core' ),
+            'type' => Controls_Manager::TEXTAREA,
+            'default' => __( 'No reviews yet. Be the first to review this product!', 'rakmyat-core' ),
+            'rows' => 2,
+        ]);
+
         $this->end_controls_section();
 
         // --- STYLE TAB: SUMMARY ---
@@ -667,9 +713,9 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
                     <div class="rmt-rating-overview">
                         <div class="rmt-rating-stars-large">
                             <?php echo $this->render_stars( $average_rating ); ?>
-                            <span class="rmt-rating-number"><?php echo esc_html( number_format( $average_rating, 1 ) ); ?> out of 5</span>
+                            <span class="rmt-rating-number"><?php echo esc_html( number_format( $average_rating, 1 ) ); ?> <?php echo esc_html( $settings['out_of_5_text'] ); ?></span>
                         </div>
-                        <p class="rmt-total-ratings"><?php echo esc_html( number_format( $review_count ) ); ?> global ratings</p>
+                        <p class="rmt-total-ratings"><?php echo esc_html( number_format( $review_count ) ); ?> <?php echo esc_html( $settings['global_ratings_text'] ); ?></p>
                     </div>
 
                     <div class="rmt-rating-breakdown">
@@ -678,7 +724,7 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
                             $percentage = $review_count > 0 ? ( $count / $review_count ) * 100 : 0;
                         ?>
                             <div class="rmt-rating-row">
-                                <span class="rmt-rating-label"><?php echo $i; ?> star</span>
+                                <span class="rmt-rating-label"><?php echo $i; ?> <?php echo esc_html( $settings['star_label_text'] ); ?></span>
                                 <div class="rmt-rating-bar">
                                     <div class="rmt-rating-bar-fill" style="width: <?php echo esc_attr( $percentage ); ?>%;"></div>
                                 </div>
@@ -723,13 +769,13 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
                                             <span class="rmt-btn-icon">
                                                 <?php Icons_Manager::render_icon( $settings['like_icon'] ); ?>
                                             </span>
-                                            <span class="rmt-btn-text">Like</span>
+                                            <span class="rmt-btn-text"><?php echo esc_html( $settings['like_text'] ); ?></span>
                                         </button>
                                         <button class="rmt-review-btn rmt-dislike-btn" data-action="dislike">
                                             <span class="rmt-btn-icon">
                                                 <?php Icons_Manager::render_icon( $settings['dislike_icon'] ); ?>
                                             </span>
-                                            <span class="rmt-btn-text">Dislike</span>
+                                            <span class="rmt-btn-text"><?php echo esc_html( $settings['dislike_text'] ); ?></span>
                                         </button>
                                     </div>
                                 <?php endif; ?>
@@ -743,7 +789,7 @@ class RMT_Product_Reviews_Widget extends Widget_Base {
                         <?php endif; ?>
 
                     <?php else : ?>
-                        <p class="rmt-no-reviews"><?php esc_html_e( 'No reviews yet. Be the first to review this product!', 'rakmyat-core' ); ?></p>
+                        <p class="rmt-no-reviews"><?php echo esc_html( $settings['no_reviews_text'] ); ?></p>
                     <?php endif; ?>
                 </div>
             </div>
